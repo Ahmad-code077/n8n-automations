@@ -1,0 +1,244 @@
+{
+  "name": "Publish Post on insta and facebook",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -304,
+        128
+      ],
+      "id": "683cda2e-9a22-4543-b747-5c16748e1034",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v22.0",
+        "node": "me/accounts",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        -48,
+        304
+      ],
+      "id": "909cbc16-f949-4126-acf7-38a00bbaab99",
+      "name": "Facebook Graph Api",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ieBdJkdtnIhkNgtT",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v24.0/{{ $json.data[0].id }}/photos",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png\",\n  \"caption\": \"Hello from my automation\",\n  \"published\": true,\n\"access_token\":\"{{ $json.data[0].access_token }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        160,
+        304
+      ],
+      "id": "b5348403-eeb8-437f-bcd6-ab55b354818e",
+      "name": "Post with image to facebook page"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "17841478709256156",
+        "edge": "media",
+        "options": {
+          "queryParametersJson": "{\n\"image_url\":\"https://n8n.io/brandguidelines/dont/vertical-align.png\",\n  \"caption\":\"Testing the Automation\",\n  \"node\":\"17841478709256156\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        -32,
+        80
+      ],
+      "id": "6f76a170-c1a3-407b-98cd-3c0ea3642fab",
+      "name": "Create image container id for instagram",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ieBdJkdtnIhkNgtT",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "17841478709256156",
+        "edge": "media_publish",
+        "options": {
+          "queryParametersJson": "={\n\"image_url\":\"https://n8n.io/brandguidelines/dont/vertical-align.png\",\n\"caption\":\"Testing the Automation\",\n  \"creation_id\":\"{{ $json.id }}\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        176,
+        80
+      ],
+      "id": "11a47a35-cae0-44b5-958a-4e1c537cd276",
+      "name": "publish to instagram",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "ieBdJkdtnIhkNgtT",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Instagram simple post to instagram\n",
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "da0cff9f-056f-49eb-9f31-e3b46f40acd5",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "facebook simple post to facebook\n\n",
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        240
+      ],
+      "id": "6536c178-d6e0-40c4-9d6b-83cb6d5e13d0",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {
+    "Facebook Graph Api": [
+      {
+        "json": {
+          "data": [
+            {
+              "access_token": "EAAMoBNTmgewBQcIgbbUAZAEbpCwLihb1f5rBk2nicZANUOZBXHOAiuHCZBSLv25KKpUc2J1XzzOduAZATraSoCxZByYiMgqHuwpGIR4u8DaaQub2MUZCOKOqK80a4SEdogCn23ANw8CQ3G3uObFEDq5ZCprmbaWSMVy0qsj7ZApw5hjDhcgnjZCKBcyAFZB8UZAyH6TOAZBi9qihj",
+              "category": "Software company",
+              "category_list": [
+                {
+                  "id": "1065597503495311",
+                  "name": "Software company"
+                },
+                {
+                  "id": "2211",
+                  "name": "Software"
+                },
+                {
+                  "id": "153535891368765",
+                  "name": "Automation service"
+                }
+              ],
+              "name": "Ahmad Automation & Web Projects",
+              "id": "914740581721664",
+              "tasks": [
+                "ADVERTISE",
+                "ANALYZE",
+                "CREATE_CONTENT",
+                "MESSAGING",
+                "MODERATE",
+                "MANAGE"
+              ]
+            }
+          ],
+          "paging": {
+            "cursors": {
+              "before": "QVFIU2J2WlBMMldjWnpmYjN2OFJwMmJiSFJZATV9KRERRcWZAsZAl9vSUJoeHhPbU4yUk0yT3p3bzdaVmdaMnAwT09zeU4xSGhaY0VuMzVDSWJWNlh1aEE0ei1B",
+              "after": "QVFIU2J2WlBMMldjWnpmYjN2OFJwMmJiSFJZATV9KRERRcWZAsZAl9vSUJoeHhPbU4yUk0yT3p3bzdaVmdaMnAwT09zeU4xSGhaY0VuMzVDSWJWNlh1aEE0ei1B"
+            }
+          }
+        }
+      }
+    ],
+    "Post with image to facebook page": [
+      {
+        "json": {
+          "id": "122096590251191137",
+          "post_id": "914740581721664_122096590269191137"
+        }
+      }
+    ],
+    "Create image container id for instagram": [
+      {
+        "json": {
+          "id": "17847410277623642"
+        }
+      }
+    ],
+    "publish to instagram": [
+      {
+        "json": {
+          "id": "18097764943672044"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph Api",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph Api": {
+      "main": [
+        [
+          {
+            "node": "Post with image to facebook page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create image container id for instagram": {
+      "main": [
+        [
+          {
+            "node": "publish to instagram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d8014dfe-50fe-485a-8c0c-2f3c109d04a2",
+  "meta": {
+    "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
+  },
+  "id": "mZls3fiZePnXKV4R",
+  "tags": []
+}
