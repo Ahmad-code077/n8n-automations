@@ -1,0 +1,147 @@
+{
+  "name": "Generate Image via webhook payload",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-and-store-image-to-db",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -144,
+        96
+      ],
+      "id": "94e07317-a29b-4807-a13b-48a0ad069791",
+      "name": "Generate Image Webhook",
+      "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "post-content-publish-webhook",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -144,
+        272
+      ],
+      "id": "5e207840-fa50-4994-8eec-fc69b1563bf6",
+      "name": "Post to Meta Platforms Webhook",
+      "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "posts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.body.postId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        48,
+        96
+      ],
+      "id": "2494a5e6-67b9-407b-a2df-a39c82bf83e7",
+      "name": "Get Post From the db",
+      "credentials": {
+        "supabaseApi": {
+          "id": "xv98hduAJfVKrVtg",
+          "name": "Ahmad developer"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Add the ai nodes for the post text creation and the post image generation also for the hastags\nStore the image in the post for the approval\n",
+        "height": 224,
+        "width": 384
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        304,
+        64
+      ],
+      "id": "18817792-1d97-4c6d-9cb1-153e9147ef17",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {
+    "Generate Image Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "my-automation-4j0i.onrender.com",
+            "user-agent": "node",
+            "content-length": "75",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "accept-language": "*",
+            "authorization": "Bearer undefined",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "119.157.185.97",
+            "cf-ipcountry": "PK",
+            "cf-ray": "9b64e03bd96cc225-KHI",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "content-type": "application/json",
+            "render-proxy-ttl": "4",
+            "rndr-id": "9bc82393-6b1c-40c7",
+            "sec-fetch-mode": "cors",
+            "true-client-ip": "119.157.185.97",
+            "x-forwarded-for": "119.157.185.97, 172.69.244.186, 10.17.39.207",
+            "x-forwarded-proto": "https",
+            "x-request-start": "1767132717456696"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "postId": "593ae854-3102-476d-8245-b6d05304fada",
+            "action": "generate_image"
+          },
+          "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/generate-and-store-image-to-db",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Generate Image Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Post From the db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Post From the db": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "b9749e58-480d-4a34-9c9e-e0367c7cbb8b",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
+  },
+  "id": "rIcE1XTcM00uvke3",
+  "tags": []
+}
