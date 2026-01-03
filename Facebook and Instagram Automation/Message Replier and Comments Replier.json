@@ -1,0 +1,180 @@
+{
+  "name": "Message Replier and Comments Replier",
+  "nodes": [
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.challenge }}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "text/plain"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "32dbfbf9-8394-4e18-9c99-fb607ac5ffb3",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "if($json.query[\"hub.verify_token\"] === \"some-random-verfiy-token3rsdfjdf2393skljfsdlfj9023kjdldjf90elkdsfjdslfj\") {\n  return [{json:{challenge:$json.query[\"hub.challenge\"]}}];\n} else {\n  return [{json:{challenge:\"\"}}]; // or 403\n}\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a36ff53c-cea1-47b5-bb7e-5811926201ac",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "path": "facebook-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "2fba0da6-8eed-4115-8b87-bb12aefaf3f4",
+      "name": "Webhook to verfiy the token",
+      "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "facebook-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -64,
+        480
+      ],
+      "id": "c46fde04-cc69-4232-b2ec-e1acbc547a77",
+      "name": "Webhook to recieve messages and comments",
+      "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318"
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        144,
+        480
+      ],
+      "id": "85b4444e-56f2-4fee-84db-08bd20818c11",
+      "name": "Respond back to facebook curcial"
+    }
+  ],
+  "pinData": {
+    "Webhook to verfiy the token": [
+      {
+        "json": {
+          "headers": {
+            "host": "my-automation-4j0i.onrender.com",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+            "accept-encoding": "gzip, br",
+            "accept-language": "en-US,en;q=0.9,ar;q=0.8,hy;q=0.7,ur;q=0.6",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "119.157.160.192",
+            "cf-ipcountry": "PK",
+            "cf-ray": "9b84b97e7cb1fbff-KHI",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX19mk8YoXpadDg7%2BtBWjEK%2FZRAcmoxkWqew%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19hniSHxws7cDnIUBIzrW5U2n5HqgAFeMk%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BwliONo1B4H6ymWPLsU0BtC37t13GQ%2BGqIJTbOHTKMXM%2Bd1dh8l1w%2FG%2By387ovttdm1Xmkp5uihQ%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX189eIaTXN%2B7cwaZV%2B5sRnM2%2B8BydmeKDhUSE0D0b3zWGMbF%2FdpRwSU%2BaAzQnJxOCiRdVe0MeCgfyLJ2RRz61GIGRRsHy1%2BFs5mhxdGRvSth9Gu6TDEpxPp49WsDBBwyI%2Fbl%2Fc1mO9m6LZy18beLH7dMBRFdsIkKiko%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX18xou37q59hr2kN0jB0bcLikmOvJnsTbE%2F76iyuUjErckZOl5THcBT%2Fb4h4u2Uq62zuVEY%2FL42jFkluHoBeX2GpyR756zeTmFtyXTQg4qQ6uN1Zj88Azc%2BVjwdj6GK1NaIZFHrynszJ8w%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%225fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda%23c474b9c6-bd72-4ab8-8aec-611e6a5fb7e6%22%2C%22%24sesid%22%3A%5B1767465282971%2C%22019b850b-7ff1-77a9-98e5-fdcd9f7465d2%22%2C1767463681989%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fmy-automation-4j0i.onrender.com%2Fsignout%22%7D%7D; rl_session=RudderEncrypt%3AU2FsdGVkX19S1GolcABVU6uAObCxLYwxzjGPwAOH28gQKESQZ6Od3RIiu3mTmyHjbWJK6EBa8NUm9szH6b3VnVEGncGQsUilgGsgVdoU8CGafE4UIAfizbkKE7%2FLqK6HeCU0w%2FHt81FNSUwbgoGvVg%3D%3D",
+            "priority": "u=0, i",
+            "render-proxy-ttl": "4",
+            "rndr-id": "f25e28b7-d126-4048",
+            "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+            "sec-ch-ua-mobile": "?0",
+            "sec-ch-ua-platform": "\"Windows\"",
+            "sec-fetch-dest": "document",
+            "sec-fetch-mode": "navigate",
+            "sec-fetch-site": "none",
+            "sec-fetch-user": "?1",
+            "true-client-ip": "119.157.160.192",
+            "upgrade-insecure-requests": "1",
+            "x-forwarded-for": "119.157.160.192, 172.69.244.186, 10.17.39.207",
+            "x-forwarded-proto": "https",
+            "x-request-start": "1767466675361130"
+          },
+          "params": {},
+          "query": {
+            "hub.mode": "subscribe",
+            "hub.verify_token": "some-random-verfiy-token3rsdfjdf2393skljfsdlfj9023kjdldjf90elkdsfjdslfj",
+            "hub.challenge": "123456"
+          },
+          "body": {},
+          "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook to verfiy the token": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook to recieve messages and comments": {
+      "main": [
+        [
+          {
+            "node": "Respond back to facebook curcial",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "91ef88e4-7fb0-4ff6-b292-d8a98d7c63a5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
+  },
+  "id": "iYlpWrFzNCLfstVt",
+  "tags": []
+}
