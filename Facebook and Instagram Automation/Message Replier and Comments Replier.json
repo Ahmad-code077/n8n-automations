@@ -64,8 +64,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -64,
-        480
+        -160,
+        288
       ],
       "id": "c46fde04-cc69-4232-b2ec-e1acbc547a77",
       "name": "Webhook to recieve messages and comments",
@@ -84,6 +84,47 @@
       ],
       "id": "85b4444e-56f2-4fee-84db-08bd20818c11",
       "name": "Respond back to facebook curcial"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.object }}",
+                    "rightValue": "page",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "033ef919-fa65-4bb3-b028-8bc0b9407011"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Messenger Chat"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        192,
+        240
+      ],
+      "id": "3efb660b-be9c-4ea4-a6ba-9c29451d0d30",
+      "name": "Switch"
     }
   ],
   "pinData": {
@@ -129,6 +170,62 @@
           "executionMode": "production"
         }
       }
+    ],
+    "Webhook to recieve messages and comments": [
+      {
+        "json": {
+          "headers": {
+            "host": "my-automation-4j0i.onrender.com",
+            "user-agent": "facebookexternalua",
+            "content-length": "324",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "69.63.189.17",
+            "cf-ipcountry": "US",
+            "cf-ray": "9b8df3b5bf1a6c1d-SIN",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "content-type": "application/json",
+            "facebook-api-version": "v24.0",
+            "render-proxy-ttl": "4",
+            "rndr-id": "982cf0d4-64dd-4039",
+            "true-client-ip": "69.63.189.17",
+            "x-forwarded-for": "69.63.189.17, 172.71.124.82, 10.17.2.247",
+            "x-forwarded-proto": "https",
+            "x-hub-signature": "sha1=e888fa8735b08d3eeec65458a3417f00d5aae301",
+            "x-hub-signature-256": "sha256=d7cc65015768e1f494c2d1943d6bd38c2705278afd3e178ae7c6f4b13df66e68",
+            "x-request-start": "1767563431475062"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "object": "page",
+            "entry": [
+              {
+                "time": 1767563431266,
+                "id": "914740581721664",
+                "messaging": [
+                  {
+                    "sender": {
+                      "id": "25672083659147013"
+                    },
+                    "recipient": {
+                      "id": "914740581721664"
+                    },
+                    "timestamp": 1767563429027,
+                    "message": {
+                      "mid": "m_Pounxu18EGJPVevRmlLl7NKKBvS3KCA5HQLzV_rhob6r8S3Y19oe0ZyeR1F6_1kLJQICT1LXlRKOJT8MejGi1Q",
+                      "text": "hello testing 123"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
+          "executionMode": "production"
+        }
+      }
     ]
   },
   "connections": {
@@ -161,6 +258,11 @@
             "node": "Respond back to facebook curcial",
             "type": "main",
             "index": 0
+          },
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
           }
         ]
       ]
@@ -170,7 +272,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "91ef88e4-7fb0-4ff6-b292-d8a98d7c63a5",
+  "versionId": "366523f3-ec07-4958-9cb0-5716b877e0a5",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
