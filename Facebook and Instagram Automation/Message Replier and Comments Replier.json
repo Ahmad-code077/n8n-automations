@@ -1,5 +1,4 @@
 {
-  "name": "Message Replier and Comments Replier",
   "nodes": [
     {
       "parameters": {
@@ -79,11 +78,113 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        144,
-        480
+        -192,
+        608
       ],
       "id": "85b4444e-56f2-4fee-84db-08bd20818c11",
       "name": "Respond back to facebook curcial"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "facebook-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -512,
+        144
+      ],
+      "id": "f5131c09-8bb2-4f23-b326-c1171c9db35c",
+      "name": "Messnger page message body",
+      "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "facebook-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -528,
+        352
+      ],
+      "id": "93494efc-2a67-4066-9842-b504bba10dd4",
+      "name": "Instagram commets api",
+      "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.entry[0].changes[0].field }}",
+                    "rightValue": "comments",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "6784192e-dd0a-4933-a886-bdef303c86eb"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Instagram Commets"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "970fdd38-b045-490d-9997-8bcc9305e999",
+                    "leftValue": "={{ $json.body.entry[0].changes[0].field }}",
+                    "rightValue": "messages",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Instagram messages"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        448,
+        384
+      ],
+      "id": "196b5c3d-0a2a-4938-8a62-853f2367efd5",
+      "name": "Switch1"
     },
     {
       "parameters": {
@@ -111,7 +212,32 @@
                 "combinator": "and"
               },
               "renameOutput": true,
-              "outputKey": "Messenger Chat"
+              "outputKey": "Facebook"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "f34cf796-29a0-41f1-b619-639fe5263e4b",
+                    "leftValue": "={{ $json.body.object }}",
+                    "rightValue": "instagram",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Instagram"
             }
           ]
         },
@@ -120,114 +246,166 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        192,
-        240
+        144,
+        288
       ],
       "id": "3efb660b-be9c-4ea4-a6ba-9c29451d0d30",
-      "name": "Switch"
-    }
-  ],
-  "pinData": {
-    "Webhook to verfiy the token": [
-      {
-        "json": {
-          "headers": {
-            "host": "my-automation-4j0i.onrender.com",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-            "accept-encoding": "gzip, br",
-            "accept-language": "en-US,en;q=0.9,ar;q=0.8,hy;q=0.7,ur;q=0.6",
-            "cdn-loop": "cloudflare; loops=1",
-            "cf-connecting-ip": "119.157.160.192",
-            "cf-ipcountry": "PK",
-            "cf-ray": "9b84b97e7cb1fbff-KHI",
-            "cf-visitor": "{\"scheme\":\"https\"}",
-            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX19mk8YoXpadDg7%2BtBWjEK%2FZRAcmoxkWqew%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19hniSHxws7cDnIUBIzrW5U2n5HqgAFeMk%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BwliONo1B4H6ymWPLsU0BtC37t13GQ%2BGqIJTbOHTKMXM%2Bd1dh8l1w%2FG%2By387ovttdm1Xmkp5uihQ%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX189eIaTXN%2B7cwaZV%2B5sRnM2%2B8BydmeKDhUSE0D0b3zWGMbF%2FdpRwSU%2BaAzQnJxOCiRdVe0MeCgfyLJ2RRz61GIGRRsHy1%2BFs5mhxdGRvSth9Gu6TDEpxPp49WsDBBwyI%2Fbl%2Fc1mO9m6LZy18beLH7dMBRFdsIkKiko%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX18xou37q59hr2kN0jB0bcLikmOvJnsTbE%2F76iyuUjErckZOl5THcBT%2Fb4h4u2Uq62zuVEY%2FL42jFkluHoBeX2GpyR756zeTmFtyXTQg4qQ6uN1Zj88Azc%2BVjwdj6GK1NaIZFHrynszJ8w%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%225fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda%23c474b9c6-bd72-4ab8-8aec-611e6a5fb7e6%22%2C%22%24sesid%22%3A%5B1767465282971%2C%22019b850b-7ff1-77a9-98e5-fdcd9f7465d2%22%2C1767463681989%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fmy-automation-4j0i.onrender.com%2Fsignout%22%7D%7D; rl_session=RudderEncrypt%3AU2FsdGVkX19S1GolcABVU6uAObCxLYwxzjGPwAOH28gQKESQZ6Od3RIiu3mTmyHjbWJK6EBa8NUm9szH6b3VnVEGncGQsUilgGsgVdoU8CGafE4UIAfizbkKE7%2FLqK6HeCU0w%2FHt81FNSUwbgoGvVg%3D%3D",
-            "priority": "u=0, i",
-            "render-proxy-ttl": "4",
-            "rndr-id": "f25e28b7-d126-4048",
-            "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
-            "sec-fetch-dest": "document",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-site": "none",
-            "sec-fetch-user": "?1",
-            "true-client-ip": "119.157.160.192",
-            "upgrade-insecure-requests": "1",
-            "x-forwarded-for": "119.157.160.192, 172.69.244.186, 10.17.39.207",
-            "x-forwarded-proto": "https",
-            "x-request-start": "1767466675361130"
-          },
-          "params": {},
-          "query": {
-            "hub.mode": "subscribe",
-            "hub.verify_token": "some-random-verfiy-token3rsdfjdf2393skljfsdlfj9023kjdldjf90elkdsfjdslfj",
-            "hub.challenge": "123456"
-          },
-          "body": {},
-          "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
-          "executionMode": "production"
+      "name": "seperate instagram and facebook Data"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "facebook-webhook",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -528,
+        544
+      ],
+      "id": "0d7f4036-0832-41e5-b6da-ac0abbd91805",
+      "name": "Instagram Messages",
+      "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You will receive conversation data. Read the last message and reply appropriately in 1-2 sentences maximum.\n{{JSON.stringify($input.all().map(item=>item.json))}}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are a helpful AI assistant that replies to conversations naturally and concisely. Your replies should be:\n\nShort & Simple: Use plain English with clear, direct wording.\n\nHuman-like: Sound natural, friendly, and polite without robotic phrasing.\n\nNo Special Characters: Avoid em dashes, bullet points, asterisks, or markdown.\n\nDirect Response: Answer the last message appropriately without extra explanations.\n\nConversational Tone: Keep it casual and engaging.\n\nExample Style:\n\n\"Sure, I can help with that.\"\n\n\"Got it, I'll take care of that.\"\n\n\"Thanks for sharing that information.\"\n\n\"I understand what you need.\"\n\n\nDo not include any other text, explanations, or formatting outside the JSON."
         }
-      }
-    ],
-    "Webhook to recieve messages and comments": [
-      {
-        "json": {
-          "headers": {
-            "host": "my-automation-4j0i.onrender.com",
-            "user-agent": "facebookexternalua",
-            "content-length": "324",
-            "accept": "*/*",
-            "accept-encoding": "gzip, br",
-            "cdn-loop": "cloudflare; loops=1",
-            "cf-connecting-ip": "69.63.189.17",
-            "cf-ipcountry": "US",
-            "cf-ray": "9b8df3b5bf1a6c1d-SIN",
-            "cf-visitor": "{\"scheme\":\"https\"}",
-            "content-type": "application/json",
-            "facebook-api-version": "v24.0",
-            "render-proxy-ttl": "4",
-            "rndr-id": "982cf0d4-64dd-4039",
-            "true-client-ip": "69.63.189.17",
-            "x-forwarded-for": "69.63.189.17, 172.71.124.82, 10.17.2.247",
-            "x-forwarded-proto": "https",
-            "x-hub-signature": "sha1=e888fa8735b08d3eeec65458a3417f00d5aae301",
-            "x-hub-signature-256": "sha256=d7cc65015768e1f494c2d1943d6bd38c2705278afd3e178ae7c6f4b13df66e68",
-            "x-request-start": "1767563431475062"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "object": "page",
-            "entry": [
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1536,
+        480
+      ],
+      "id": "5556626b-fe5e-4431-b4eb-09855623bc45",
+      "name": "AI Agent",
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v23.0",
+        "node": "914740581721664",
+        "edge": "conversations",
+        "options": {
+          "queryParameters": {
+            "parameter": [
               {
-                "time": 1767563431266,
-                "id": "914740581721664",
-                "messaging": [
-                  {
-                    "sender": {
-                      "id": "25672083659147013"
-                    },
-                    "recipient": {
-                      "id": "914740581721664"
-                    },
-                    "timestamp": 1767563429027,
-                    "message": {
-                      "mid": "m_Pounxu18EGJPVevRmlLl7NKKBvS3KCA5HQLzV_rhob6r8S3Y19oe0ZyeR1F6_1kLJQICT1LXlRKOJT8MejGi1Q",
-                      "text": "hello testing 123"
-                    }
-                  }
-                ]
+                "name": "platform",
+                "value": "instagram"
+              },
+              {
+                "name": "user_id",
+                "value": "={{ $json.body.entry[0].changes[0].value.sender.id }}"
               }
             ]
-          },
-          "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
-          "executionMode": "production"
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        768,
+        480
+      ],
+      "id": "848c852e-402c-421d-a9ea-d22982c5d858",
+      "name": "Fetch conversation",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "GzarcB0DEAIBwe5r",
+          "name": "Facebook Graph page access token"
         }
       }
-    ]
-  },
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v23.0",
+        "node": "={{ $json.data[0].id }}",
+        "edge": "messages",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "fields",
+                "value": "message,from,created_time"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        976,
+        480
+      ],
+      "id": "88761eb0-23ec-485b-98ac-230a36834c74",
+      "name": "Facebook Graph API",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "GzarcB0DEAIBwe5r",
+          "name": "Facebook Graph page access token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const messages = $input.first().json.data;\nconst myId = \"17841478709256156\";\n\nreturn messages\n  .sort((a, b) => new Date(a.created_time) - new Date(b.created_time))\n  .map(msg => ({\n    text: msg.message,\n    sender: msg.from.id === myId ? \"me\" : \"other\",\n    time: msg.created_time,\n    username: msg.from.username\n  }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1184,
+        480
+      ],
+      "id": "3a5c911c-10cd-46a3-a52b-1a6897970a6d",
+      "name": "Get past messages for context"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1408,
+        688
+      ],
+      "id": "53b6300d-4fb6-4837-a35e-3ea9447e5fd0",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "QXjIfiCYJMVGwLkR",
+          "name": "OpenAi working"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"reply\":\"your reply goes here \"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1712,
+        688
+      ],
+      "id": "d9166ef9-9f38-45e9-b5f8-3cced2f7adab",
+      "name": "Structured Output Parser"
+    }
+  ],
   "connections": {
     "Code in JavaScript": {
       "main": [
@@ -260,23 +438,409 @@
             "index": 0
           },
           {
-            "node": "Switch",
+            "node": "seperate instagram and facebook Data",
             "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Fetch conversation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "seperate instagram and facebook Data": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch conversation": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API": {
+      "main": [
+        [
+          {
+            "node": "Get past messages for context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get past messages for context": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
             "index": 0
           }
         ]
       ]
     }
   },
-  "active": true,
-  "settings": {
-    "executionOrder": "v1"
+  "pinData": {
+    "Webhook to verfiy the token": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-encoding": "gzip, br",
+          "accept-language": "en-US,en;q=0.9,ar;q=0.8,hy;q=0.7,ur;q=0.6",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "119.157.160.192",
+          "cf-ipcountry": "PK",
+          "cf-ray": "9b84b97e7cb1fbff-KHI",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX19mk8YoXpadDg7%2BtBWjEK%2FZRAcmoxkWqew%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX19hniSHxws7cDnIUBIzrW5U2n5HqgAFeMk%3D; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2BwliONo1B4H6ymWPLsU0BtC37t13GQ%2BGqIJTbOHTKMXM%2Bd1dh8l1w%2FG%2By387ovttdm1Xmkp5uihQ%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX189eIaTXN%2B7cwaZV%2B5sRnM2%2B8BydmeKDhUSE0D0b3zWGMbF%2FdpRwSU%2BaAzQnJxOCiRdVe0MeCgfyLJ2RRz61GIGRRsHy1%2BFs5mhxdGRvSth9Gu6TDEpxPp49WsDBBwyI%2Fbl%2Fc1mO9m6LZy18beLH7dMBRFdsIkKiko%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX18xou37q59hr2kN0jB0bcLikmOvJnsTbE%2F76iyuUjErckZOl5THcBT%2Fb4h4u2Uq62zuVEY%2FL42jFkluHoBeX2GpyR756zeTmFtyXTQg4qQ6uN1Zj88Azc%2BVjwdj6GK1NaIZFHrynszJ8w%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%225fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda%23c474b9c6-bd72-4ab8-8aec-611e6a5fb7e6%22%2C%22%24sesid%22%3A%5B1767465282971%2C%22019b850b-7ff1-77a9-98e5-fdcd9f7465d2%22%2C1767463681989%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fmy-automation-4j0i.onrender.com%2Fsignout%22%7D%7D; rl_session=RudderEncrypt%3AU2FsdGVkX19S1GolcABVU6uAObCxLYwxzjGPwAOH28gQKESQZ6Od3RIiu3mTmyHjbWJK6EBa8NUm9szH6b3VnVEGncGQsUilgGsgVdoU8CGafE4UIAfizbkKE7%2FLqK6HeCU0w%2FHt81FNSUwbgoGvVg%3D%3D",
+          "priority": "u=0, i",
+          "render-proxy-ttl": "4",
+          "rndr-id": "f25e28b7-d126-4048",
+          "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "document",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "none",
+          "sec-fetch-user": "?1",
+          "true-client-ip": "119.157.160.192",
+          "upgrade-insecure-requests": "1",
+          "x-forwarded-for": "119.157.160.192, 172.69.244.186, 10.17.39.207",
+          "x-forwarded-proto": "https",
+          "x-request-start": "1767466675361130"
+        },
+        "params": {},
+        "query": {
+          "hub.mode": "subscribe",
+          "hub.verify_token": "some-random-verfiy-token3rsdfjdf2393skljfsdlfj9023kjdldjf90elkdsfjdslfj",
+          "hub.challenge": "123456"
+        },
+        "body": {},
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
+        "executionMode": "production"
+      }
+    ],
+    "Webhook to recieve messages and comments": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "Webhooks/1.0 (https://fb.me/webhooks)",
+          "content-length": "255",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "173.252.127.6",
+          "cf-ipcountry": "US",
+          "cf-ray": "9b9d6530485b8832-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "render-proxy-ttl": "4",
+          "rndr-id": "959eceb0-df8d-4586",
+          "true-client-ip": "173.252.127.6",
+          "x-forwarded-for": "173.252.127.6, 172.71.124.96, 10.17.6.49",
+          "x-forwarded-proto": "https",
+          "x-hub-signature": "sha1=5fc83dd4778268747a07c73e276c03087f7946f1",
+          "x-hub-signature-256": "sha256=114d0a354b3b09ccb886420efdf1a1aaa3563f7856f50942b4dcb059a9d58c1e",
+          "x-request-start": "1767725365996615"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "entry": [
+            {
+              "id": "0",
+              "time": 1767725365,
+              "changes": [
+                {
+                  "field": "messages",
+                  "value": {
+                    "sender": {
+                      "id": "1189770910038355"
+                    },
+                    "recipient": {
+                      "id": "23245"
+                    },
+                    "timestamp": "1527459824",
+                    "message": {
+                      "mid": "random_mid",
+                      "text": "random_text"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "object": "instagram"
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
+        "executionMode": "production"
+      }
+    ],
+    "Messnger page message body": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "facebookexternalua",
+          "content-length": "324",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "69.63.189.17",
+          "cf-ipcountry": "US",
+          "cf-ray": "9b8df3b5bf1a6c1d-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "facebook-api-version": "v24.0",
+          "render-proxy-ttl": "4",
+          "rndr-id": "982cf0d4-64dd-4039",
+          "true-client-ip": "69.63.189.17",
+          "x-forwarded-for": "69.63.189.17, 172.71.124.82, 10.17.2.247",
+          "x-forwarded-proto": "https",
+          "x-hub-signature": "sha1=e888fa8735b08d3eeec65458a3417f00d5aae301",
+          "x-hub-signature-256": "sha256=d7cc65015768e1f494c2d1943d6bd38c2705278afd3e178ae7c6f4b13df66e68",
+          "x-request-start": "1767563431475062"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "object": "page",
+          "entry": [
+            {
+              "time": 1767563431266,
+              "id": "914740581721664",
+              "messaging": [
+                {
+                  "sender": {
+                    "id": "25672083659147013"
+                  },
+                  "recipient": {
+                    "id": "914740581721664"
+                  },
+                  "timestamp": 1767563429027,
+                  "message": {
+                    "mid": "m_Pounxu18EGJPVevRmlLl7NKKBvS3KCA5HQLzV_rhob6r8S3Y19oe0ZyeR1F6_1kLJQICT1LXlRKOJT8MejGi1Q",
+                    "text": "hello testing 123"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
+        "executionMode": "production"
+      }
+    ],
+    "Instagram commets api": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "Webhooks/1.0 (https://fb.me/webhooks)",
+          "content-length": "308",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "173.252.127.16",
+          "cf-ipcountry": "US",
+          "cf-ray": "9b9d5647be610a45-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "render-proxy-ttl": "4",
+          "rndr-id": "9f2beb93-6764-4134",
+          "true-client-ip": "173.252.127.16",
+          "x-forwarded-for": "173.252.127.16, 172.71.124.172, 10.16.237.183",
+          "x-forwarded-proto": "https",
+          "x-hub-signature": "sha1=069f5f4698055fec550b182c6663099e3b9c8012",
+          "x-hub-signature-256": "sha256=75108058c09b60d70cceb699437794a1b585e64b2fd0c59a6e87be8139ed069f",
+          "x-request-start": "1767724755366620"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "entry": [
+            {
+              "id": "0",
+              "time": 1767724754,
+              "changes": [
+                {
+                  "field": "comments",
+                  "value": {
+                    "from": {
+                      "id": "232323232",
+                      "username": "test"
+                    },
+                    "media": {
+                      "id": "123123123",
+                      "media_product_type": "FEED"
+                    },
+                    "id": "17865799348089039",
+                    "parent_id": "1231231234",
+                    "text": "This is an example."
+                  }
+                }
+              ]
+            }
+          ],
+          "object": "instagram"
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
+        "executionMode": "production"
+      }
+    ],
+    "Instagram Messages": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "Webhooks/1.0 (https://fb.me/webhooks)",
+          "content-length": "255",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "173.252.127.6",
+          "cf-ipcountry": "US",
+          "cf-ray": "9b9d6530485b8832-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "render-proxy-ttl": "4",
+          "rndr-id": "959eceb0-df8d-4586",
+          "true-client-ip": "173.252.127.6",
+          "x-forwarded-for": "173.252.127.6, 172.71.124.96, 10.17.6.49",
+          "x-forwarded-proto": "https",
+          "x-hub-signature": "sha1=5fc83dd4778268747a07c73e276c03087f7946f1",
+          "x-hub-signature-256": "sha256=114d0a354b3b09ccb886420efdf1a1aaa3563f7856f50942b4dcb059a9d58c1e",
+          "x-request-start": "1767725365996615"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "entry": [
+            {
+              "id": "0",
+              "time": 1767725365,
+              "changes": [
+                {
+                  "field": "messages",
+                  "value": {
+                    "sender": {
+                      "id": "1189770910038355"
+                    },
+                    "recipient": {
+                      "id": "23245"
+                    },
+                    "timestamp": "1527459824",
+                    "message": {
+                      "mid": "random_mid",
+                      "text": "random_text"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "object": "instagram"
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
+        "executionMode": "production"
+      }
+    ],
+    "Fetch conversation": [
+      {
+        "data": [
+          {
+            "id": "aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0Nzg3MDkyNTYxNTY6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0Mjc2MDIxNjYzMTc4NzEwNjE4",
+            "updated_time": "2026-01-06T19:16:58+0000"
+          }
+        ]
+      }
+    ],
+    "Facebook Graph API": [
+      {
+        "data": [
+          {
+            "message": "hello user",
+            "from": {
+              "username": "ahmaddevautomation",
+              "id": "17841478709256156"
+            },
+            "created_time": "2026-01-06T19:16:58+0000",
+            "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjYwODgwNzkwMzQyMzQyMDg5OTc2MDYxOTk0MjU3NjEyOAZDZD"
+          },
+          {
+            "message": "Hi ahmad",
+            "from": {
+              "username": "ahmad__mamoon",
+              "id": "1189770910038355"
+            },
+            "created_time": "2026-01-03T19:25:23+0000",
+            "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjYwNDAzNTgyMzM1Mzg5MDE2NDcwNjE1Nzk0NjQ3MDQwMAZDZD"
+          },
+          {
+            "message": "Hi",
+            "from": {
+              "username": "ahmad__mamoon",
+              "id": "1189770910038355"
+            },
+            "created_time": "2025-12-23T21:12:55+0000",
+            "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjU4NjYyMzA1MDA2MjU5NDgwMTYxMzM4ODIzOTYwMTY2NAZDZD"
+          }
+        ],
+        "paging": {
+          "cursors": {
+            "after": "ZAXlKamRYSnpiM0lpT2lJek1qVTROall5TXpBMU1EQTJNalU1TkRnd01UWXhNek00T0RJek9UWXdNVFkyTkNKOQZDZD"
+          },
+          "next": "https://graph.facebook.com/v24.0/aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0Nzg3MDkyNTYxNTY6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0Mjc2MDIxNjYzMTc4NzEwNjE4/messages?access_token=EAAMoBNTmgewBQcGfN1mEpYD5zF23wyVW4eB38GtMcuze5RjIVZAUQUILE6aByXBhdLXVCJpOCox8iCbEfoMMau2aNTEXbunKn4HgrkXmgKCQDjcbxdittNAnhYjVv1dst8l0OexhZCMUF7ENnDJDufdC5P2PdCfAIPZAWi9sIrlKlKJs8zpZAvwJ36AI5F3VHESVgSPv&fields=message%2Cfrom%2Ccreated_time&limit=2&after=ZAXlKamRYSnpiM0lpT2lJek1qVTROall5TXpBMU1EQTJNalU1TkRnd01UWXhNek00T0RJek9UWXdNVFkyTkNKOQZDZD"
+        }
+      }
+    ]
   },
-  "versionId": "366523f3-ec07-4958-9cb0-5716b877e0a5",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
-  },
-  "id": "iYlpWrFzNCLfstVt",
-  "tags": []
+  }
 }
