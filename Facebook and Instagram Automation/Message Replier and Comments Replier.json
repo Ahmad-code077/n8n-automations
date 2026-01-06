@@ -18,10 +18,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        448,
-        0
+        160,
+        -864
       ],
-      "id": "32dbfbf9-8394-4e18-9c99-fb607ac5ffb3",
+      "id": "624be1a1-beff-4411-b33d-73b7bd9f9fad",
       "name": "Respond to Webhook"
     },
     {
@@ -31,10 +31,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        208,
-        0
+        -80,
+        -864
       ],
-      "id": "a36ff53c-cea1-47b5-bb7e-5811926201ac",
+      "id": "9e934b8c-be4e-4aef-94bd-fdd51792b768",
       "name": "Code in JavaScript"
     },
     {
@@ -46,10 +46,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
-        0
+        -288,
+        -864
       ],
-      "id": "2fba0da6-8eed-4115-8b87-bb12aefaf3f4",
+      "id": "2ae43975-7883-4d36-b072-c0b84bd90478",
       "name": "Webhook to verfiy the token",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318"
     },
@@ -63,10 +63,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -160,
+        -320,
         288
       ],
-      "id": "c46fde04-cc69-4232-b2ec-e1acbc547a77",
+      "id": "676d1da2-b8fb-4da6-a14d-2d34fdd40eeb",
       "name": "Webhook to recieve messages and comments",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318"
     },
@@ -78,10 +78,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -192,
-        608
+        -208,
+        624
       ],
-      "id": "85b4444e-56f2-4fee-84db-08bd20818c11",
+      "id": "52f80ea3-f95b-49b6-84dc-eae70340a1ac",
       "name": "Respond back to facebook curcial"
     },
     {
@@ -94,10 +94,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -512,
+        -672,
         144
       ],
-      "id": "f5131c09-8bb2-4f23-b326-c1171c9db35c",
+      "id": "e41fa921-279a-4363-abb2-e45a78c6e651",
       "name": "Messnger page message body",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
       "disabled": true
@@ -112,79 +112,12 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -528,
+        -688,
         352
       ],
-      "id": "93494efc-2a67-4066-9842-b504bba10dd4",
+      "id": "d3bd7ceb-fe9f-4cc5-802f-1effec3d6220",
       "name": "Instagram commets api",
-      "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
-      "disabled": true
-    },
-    {
-      "parameters": {
-        "rules": {
-          "values": [
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "leftValue": "={{ $json.body.entry[0].changes[0].field }}",
-                    "rightValue": "comments",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals"
-                    },
-                    "id": "6784192e-dd0a-4933-a886-bdef303c86eb"
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Instagram Commets"
-            },
-            {
-              "conditions": {
-                "options": {
-                  "caseSensitive": true,
-                  "leftValue": "",
-                  "typeValidation": "strict",
-                  "version": 2
-                },
-                "conditions": [
-                  {
-                    "id": "970fdd38-b045-490d-9997-8bcc9305e999",
-                    "leftValue": "={{ $json.body.entry[0].changes[0].field }}",
-                    "rightValue": "messages",
-                    "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
-                    }
-                  }
-                ],
-                "combinator": "and"
-              },
-              "renameOutput": true,
-              "outputKey": "Instagram messages"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "type": "n8n-nodes-base.switch",
-      "typeVersion": 3.2,
-      "position": [
-        448,
-        384
-      ],
-      "id": "196b5c3d-0a2a-4938-8a62-853f2367efd5",
-      "name": "Switch1"
+      "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318"
     },
     {
       "parameters": {
@@ -246,10 +179,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        144,
+        -16,
         288
       ],
-      "id": "3efb660b-be9c-4ea4-a6ba-9c29451d0d30",
+      "id": "2f112bb8-fde0-4a86-9480-cf929b855f39",
       "name": "seperate instagram and facebook Data"
     },
     {
@@ -262,10 +195,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -528,
+        -688,
         544
       ],
-      "id": "0d7f4036-0832-41e5-b6da-ac0abbd91805",
+      "id": "0884f42f-229e-41a0-b52e-cb7179276b24",
       "name": "Instagram Messages",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
       "disabled": true
@@ -282,10 +215,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1536,
-        480
+        1552,
+        880
       ],
-      "id": "5556626b-fe5e-4431-b4eb-09855623bc45",
+      "id": "409a7f33-89bf-4afd-b93f-37987d76d820",
       "name": "AI Agent",
       "executeOnce": true
     },
@@ -312,17 +245,54 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        768,
-        480
+        880,
+        880
       ],
-      "id": "848c852e-402c-421d-a9ea-d22982c5d858",
+      "id": "882bd1ce-66d7-4a68-b262-aab03189386e",
       "name": "Fetch conversation",
       "credentials": {
         "facebookGraphApi": {
-          "id": "GzarcB0DEAIBwe5r",
-          "name": "Facebook Graph page access token"
+          "id": "3lONcAbTSkpQ9Aoz",
+          "name": "page access token"
         }
       }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1560,
+        1104
+      ],
+      "id": "aa28c11e-1af2-4f27-90ed-61ac27e87b72",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "6j24kqb9tFijNrQo",
+          "name": "OpenAi account G"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"reply\":\"your reply goes here \"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1688,
+        1104
+      ],
+      "id": "0c074f43-6593-4bf7-8ea0-1e2e58857084",
+      "name": "Structured Output Parser"
     },
     {
       "parameters": {
@@ -343,15 +313,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        976,
-        480
+        1104,
+        880
       ],
-      "id": "88761eb0-23ec-485b-98ac-230a36834c74",
-      "name": "Facebook Graph API",
+      "id": "065fb9f1-fb2e-4767-a134-882e7d8ca8d7",
+      "name": "Get recent converstaion",
       "credentials": {
         "facebookGraphApi": {
-          "id": "GzarcB0DEAIBwe5r",
-          "name": "Facebook Graph page access token"
+          "id": "3lONcAbTSkpQ9Aoz",
+          "name": "page access token"
         }
       }
     },
@@ -362,48 +332,273 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1184,
-        480
+        1328,
+        880
       ],
-      "id": "3a5c911c-10cd-46a3-a52b-1a6897970a6d",
-      "name": "Get past messages for context"
+      "id": "c7ea73aa-b06c-4048-a206-77dc7f2ce7d8",
+      "name": "Align Past messages"
     },
     {
       "parameters": {
-        "model": {
-          "__rl": true,
-          "mode": "list",
-          "value": "gpt-4.1-mini"
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.body.entry[0].changes[0].field }}",
+                    "rightValue": "comments",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "6784192e-dd0a-4933-a886-bdef303c86eb"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Instagram Commets"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "970fdd38-b045-490d-9997-8bcc9305e999",
+                    "leftValue": "={{ $json.body.entry[0].changes[0].field }}",
+                    "rightValue": "messages",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Instagram messages"
+            }
+          ]
         },
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
-      "typeVersion": 1.2,
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
       "position": [
-        1408,
-        688
+        656,
+        732
       ],
-      "id": "53b6300d-4fb6-4837-a35e-3ea9447e5fd0",
-      "name": "OpenAI Chat Model",
+      "id": "a041d820-827a-4eef-b01e-ba8acb4de5bb",
+      "name": "seperate dms and commets"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "=914740581721664",
+        "edge": "messages",
+        "options": {
+          "queryParametersJson": "={\n  \"recipient\": {\n    \"id\": \"{{ $('Webhook to recieve messages and comments').first().json.body.entry[0].changes[0].value.sender.id }}\"\n  },\n  \"messaging_type\": \"RESPONSE\",\n  \"message\": {\n    \"text\": \"{{$('AI Agent').item.json.output.reply}}\"\n  }\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        1968,
+        880
+      ],
+      "id": "ed62c2c7-f777-4116-94b1-0afbdcc8e33c",
+      "name": "Instagram Dm replies",
       "credentials": {
-        "openAiApi": {
-          "id": "QXjIfiCYJMVGwLkR",
-          "name": "OpenAi working"
+        "facebookGraphApi": {
+          "id": "3lONcAbTSkpQ9Aoz",
+          "name": "page access token"
         }
       }
     },
     {
       "parameters": {
-        "jsonSchemaExample": "{\n  \"reply\":\"your reply goes here \"\n}"
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "={{ $('Summerize all data').item.json.commentId }}",
+        "edge": "replies",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "message",
+                "value": "={{ $json.reply }}"
+              }
+            ]
+          }
+        }
       },
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.3,
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
       "position": [
-        1712,
-        688
+        2480,
+        584
       ],
-      "id": "d9166ef9-9f38-45e9-b5f8-3cced2f7adab",
-      "name": "Structured Output Parser"
+      "id": "fdfa148e-7e1c-4275-b6e1-a0df5e50380d",
+      "name": "Instagram Comments replies",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "3lONcAbTSkpQ9Aoz",
+          "name": "page access token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "70c037e1-7159-4b43-a24a-39268671c4f5",
+              "leftValue": "={{ $json.body.entry[0].changes[0].value.parent_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        584
+      ],
+      "id": "e5a561f9-5d44-43c6-a764-70afdd10b4a8",
+      "name": "check if the child reply"
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v23.0",
+        "node": "={{ $json.body.entry[0].changes[0].value.parent_id }}",
+        "options": {
+          "fields": {
+            "field": [
+              {
+                "name": "=text,from,timestamp"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        1104,
+        512
+      ],
+      "id": "12d30516-3cc4-4f9b-9a0a-a33af547ea2c",
+      "name": "Fetch Parent Comments",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "3lONcAbTSkpQ9Aoz",
+          "name": "page access token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an Instagram comment reply assistant. Generate short, friendly replies.\n\nRULES:\n1. Reply in 1-2 sentences maximum\n2. Casual, conversational tone\n3. Match the comment's energy\n4. For emoji-only comments (❤️, 👍, 😍, etc.), reply with similar emoji\n5. For questions, provide helpful answers\n6. For compliments, say thank you\n7. ALWAYS output in this exact JSON format: {\"reply\": \"Your reply here\"}\n\nEXAMPLES:\nInput: {\"user\":\"ahmad__mamoon\",\"comment\":\"❤️\",\"hasParent\":false,\"parent\":null}\nOutput: {\"reply\": \"❤️\"}\n\nInput: {\"user\":\"ahmad__mamoon\",\"comment\":\"Great post!\",\"hasParent\":false,\"parent\":null}\nOutput: {\"reply\": \"Thanks so much! 😊\"}\n\nInput: {\"user\":\"ahmad__mamoon\",\"comment\":\"How did you do this?\",\"hasParent\":true,\"parent\":{\"user\":\"test\",\"text\":\"Amazing work\"}}\nOutput: {\"reply\": \"I used n8n automation! Would you like to know more?\"}",
+              "role": "system"
+            },
+            {
+              "content": "={{ $json.prompt }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        1904,
+        584
+      ],
+      "id": "d3c04a05-4031-469e-a00e-993c6b4ab710",
+      "name": "Message a model",
+      "executeOnce": true,
+      "credentials": {
+        "openAiApi": {
+          "id": "6j24kqb9tFijNrQo",
+          "name": "OpenAi account G"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const childReplyNode = $('check if the child reply');\nconst fetchParentNode = $('Fetch Parent Comments');\n\nlet webhook = null;\nif (childReplyNode && childReplyNode.item) {\n  const json = childReplyNode.item.json;\n  \n  if (json?.body?.entry?.[0]?.changes?.[0]?.value) {\n    webhook = json.body.entry[0].changes[0].value;\n  }\n}\n\nif (!webhook) {\n  return { error: 'No webhook data found' };\n}\n\nlet parent = null;\nif (webhook.parent_id) {\n  try {\n    if (fetchParentNode?.item?.json) {\n      parent = fetchParentNode.item.json;\n    }\n  } catch (error) {\n    parent = null;\n  }\n}\n\nconst data = {\n  user: webhook?.from?.username || 'unknown',\n  comment: webhook?.text || '',\n  commentId: webhook?.id || '',\n  userId: webhook?.from?.id || '',\n  mediaId: webhook?.media?.id || '',\n  parentId: webhook?.parent_id || null,\n  hasParent: !!parent,\n  parent: parent ? {\n    user: parent?.from?.username || 'unknown',\n    text: parent?.text || '',\n    id: parent?.id || ''\n  } : null\n};\n\nreturn data;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        584
+      ],
+      "id": "7bbd5814-f7cb-44c8-b2cc-fce5ed479bc4",
+      "name": "Summerize all data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.first().json;\n\nlet prompt = `Comment from ${data.user}: \"${data.comment}\"\\n`;\n\nif (data.hasParent && data.parent) {\n  if (data?.parent?.user === data.user) {\n    prompt += `This is a reply to their own previous comment: \"${data.parent.text}\"\\n`;\n  } else {\n    prompt += `This is a reply to ${data.parent.user}'s comment: \"${data.parent.text}\"\\n`;\n  }\n}\n\nprompt += `Generate a short, friendly reply in 1-2 sentences:`;\n\nreturn {prompt};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1616,
+        584
+      ],
+      "id": "5ec99a64-9d78-4952-8e74-b2f86ef9f2c9",
+      "name": "Fields to pass to ai"
+    },
+    {
+      "parameters": {
+        "jsCode": "return JSON.parse($input.first().json.message.content)"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2256,
+        584
+      ],
+      "id": "267058d4-abe4-433e-8260-ed140f7232be",
+      "name": "parse incoming data"
     }
   ],
   "connections": {
@@ -445,24 +640,23 @@
         ]
       ]
     },
-    "Switch1": {
+    "seperate instagram and facebook Data": {
       "main": [
         [],
         [
           {
-            "node": "Fetch conversation",
+            "node": "seperate dms and commets",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "seperate instagram and facebook Data": {
+    "AI Agent": {
       "main": [
-        [],
         [
           {
-            "node": "Switch1",
+            "node": "Instagram Dm replies",
             "type": "main",
             "index": 0
           }
@@ -473,29 +667,7 @@
       "main": [
         [
           {
-            "node": "Facebook Graph API",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Facebook Graph API": {
-      "main": [
-        [
-          {
-            "node": "Get past messages for context",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get past messages for context": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
+            "node": "Get recent converstaion",
             "type": "main",
             "index": 0
           }
@@ -519,6 +691,119 @@
           {
             "node": "AI Agent",
             "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get recent converstaion": {
+      "main": [
+        [
+          {
+            "node": "Align Past messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Align Past messages": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "seperate dms and commets": {
+      "main": [
+        [
+          {
+            "node": "check if the child reply",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Fetch conversation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check if the child reply": {
+      "main": [
+        [
+          {
+            "node": "Fetch Parent Comments",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Summerize all data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Parent Comments": {
+      "main": [
+        [
+          {
+            "node": "Summerize all data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "parse incoming data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Summerize all data": {
+      "main": [
+        [
+          {
+            "node": "Fields to pass to ai",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fields to pass to ai": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "parse incoming data": {
+      "main": [
+        [
+          {
+            "node": "Instagram Comments replies",
+            "type": "main",
             "index": 0
           }
         ]
@@ -572,23 +857,23 @@
         "headers": {
           "host": "my-automation-4j0i.onrender.com",
           "user-agent": "Webhooks/1.0 (https://fb.me/webhooks)",
-          "content-length": "255",
+          "content-length": "308",
           "accept": "*/*",
           "accept-encoding": "gzip, br",
           "cdn-loop": "cloudflare; loops=1",
-          "cf-connecting-ip": "173.252.127.6",
+          "cf-connecting-ip": "173.252.127.16",
           "cf-ipcountry": "US",
-          "cf-ray": "9b9d6530485b8832-SIN",
+          "cf-ray": "9b9d5647be610a45-SIN",
           "cf-visitor": "{\"scheme\":\"https\"}",
           "content-type": "application/json",
           "render-proxy-ttl": "4",
-          "rndr-id": "959eceb0-df8d-4586",
-          "true-client-ip": "173.252.127.6",
-          "x-forwarded-for": "173.252.127.6, 172.71.124.96, 10.17.6.49",
+          "rndr-id": "9f2beb93-6764-4134",
+          "true-client-ip": "173.252.127.16",
+          "x-forwarded-for": "173.252.127.16, 172.71.124.172, 10.16.237.183",
           "x-forwarded-proto": "https",
-          "x-hub-signature": "sha1=5fc83dd4778268747a07c73e276c03087f7946f1",
-          "x-hub-signature-256": "sha256=114d0a354b3b09ccb886420efdf1a1aaa3563f7856f50942b4dcb059a9d58c1e",
-          "x-request-start": "1767725365996615"
+          "x-hub-signature": "sha1=069f5f4698055fec550b182c6663099e3b9c8012",
+          "x-hub-signature-256": "sha256=75108058c09b60d70cceb699437794a1b585e64b2fd0c59a6e87be8139ed069f",
+          "x-request-start": "1767724755366620"
         },
         "params": {},
         "query": {},
@@ -596,22 +881,22 @@
           "entry": [
             {
               "id": "0",
-              "time": 1767725365,
+              "time": 1767724754,
               "changes": [
                 {
-                  "field": "messages",
+                  "field": "comments",
                   "value": {
-                    "sender": {
-                      "id": "1189770910038355"
+                    "from": {
+                      "id": "1189770910038355",
+                      "username": "ahmad__mamoon"
                     },
-                    "recipient": {
-                      "id": "23245"
+                    "media": {
+                      "id": "18097764943672044",
+                      "media_product_type": "FEED"
                     },
-                    "timestamp": "1527459824",
-                    "message": {
-                      "mid": "random_mid",
-                      "text": "random_text"
-                    }
+                    "id": "18068956190387448",
+                    "parent_id": "",
+                    "text": "@ahmad__mamoon just saw this post totally amazing"
                   }
                 }
               ]
@@ -712,16 +997,16 @@
                   "field": "comments",
                   "value": {
                     "from": {
-                      "id": "232323232",
-                      "username": "test"
+                      "id": "1189770910038355",
+                      "username": "ahmad__mamoon"
                     },
                     "media": {
-                      "id": "123123123",
+                      "id": "18097764943672044",
                       "media_product_type": "FEED"
                     },
-                    "id": "17865799348089039",
-                    "parent_id": "1231231234",
-                    "text": "This is an example."
+                    "id": "18031216505567496",
+                    "parent_id": null,
+                    "text": "hi testing"
                   }
                 }
               ]
@@ -789,19 +1074,35 @@
         "executionMode": "production"
       }
     ],
+    "AI Agent": [
+      {
+        "output": {
+          "reply": "Hey there! How can I help you today?"
+        }
+      }
+    ],
     "Fetch conversation": [
       {
         "data": [
           {
             "id": "aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0Nzg3MDkyNTYxNTY6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0Mjc2MDIxNjYzMTc4NzEwNjE4",
-            "updated_time": "2026-01-06T19:16:58+0000"
+            "updated_time": "2026-01-06T20:10:42+0000"
           }
         ]
       }
     ],
-    "Facebook Graph API": [
+    "Get recent converstaion": [
       {
         "data": [
+          {
+            "message": "Hi user nice to meet you",
+            "from": {
+              "username": "ahmad__mamoon",
+              "id": "1189770910038355"
+            },
+            "created_time": "2026-01-06T20:10:42+0000",
+            "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjYwODg2NzM4MTc1OTc4MzM1NzI2MzU4MTUyMTM3OTMyOAZDZD"
+          },
           {
             "message": "hello user",
             "from": {
@@ -829,13 +1130,48 @@
             "created_time": "2025-12-23T21:12:55+0000",
             "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjU4NjYyMzA1MDA2MjU5NDgwMTYxMzM4ODIzOTYwMTY2NAZDZD"
           }
-        ],
-        "paging": {
-          "cursors": {
-            "after": "ZAXlKamRYSnpiM0lpT2lJek1qVTROall5TXpBMU1EQTJNalU1TkRnd01UWXhNek00T0RJek9UWXdNVFkyTkNKOQZDZD"
-          },
-          "next": "https://graph.facebook.com/v24.0/aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0Nzg3MDkyNTYxNTY6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0Mjc2MDIxNjYzMTc4NzEwNjE4/messages?access_token=EAAMoBNTmgewBQcGfN1mEpYD5zF23wyVW4eB38GtMcuze5RjIVZAUQUILE6aByXBhdLXVCJpOCox8iCbEfoMMau2aNTEXbunKn4HgrkXmgKCQDjcbxdittNAnhYjVv1dst8l0OexhZCMUF7ENnDJDufdC5P2PdCfAIPZAWi9sIrlKlKJs8zpZAvwJ36AI5F3VHESVgSPv&fields=message%2Cfrom%2Ccreated_time&limit=2&after=ZAXlKamRYSnpiM0lpT2lJek1qVTROall5TXpBMU1EQTJNalU1TkRnd01UWXhNek00T0RJek9UWXdNVFkyTkNKOQZDZD"
-        }
+        ]
+      }
+    ],
+    "Instagram Dm replies": [
+      {
+        "recipient_id": "1189770910038355",
+        "message_id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjYwODg2ODUyMTY1MzIwMTE3NTA3Njg5MTg1NDM3Mjg2NAZDZD"
+      }
+    ],
+    "Instagram Comments replies": [
+      {
+        "id": "18037802876738222"
+      }
+    ],
+    "Message a model": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"reply\": \"Thanks a lot! Glad you liked it! 😊\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "Summerize all data": [
+      {
+        "user": "ahmad__mamoon",
+        "comment": "@ahmad__mamoon just saw this post totally amazing",
+        "commentId": "18068956190387448",
+        "userId": "1189770910038355",
+        "mediaId": "18097764943672044",
+        "parentId": null,
+        "hasParent": false,
+        "parent": null
+      }
+    ],
+    "Fields to pass to ai": [
+      {
+        "prompt": "Comment from ahmad__mamoon: \"@ahmad__mamoon just saw this post totally amazing\"\nGenerate a short, friendly reply in 1-2 sentences:"
       }
     ]
   },
