@@ -94,8 +94,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -672,
-        144
+        -1024,
+        -112
       ],
       "id": "e41fa921-279a-4363-abb2-e45a78c6e651",
       "name": "Messnger page message body",
@@ -112,8 +112,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -688,
-        352
+        -1040,
+        96
       ],
       "id": "d3bd7ceb-fe9f-4cc5-802f-1effec3d6220",
       "name": "Instagram commets api",
@@ -196,8 +196,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -688,
-        544
+        -1040,
+        288
       ],
       "id": "0884f42f-229e-41a0-b52e-cb7179276b24",
       "name": "Instagram Messages",
@@ -216,8 +216,8 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1552,
-        880
+        2256,
+        720
       ],
       "id": "409a7f33-89bf-4afd-b93f-37987d76d820",
       "name": "AI Agent",
@@ -237,7 +237,7 @@
               },
               {
                 "name": "user_id",
-                "value": "={{ $json.body.entry[0].changes[0].value.sender.id }}"
+                "value": "={{ $json.body.entry[0].messaging[0].sender.id }}"
               }
             ]
           }
@@ -246,8 +246,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        880,
-        880
+        1584,
+        816
       ],
       "id": "882bd1ce-66d7-4a68-b262-aab03189386e",
       "name": "Fetch conversation",
@@ -270,8 +270,8 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1568,
-        1104
+        2272,
+        944
       ],
       "id": "aa28c11e-1af2-4f27-90ed-61ac27e87b72",
       "name": "OpenAI Chat Model",
@@ -289,8 +289,8 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        1696,
-        1104
+        2400,
+        944
       ],
       "id": "0c074f43-6593-4bf7-8ea0-1e2e58857084",
       "name": "Structured Output Parser"
@@ -314,8 +314,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1104,
-        880
+        1808,
+        816
       ],
       "id": "065fb9f1-fb2e-4767-a134-882e7d8ca8d7",
       "name": "Get recent converstaion",
@@ -333,8 +333,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1328,
-        880
+        2032,
+        816
       ],
       "id": "c7ea73aa-b06c-4048-a206-77dc7f2ce7d8",
       "name": "Align Past messages"
@@ -378,12 +378,12 @@
                 "conditions": [
                   {
                     "id": "970fdd38-b045-490d-9997-8bcc9305e999",
-                    "leftValue": "={{ $json.body.entry[0].changes[0].field }}",
+                    "leftValue": "={{ \n  $json.body.entry && \n  $json.body.entry[0] && \n  $json.body.entry[0].messaging && \n  $json.body.entry[0].messaging.length > 0 \n}}",
                     "rightValue": "messages",
                     "operator": {
-                      "type": "string",
-                      "operation": "equals",
-                      "name": "filter.operator.equals"
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
                     }
                   }
                 ],
@@ -399,8 +399,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        656,
-        736
+        864,
+        624
       ],
       "id": "a041d820-827a-4eef-b01e-ba8acb4de5bb",
       "name": "seperate dms and commets"
@@ -412,14 +412,14 @@
         "node": "=914740581721664",
         "edge": "messages",
         "options": {
-          "queryParametersJson": "={\n  \"recipient\": {\n    \"id\": \"{{ $('Webhook to recieve messages and comments').first().json.body.entry[0].changes[0].value.sender.id }}\"\n  },\n  \"messaging_type\": \"RESPONSE\",\n  \"message\": {\n    \"text\": \"{{$('AI Agent').item.json.output.reply}}\"\n  }\n}"
+          "queryParametersJson": "={\n  \"recipient\": {\n    \"id\": \"{{ $('seperate dms and commets').first().json.body.entry[0].messaging[0].sender.id }}\"\n  },\n  \"messaging_type\": \"RESPONSE\",\n  \"message\": {\n    \"text\": \"{{$('AI Agent').item.json.output.reply}}\"\n  }\n}"
         }
       },
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1968,
-        880
+        2672,
+        816
       ],
       "id": "ed62c2c7-f777-4116-94b1-0afbdcc8e33c",
       "name": "Instagram Dm replies",
@@ -450,8 +450,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2480,
-        592
+        3408,
+        480
       ],
       "id": "fdfa148e-7e1c-4275-b6e1-a0df5e50380d",
       "name": "Instagram Comments replies",
@@ -490,8 +490,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        880,
-        592
+        1808,
+        480
       ],
       "id": "e5a561f9-5d44-43c6-a764-70afdd10b4a8",
       "name": "check if the child reply"
@@ -513,8 +513,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1104,
-        512
+        2032,
+        400
       ],
       "id": "12d30516-3cc4-4f9b-9a0a-a33af547ea2c",
       "name": "Fetch Parent Comments",
@@ -549,8 +549,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1904,
-        592
+        2832,
+        480
       ],
       "id": "d3c04a05-4031-469e-a00e-993c6b4ab710",
       "name": "Message a model",
@@ -569,8 +569,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1328,
-        592
+        2256,
+        480
       ],
       "id": "7bbd5814-f7cb-44c8-b2cc-fce5ed479bc4",
       "name": "Summerize all data"
@@ -582,8 +582,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1616,
-        592
+        2544,
+        480
       ],
       "id": "5ec99a64-9d78-4952-8e74-b2f86ef9f2c9",
       "name": "Fields to pass to ai"
@@ -595,8 +595,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2256,
-        592
+        3184,
+        480
       ],
       "id": "267058d4-abe4-433e-8260-ed140f7232be",
       "name": "parse incoming data"
@@ -637,8 +637,8 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        608,
-        208
+        1056,
+        -272
       ],
       "id": "d80ec422-3522-4161-a509-7bfff1e197d0",
       "name": "Route to message and comments"
@@ -666,8 +666,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        864,
-        224
+        1280,
+        -272
       ],
       "id": "6b70dff8-e584-4d74-9101-05d3af121260",
       "name": "Fetch conversation messanger",
@@ -696,8 +696,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1072,
-        224
+        1504,
+        -272
       ],
       "id": "ec4b9325-1682-4fc2-84d2-250e49a57654",
       "name": "Facebook Graph API",
@@ -715,8 +715,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1344,
-        240
+        1728,
+        -272
       ],
       "id": "01215036-2e29-4ddc-bc18-16647847a61e",
       "name": "Align Past messages1"
@@ -745,8 +745,8 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1696,
-        240
+        1952,
+        -272
       ],
       "id": "c553c63c-9a83-41f4-8ce0-0d22834b271a",
       "name": "Generate reply for messanger",
@@ -765,8 +765,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2048,
-        240
+        2304,
+        -272
       ],
       "id": "2f37802a-496f-4813-9d63-c042e3d68bcf",
       "name": "Parse the Results"
@@ -784,8 +784,8 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2320,
-        224
+        2528,
+        -272
       ],
       "id": "243b88eb-8630-4e4e-9fba-e28ae5a406e5",
       "name": "Facebook Dm reply",
@@ -795,6 +795,32 @@
           "name": "page access token"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter out messages sent by me (my own messages)\nconst myInstagramUserId = \"17841478709256156\"; // Your Instagram user ID\n\n// Loop through all input items\nfor (const item of items) {\n  const body = item.json.body;\n  \n  // Check if it's an Instagram message\n  if (body.object === \"instagram\" && body.entry && body.entry[0]) {\n    const entry = body.entry[0];\n    \n    // Check if it has messaging data (direct message)\n    if (entry.messaging && entry.messaging[0]) {\n      const message = entry.messaging[0];\n      const senderId = message.sender.id;\n      \n      // Skip processing if sender is ME (my own messages)\n      if (senderId === myInstagramUserId) {\n        // Return empty array to stop processing this item\n        continue;\n      }\n    }\n  }\n  \n  // If we reach here, keep the item (message from someone else)\n  return item;\n}\n\n// If all items were filtered out, return empty array\nreturn [];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1376,
+        752
+      ],
+      "id": "a34d098d-da2b-4b01-a178-4ca4f0555eec",
+      "name": "Remove the personal messages"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Filter out messages/comments sent by me\nconst myInstagramUserId = \"17841478709256156\";\n\nfor (const item of items) {\n  const body = item.json.body;\n  \n  // Check if it's Instagram\n  if (body.object === \"instagram\" && body.entry && body.entry[0]) {\n    const entry = body.entry[0];\n    \n    // Check if it's a DIRECT MESSAGE\n    if (entry.messaging && entry.messaging[0]) {\n      const senderId = entry.messaging[0].sender.id;\n      \n      // Skip if DM is from ME\n      if (senderId === myInstagramUserId) {\n        continue; // Skip my own DMs\n      }\n    }\n    \n    // Check if it's a COMMENT\n    if (entry.changes && entry.changes[0] && entry.changes[0].field === \"comments\") {\n      const commenterId = entry.changes[0].value.from.id;\n      \n      // Skip if comment is from ME\n      if (commenterId === myInstagramUserId) {\n        continue; // Skip my own comments\n      }\n    }\n  }\n  \n  // If we reach here, keep the item\n  return item;\n}\n\nreturn [];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1296,
+        528
+      ],
+      "id": "11bb552d-b005-4cd6-beb7-cfda82193dd9",
+      "name": "Remove mine comments"
     }
   ],
   "connections": {
@@ -924,14 +950,14 @@
       "main": [
         [
           {
-            "node": "check if the child reply",
+            "node": "Remove mine comments",
             "type": "main",
             "index": 0
           }
         ],
         [
           {
-            "node": "Fetch conversation",
+            "node": "Remove the personal messages",
             "type": "main",
             "index": 0
           }
@@ -1076,6 +1102,28 @@
           }
         ]
       ]
+    },
+    "Remove the personal messages": {
+      "main": [
+        [
+          {
+            "node": "Fetch conversation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Remove mine comments": {
+      "main": [
+        [
+          {
+            "node": "check if the child reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {
@@ -1124,51 +1172,61 @@
       {
         "headers": {
           "host": "my-automation-4j0i.onrender.com",
-          "user-agent": "facebookexternalua",
-          "content-length": "324",
+          "user-agent": "Webhooks/1.0 (https://fb.me/webhooks)",
+          "content-length": "757",
           "accept": "*/*",
           "accept-encoding": "gzip, br",
           "cdn-loop": "cloudflare; loops=1",
-          "cf-connecting-ip": "69.63.189.17",
+          "cf-connecting-ip": "69.171.230.113",
           "cf-ipcountry": "US",
-          "cf-ray": "9b8df3b5bf1a6c1d-SIN",
+          "cf-ray": "9ba64bbf3e83762e-SIN",
           "cf-visitor": "{\"scheme\":\"https\"}",
           "content-type": "application/json",
-          "facebook-api-version": "v24.0",
           "render-proxy-ttl": "4",
-          "rndr-id": "982cf0d4-64dd-4039",
-          "true-client-ip": "69.63.189.17",
-          "x-forwarded-for": "69.63.189.17, 172.71.124.82, 10.17.2.247",
+          "rndr-id": "926154d1-3f38-4d01",
+          "true-client-ip": "69.171.230.113",
+          "x-forwarded-for": "69.171.230.113, 172.68.242.40, 10.17.40.191",
           "x-forwarded-proto": "https",
-          "x-hub-signature": "sha1=e888fa8735b08d3eeec65458a3417f00d5aae301",
-          "x-hub-signature-256": "sha256=d7cc65015768e1f494c2d1943d6bd38c2705278afd3e178ae7c6f4b13df66e68",
-          "x-request-start": "1767563431475062"
+          "x-hub-signature": "sha1=a67778e3a5b1ceb2097c8f6c0a8b6940903859f4",
+          "x-hub-signature-256": "sha256=079d2e3bfa4294a78306f17d5dd978fd0206be068a6266ff461344d456b77a4a",
+          "x-request-start": "1767818695662933"
         },
         "params": {},
         "query": {},
         "body": {
-          "object": "page",
           "entry": [
             {
-              "time": 1767563431266,
               "id": "914740581721664",
-              "messaging": [
+              "time": 1767818694,
+              "changes": [
                 {
-                  "sender": {
-                    "id": "25672083659147013"
+                  "value": {
+                    "from": {
+                      "id": "25491823657093532",
+                      "name": "Ahmad Mamoon"
+                    },
+                    "post": {
+                      "status_type": "added_photos",
+                      "is_published": true,
+                      "updated_time": "2026-01-07T20:44:51+0000",
+                      "permalink_url": "https://www.facebook.com/122105176599191137/posts/pfbid0NPZMmMKmVeVygJHL8F3mLgDP4mgXf3k4U8U65fWaGUDivBfuZ2v397md96NW3Bahl",
+                      "promotion_status": "inactive",
+                      "id": "914740581721664_122096525553191137"
+                    },
+                    "message": "Hello i love this post",
+                    "post_id": "914740581721664_122096525553191137",
+                    "comment_id": "122096525553191137_4228656634114716",
+                    "created_time": 1767818691,
+                    "item": "comment",
+                    "parent_id": "914740581721664_122096525553191137",
+                    "verb": "add"
                   },
-                  "recipient": {
-                    "id": "914740581721664"
-                  },
-                  "timestamp": 1767563429027,
-                  "message": {
-                    "mid": "m_Pounxu18EGJPVevRmlLl7NKKBvS3KCA5HQLzV_rhob6r8S3Y19oe0ZyeR1F6_1kLJQICT1LXlRKOJT8MejGi1Q",
-                    "text": "hello testing 123"
-                  }
+                  "field": "feed"
                 }
               ]
             }
-          ]
+          ],
+          "object": "page"
         },
         "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/facebook-webhook",
         "executionMode": "production"
