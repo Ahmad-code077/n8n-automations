@@ -1,0 +1,192 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-email-to-n8n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        384,
+        -32
+      ],
+      "id": "f12ff206-abb6-4d65-a352-7107cbd4887a",
+      "name": "Webhook",
+      "webhookId": "f79e86b6-2449-48c8-b477-19fe1ac04ba3"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "hello",
+        "options": {
+          "systemMessage": "You are an expert professional email writer. Your task is to generate highly personalized, professional job application emails that follow the user’s style and template exactly. \n\nRequirements:\n1. Use the email structure and tone provided by the user. Be polite, clear, and professional.  \n2. Include relevant resume information (skills, experience, projects, links) in a natural way.  \n3. Adapt the content to the target job position and company provided by the user.  \n4. Always mention portfolio, GitHub, LinkedIn links, and contact info.  \n5. Make the email concise but comprehensive, roughly 250–350 words.  \n6. Do not add unrelated content; only use the resume data provided.  \n7. Respect the user’s formatting style (paragraphs, greetings, signature, spacing, emojis).  \n8. Make it sound human-written, not AI-generated."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        1152,
+        -32
+      ],
+      "id": "2443d373-a7b7-467b-8aad-3ec61664f126",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1136,
+        160
+      ],
+      "id": "6f39f195-4db7-4e46-a68d-46e643aa9b2d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "6j24kqb9tFijNrQo",
+          "name": "OpenAi account G"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "documentURL": "https://docs.google.com/document/d/1-3eBHKB3V6NRg1TYKbpHElIUc2ABM_cgIoXL2XHz49w/edit?usp=sharing"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        656,
+        -32
+      ],
+      "id": "8126b2d0-338d-4acb-9c4f-dc6ee451c798",
+      "name": "Get Resume Data",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "k5EDpBKQPJT6t3cf",
+          "name": "Google account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return [{\n  \"my_resume_content\": $input.first().json.content,\n  \"job_description\": $('Webhook').first().json.body.jobDescription,\n  \"portfolio_url\": \"https://ahmadmamoon.netlify.app\",\n  \"linkedin_url\": \"https://www.linkedin.com/in/muhammad-ahmad077\",\n  \"github\": \"https://github.com/Ahmad-code077\"\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        864,
+        -32
+      ],
+      "id": "69d2d5ab-7c18-45a3-a606-3e8786f06214",
+      "name": "Merge the data in the content"
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Resume Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Resume Data": {
+      "main": [
+        [
+          {
+            "node": "Merge the data in the content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge the data in the content": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "Webhook": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+          "content-length": "1736",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "accept-language": "en-US,en;q=0.9,ar;q=0.8,hy;q=0.7,ur;q=0.6",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "119.157.191.199",
+          "cf-ipcountry": "PK",
+          "cf-ray": "9bbf5dd01fce4906-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "origin": "http://localhost:3000",
+          "priority": "u=1, i",
+          "referer": "http://localhost:3000/",
+          "render-proxy-ttl": "4",
+          "rndr-id": "d54a9789-ec83-447e",
+          "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "cross-site",
+          "true-client-ip": "119.157.191.199",
+          "x-forwarded-for": "119.157.191.199, 172.71.82.149, 10.17.191.229",
+          "x-forwarded-proto": "https",
+          "x-request-start": "1768081579582560"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "jobDescription": "📢 hashtag#HiringAlert\n\n𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧: 𝐌𝐢𝐝 𝐥𝐞𝐯𝐞𝐥 - Full Stack Developer\n𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞: 2+ 𝐲𝐞𝐚𝐫𝐬\nWe are looking for a skilled Full Stack Developer with experience in front end technologies and back-end development to join our development team. \n\nThe candidate will be responsible for developing and maintaining web applications, collaborating with cross-functional teams, and building robust solutions. This role requires proficiency in both front-end and back-end development, along with expertise in MySQL and MongoDB databases.\n\n𝐍𝐨𝐭𝐞: 𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚𝐧 𝐎𝐧𝐬𝐢𝐭𝐞 𝐫𝐨𝐥𝐞, 𝐈𝐧 𝐉𝐨𝐡𝐚𝐫 𝐓𝐨𝐰𝐧 𝐋𝐚𝐡𝐨𝐫𝐞. \n𝐓𝐢𝐦𝐢𝐧𝐠𝐬: 11:00 𝐀𝐌 - 8:00 𝐏𝐌\n\n𝐖𝐡𝐚𝐭 𝐖𝐞 𝐎𝐟𝐟𝐞𝐫:\n☑️Biannual Increments\n☑️Eid Bonuses/Gifts\n☑️Leave Encashment\n☑️Interest Free Loans\n☑️Performance based incentives\n☑️Maternity & Paternity Leaves\n☑️Career & growth plans\n☑️Monthly Dinner/Lunch\n☑️Company Sponsored Trips\n\n📧𝐇𝐨𝐰 𝐭𝐨 𝐀𝐩𝐩𝐥𝐲: Please share your resume here, faiqa.rashid@verdant-soft.com \n\nhashtag#FullStackDeveloper hashtag#FullStackDevelopment hashtag#SoftwareDeveloper hashtag#WebDeveloper hashtag#SoftwareEngineering hashtag#JavaScript hashtag#ReactJS hashtag#NodeJS hashtag#MERNStack hashtag#TechCareers hashtag#DeveloperCommunity hashtag#StartupLife hashtag#LinkedInTech hashtag#VerdantSoft\n\napply here ",
+          "action": "save",
+          "timestamp": "2026-01-10T21:46:19.504Z",
+          "metadata": {
+            "characterCount": 1339,
+            "wordCount": 141
+          }
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/send-email-to-n8n",
+        "executionMode": "production"
+      }
+    ]
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
+  }
+}
