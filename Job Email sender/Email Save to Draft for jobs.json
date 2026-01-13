@@ -9,10 +9,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        384,
-        -32
+        -1504,
+        464
       ],
-      "id": "f12ff206-abb6-4d65-a352-7107cbd4887a",
+      "id": "b977ae12-b302-42c5-9b53-d9b3d85290ba",
       "name": "Webhook",
       "webhookId": "f79e86b6-2449-48c8-b477-19fe1ac04ba3"
     },
@@ -28,10 +28,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1152,
-        -32
+        -736,
+        464
       ],
-      "id": "2443d373-a7b7-467b-8aad-3ec61664f126",
+      "id": "bf590812-d29e-4fef-8a0e-a52c3adf5f6b",
       "name": "AI Agent"
     },
     {
@@ -46,15 +46,15 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1136,
-        160
+        -752,
+        656
       ],
-      "id": "6f39f195-4db7-4e46-a68d-46e643aa9b2d",
+      "id": "b6ee8529-8347-41b9-9516-6d2d5babea5b",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "6j24kqb9tFijNrQo",
-          "name": "OpenAi account G"
+          "id": "cEB2gumwwFr9rNn5",
+          "name": "OpenAi account jordan"
         }
       }
     },
@@ -66,15 +66,15 @@
       "type": "n8n-nodes-base.googleDocs",
       "typeVersion": 2,
       "position": [
-        656,
-        -32
+        -1232,
+        464
       ],
-      "id": "8126b2d0-338d-4acb-9c4f-dc6ee451c798",
+      "id": "d265af8e-c885-4f62-b3bb-e278d4eb6eb3",
       "name": "Get Resume Data",
       "credentials": {
         "googleDocsOAuth2Api": {
-          "id": "k5EDpBKQPJT6t3cf",
-          "name": "Google account"
+          "id": "nEcl090MaBV51vum",
+          "name": "Google Docs account"
         }
       }
     },
@@ -85,10 +85,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        864,
-        -32
+        -1024,
+        464
       ],
-      "id": "69d2d5ab-7c18-45a3-a606-3e8786f06214",
+      "id": "ec9ee564-2fab-4728-91b0-c6758d546d33",
       "name": "Merge the data in the content"
     },
     {
@@ -99,34 +99,133 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        1328,
-        176
+        -560,
+        672
       ],
-      "id": "5ecd53d0-074e-43a4-9a28-d95cb6568d69",
+      "id": "d53dbe52-2633-43a2-8a8c-4605cfc00f05",
       "name": "Structured Output Parser"
     },
     {
       "parameters": {
-        "sendTo": "rough6781@gmail.com",
+        "url": "https://res.cloudinary.com/dilpjrnnr/image/upload/v1768258289/Ahmad_Resume_svf6yx.pdf",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -352,
+        464
+      ],
+      "id": "89d95e06-eee2-40d1-8229-18ec97f61dcd",
+      "name": "Download Resume"
+    },
+    {
+      "parameters": {
+        "resource": "draft",
         "subject": "={{ $json.output.email_subject }}",
+        "emailType": "html",
         "message": "=<!DOCTYPE html>\n<html>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #111;\">\n    \n    <p><strong>tldr</strong><br>\n    {{ $json.output.email_body_chunks.tldr }}</p>\n    \n    <p>Dear {{ $json.output.recruiter_name || 'Hiring Manager' }},</p>\n    \n    <p>{{ $json.output.email_body_chunks.para1 }}</p>\n    \n    <p>{{ $json.output.email_body_chunks.para2 }}</p>\n    \n    <p>Please find my portfolio and GitHub for reference:</p>\n    <ul>\n      <li>GitHub: <a href=\"https://github.com/Ahmad-code077\" target=\"_blank\">https://github.com/Ahmad-code077</a></li>\n      <li>Portfolio: <a href=\"https://ahmadmamoon.netlify.app\" target=\"_blank\">https://ahmadmamoon.netlify.app</a></li>\n      <li>LinkedIn: <a href=\"https://www.linkedin.com/in/muhammad-ahmad077/\" target=\"_blank\">https://www.linkedin.com/in/muhammad-ahmad077/</a></li>\n    </ul>\n    \n    <p>{{ $json.output.email_body_chunks.para3 }}</p>\n    \n    <p>Best regards,<br>\n    Muhammad Ahmad<br>\n    +92-321-0711148<br>\n    <a href=\"mailto:ahmadeveloper077@gmail.com\">ahmadeveloper077@gmail.com</a></p>\n    \n  </body>\n</html>\n",
         "options": {
-          "appendAttribution": false
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "data"
+              }
+            ]
+          },
+          "sendTo": "={{ $json.output.recruiter_email }}"
         }
       },
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1952,
-        -32
+        -96,
+        464
       ],
-      "id": "2ef0f051-2846-44c9-9f20-101e5c911365",
-      "name": "Send a message",
+      "id": "d4389e7b-d314-4490-93ae-f35903dc3ecb",
+      "name": "Create a draft email for approval system",
       "webhookId": "c7a19019-b3ad-4493-9602-87104d8f8e98",
       "credentials": {
         "gmailOAuth2": {
-          "id": "FraUV4x95QqtY2Ul",
+          "id": "Jn3vAgTX5encUbQt",
           "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "jobs",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "raw_post",
+              "fieldValue": "={{ $('Webhook').item.json.body.jobDescription }}"
+            },
+            {
+              "fieldId": "title",
+              "fieldValue": "={{ $('AI Agent').item.json.output.title }}"
+            },
+            {
+              "fieldId": "company",
+              "fieldValue": "={{ $('AI Agent').item.json.output.company }}"
+            },
+            {
+              "fieldId": "recruiter_name",
+              "fieldValue": "={{ $('AI Agent').item.json.output.recruiter_name }}"
+            },
+            {
+              "fieldId": "recruiter_email",
+              "fieldValue": "={{ $('AI Agent').item.json.output.recruiter_email }}"
+            },
+            {
+              "fieldId": "location",
+              "fieldValue": "={{ $('AI Agent').item.json.output.location }}"
+            },
+            {
+              "fieldId": "work_type",
+              "fieldValue": "={{ $('AI Agent').item.json.output.work_type }}"
+            },
+            {
+              "fieldId": "experience",
+              "fieldValue": "={{ $('AI Agent').item.json.output.experience }}"
+            },
+            {
+              "fieldId": "skills",
+              "fieldValue": "={{ $('AI Agent').item.json.output.skills }}"
+            },
+            {
+              "fieldId": "timings",
+              "fieldValue": "={{ $('AI Agent').item.json.output.timings }}"
+            },
+            {
+              "fieldId": "email_draft_link",
+              "fieldValue": "=https://mail.google.com/mail/u/0/#drafts/{{ $json.message.id }}"
+            },
+            {
+              "fieldId": "user_id",
+              "fieldValue": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        112,
+        464
+      ],
+      "id": "2c84a33e-eb9d-49ae-9e95-41a05e728f7e",
+      "name": "Create row for dasbhoard approval",
+      "credentials": {
+        "supabaseApi": {
+          "id": "PY0xlj3BC03g9GGf",
+          "name": "Supabase account"
         }
       }
     }
@@ -147,7 +246,7 @@
       "main": [
         [
           {
-            "node": "Send a message",
+            "node": "Download Resume",
             "type": "main",
             "index": 0
           }
@@ -193,6 +292,28 @@
           {
             "node": "AI Agent",
             "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Resume": {
+      "main": [
+        [
+          {
+            "node": "Create a draft email for approval system",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a draft email for approval system": {
+      "main": [
+        [
+          {
+            "node": "Create row for dasbhoard approval",
+            "type": "main",
             "index": 0
           }
         ]
