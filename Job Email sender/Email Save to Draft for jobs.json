@@ -452,6 +452,34 @@
           "name": "Supabase account"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Delete the draft email \n"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1088,
+        1024
+      ],
+      "id": "b12381bc-7346-49a8-877a-8e38da72d3aa",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## overview\n\n## Check the store id to open the exact draft email to check and hit send for it \n\n## then delete email form the draft also after sending \n \n## the follow up tracks check if reply came back if not then send follow up increase the count and things \n\n",
+        "height": 400,
+        "width": 480
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1008,
+        944
+      ],
+      "id": "ae8c5a03-5ac9-4635-9f43-e33bc0d2248b",
+      "name": "Sticky Note1"
     }
   ],
   "connections": {
