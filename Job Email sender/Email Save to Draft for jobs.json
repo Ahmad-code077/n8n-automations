@@ -2,22 +2,6 @@
   "nodes": [
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "send-email-to-n8n",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -1504,
-        464
-      ],
-      "id": "b977ae12-b302-42c5-9b53-d9b3d85290ba",
-      "name": "Webhook",
-      "webhookId": "f79e86b6-2449-48c8-b477-19fe1ac04ba3"
-    },
-    {
-      "parameters": {
         "promptType": "define",
         "text": "=You are tasked with creating a professional job application email body only based on the following information.\n\nJob Posting:\n{{ $json.job_description }}\n\nApplicant Resume:\n{{ $json.my_resume_content }}\n\nRequirements:\n\nWrite only the main content of the email — do not include the salutation (e.g., \"Hi Faiqa Rashid\") or the signature (name, email, phone, closing line). These will be added separately.\n\nInclude a short “tldr” intro summarizing the applicant’s focus/passion.\n\nExpress clear interest in the position and company.\n\nSummarize relevant skills, experience, and projects from the resume that make the applicant a strong fit.\n\nInclude a polite call-to-action paragraph without a signature.\n\nMaintain a professional, concise, and human tone.\n\nOnly use information provided in the input (resume and job post); do not hallucinate missing details.\n\nOutput Requirements:\n\nBreak the email body into logical chunks: tldr, para1, para2, para3, closing to preserve formatting.\n",
         "hasOutputParser": true,
@@ -80,7 +64,7 @@
     },
     {
       "parameters": {
-        "jsCode": "return [{\n  \"my_resume_content\": $input.first().json.content,\n  \"job_description\": $('Webhook').first().json.body.jobDescription,\n  \"portfolio_url\": \"https://ahmadmamoon.netlify.app\",\n  \"linkedin_url\": \"https://www.linkedin.com/in/muhammad-ahmad077\",\n  \"github\": \"https://github.com/Ahmad-code077\"\n}];\n"
+        "jsCode": "return [{\n  \"my_resume_content\": $input.first().json.content,\n  \"job_description\": $('Generate Email Draft').first().json.body.jobDescription,\n  \"portfolio_url\": \"https://ahmadmamoon.netlify.app\",\n  \"linkedin_url\": \"https://www.linkedin.com/in/muhammad-ahmad077\",\n  \"github\": \"https://github.com/Ahmad-code077\"\n}];\n"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -107,38 +91,11 @@
     },
     {
       "parameters": {
-        "url": "https://res.cloudinary.com/dilpjrnnr/image/upload/v1768258289/Ahmad_Resume_svf6yx.pdf",
-        "options": {
-          "response": {
-            "response": {
-              "responseFormat": "file"
-            }
-          }
-        }
-      },
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        -352,
-        464
-      ],
-      "id": "89d95e06-eee2-40d1-8229-18ec97f61dcd",
-      "name": "Download Resume"
-    },
-    {
-      "parameters": {
         "resource": "draft",
         "subject": "={{ $json.output.email_subject }}",
         "emailType": "html",
         "message": "=<!DOCTYPE html>\n<html>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #111;\">\n    \n    <p><strong>tldr</strong><br>\n    {{ $json.output.email_body_chunks.tldr }}</p>\n    \n    <p>Dear {{ $json.output.recruiter_name || 'Hiring Manager' }},</p>\n    \n    <p>{{ $json.output.email_body_chunks.para1 }}</p>\n    \n    <p>{{ $json.output.email_body_chunks.para2 }}</p>\n    \n    <p>Please find my portfolio and GitHub for reference:</p>\n    <ul>\n      <li>GitHub: <a href=\"https://github.com/Ahmad-code077\" target=\"_blank\">https://github.com/Ahmad-code077</a></li>\n      <li>Portfolio: <a href=\"https://ahmadmamoon.netlify.app\" target=\"_blank\">https://ahmadmamoon.netlify.app</a></li>\n      <li>LinkedIn: <a href=\"https://www.linkedin.com/in/muhammad-ahmad077/\" target=\"_blank\">https://www.linkedin.com/in/muhammad-ahmad077/</a></li>\n    </ul>\n    \n    <p>{{ $json.output.email_body_chunks.para3 }}</p>\n    \n    <p>Best regards,<br>\n    Muhammad Ahmad<br>\n    +92-321-0711148<br>\n    <a href=\"mailto:ahmadeveloper077@gmail.com\">ahmadeveloper077@gmail.com</a></p>\n    \n  </body>\n</html>\n",
         "options": {
-          "attachmentsUi": {
-            "attachmentsBinary": [
-              {
-                "property": "data"
-              }
-            ]
-          },
           "sendTo": "=mahmadeveloper077@gmail.com"
         }
       },
@@ -165,7 +122,7 @@
           "fieldValues": [
             {
               "fieldId": "raw_post",
-              "fieldValue": "={{ $('Webhook').first().json.body.jobDescription }}"
+              "fieldValue": "={{ $('Generate Email Draft').first().json.body.jobDescription }}"
             },
             {
               "fieldId": "title",
@@ -204,7 +161,7 @@
               "fieldValue": "={{ $('AI Agent').first().json.output.timings }}"
             },
             {
-              "fieldId": "email_draft_link",
+              "fieldId": "gmail_draft_id",
               "fieldValue": "={{ $json.id }}"
             },
             {
@@ -214,6 +171,10 @@
             {
               "fieldId": "gmail_message_id",
               "fieldValue": "={{ $json.message.id }}"
+            },
+            {
+              "fieldId": "thread_id",
+              "fieldValue": "={{ $json.message.threadId }}"
             }
           ]
         }
@@ -235,53 +196,9 @@
     },
     {
       "parameters": {
-        "httpMethod": "POST",
-        "path": "send-job-post-email",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -192,
-        1008
-      ],
-      "id": "a1646231-e234-45e9-af5e-0431684eeb59",
-      "name": "Webhook1",
-      "webhookId": "0302a1e5-4783-4198-87b7-6593828f26fc"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "tableId": "jobs",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "keyValue": "=2215abca-0bc6-4893-9aad-bf38532e3f65"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        0,
-        1008
-      ],
-      "id": "ddc5f494-4821-4d42-b0ea-49cc3d1339eb",
-      "name": "Get a row",
-      "credentials": {
-        "supabaseApi": {
-          "id": "PY0xlj3BC03g9GGf",
-          "name": "Supabase account"
-        }
-      }
-    },
-    {
-      "parameters": {
         "resource": "draft",
         "operation": "get",
-        "messageId": "={{ $json.email_draft_link }}",
+        "messageId": "={{ $json.gmail_draft_id }}",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
@@ -306,6 +223,7 @@
         "subject": "={{ $json.subject }}",
         "message": "={{ $json.html }}",
         "options": {
+          "appendAttribution": false,
           "attachmentsUi": {
             "attachmentsBinary": [
               {}
@@ -343,7 +261,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        400,
+        384,
         1008
       ],
       "id": "46f1c535-2459-477c-82da-5262354136a8",
@@ -358,7 +276,7 @@
             {
               "keyName": "id",
               "condition": "eq",
-              "keyValue": "={{ $('Get a row').first().json.id }}"
+              "keyValue": "={{ $('Get the job post detail').first().json.id }}"
             }
           ]
         },
@@ -375,6 +293,10 @@
             {
               "fieldId": "thread_id",
               "fieldValue": "={{ $json.threadId }}"
+            },
+            {
+              "fieldId": "gmail_message_id",
+              "fieldValue": "={{ $json.id }}"
             }
           ]
         }
@@ -455,19 +377,6 @@
     },
     {
       "parameters": {
-        "content": "## Delete the draft email \n"
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        1088,
-        1024
-      ],
-      "id": "b12381bc-7346-49a8-877a-8e38da72d3aa",
-      "name": "Sticky Note"
-    },
-    {
-      "parameters": {
         "content": "## overview\n\n## Check the store id to open the exact draft email to check and hit send for it \n\n## then delete email form the draft also after sending \n \n## the follow up tracks check if reply came back if not then send follow up increase the count and things \n\n",
         "height": 400,
         "width": 480
@@ -480,25 +389,96 @@
       ],
       "id": "ae8c5a03-5ac9-4635-9f43-e33bc0d2248b",
       "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-email-to-n8n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1504,
+        464
+      ],
+      "id": "b977ae12-b302-42c5-9b53-d9b3d85290ba",
+      "name": "Generate Email Draft",
+      "webhookId": "f79e86b6-2449-48c8-b477-19fe1ac04ba3"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "send-job-post-email",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -288,
+        1008
+      ],
+      "id": "a1646231-e234-45e9-af5e-0431684eeb59",
+      "name": "Send Draft messages",
+      "webhookId": "0302a1e5-4783-4198-87b7-6593828f26fc"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "jobs",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.body.jobId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        0,
+        1008
+      ],
+      "id": "ddc5f494-4821-4d42-b0ea-49cc3d1339eb",
+      "name": "Get the job post detail",
+      "credentials": {
+        "supabaseApi": {
+          "id": "PY0xlj3BC03g9GGf",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "operation": "delete",
+        "messageId": "={{ $json.gmail_draft_id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        976,
+        1008
+      ],
+      "id": "8f6dcb01-ff0a-455d-814b-c14c744d60b5",
+      "name": "Delete a draft",
+      "webhookId": "c8e163e1-93dc-4280-87db-c0e9a277cfb0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Jn3vAgTX5encUbQt",
+          "name": "Gmail account"
+        }
+      }
     }
   ],
   "connections": {
-    "Webhook": {
-      "main": [
-        [
-          {
-            "node": "Get Resume Data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "AI Agent": {
       "main": [
         [
           {
-            "node": "Download Resume",
+            "node": "Create a draft email for approval system",
             "type": "main",
             "index": 0
           }
@@ -549,44 +529,11 @@
         ]
       ]
     },
-    "Download Resume": {
-      "main": [
-        [
-          {
-            "node": "Create a draft email for approval system",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Create a draft email for approval system": {
       "main": [
         [
           {
             "node": "Create row for dasbhoard approval",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Webhook1": {
-      "main": [
-        [
-          {
-            "node": "Get a row",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get a row": {
-      "main": [
-        [
-          {
-            "node": "Get a draft",
             "type": "main",
             "index": 0
           }
@@ -628,7 +575,13 @@
     },
     "Update the row": {
       "main": [
-        []
+        [
+          {
+            "node": "Delete a draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Schedule Trigger": {
@@ -641,55 +594,42 @@
           }
         ]
       ]
+    },
+    "Generate Email Draft": {
+      "main": [
+        [
+          {
+            "node": "Get Resume Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Draft messages": {
+      "main": [
+        [
+          {
+            "node": "Get the job post detail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get the job post detail": {
+      "main": [
+        [
+          {
+            "node": "Get a draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {
-    "Webhook": [
-      {
-        "headers": {
-          "host": "my-automation-4j0i.onrender.com",
-          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
-          "content-length": "1736",
-          "accept": "*/*",
-          "accept-encoding": "gzip, br",
-          "accept-language": "en-US,en;q=0.9,ar;q=0.8,hy;q=0.7,ur;q=0.6",
-          "cdn-loop": "cloudflare; loops=1",
-          "cf-connecting-ip": "119.157.191.199",
-          "cf-ipcountry": "PK",
-          "cf-ray": "9bbf5dd01fce4906-SIN",
-          "cf-visitor": "{\"scheme\":\"https\"}",
-          "content-type": "application/json",
-          "origin": "http://localhost:3000",
-          "priority": "u=1, i",
-          "referer": "http://localhost:3000/",
-          "render-proxy-ttl": "4",
-          "rndr-id": "d54a9789-ec83-447e",
-          "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
-          "sec-ch-ua-mobile": "?0",
-          "sec-ch-ua-platform": "\"Windows\"",
-          "sec-fetch-dest": "empty",
-          "sec-fetch-mode": "cors",
-          "sec-fetch-site": "cross-site",
-          "true-client-ip": "119.157.191.199",
-          "x-forwarded-for": "119.157.191.199, 172.71.82.149, 10.17.191.229",
-          "x-forwarded-proto": "https",
-          "x-request-start": "1768081579582560"
-        },
-        "params": {},
-        "query": {},
-        "body": {
-          "jobDescription": "📢 hashtag#HiringAlert\n\n𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧: 𝐌𝐢𝐝 𝐥𝐞𝐯𝐞𝐥 - Full Stack Developer\n𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞: 2+ 𝐲𝐞𝐚𝐫𝐬\nWe are looking for a skilled Full Stack Developer with experience in front end technologies and back-end development to join our development team. \n\nThe candidate will be responsible for developing and maintaining web applications, collaborating with cross-functional teams, and building robust solutions. This role requires proficiency in both front-end and back-end development, along with expertise in MySQL and MongoDB databases.\n\n𝐍𝐨𝐭𝐞: 𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚𝐧 𝐎𝐧𝐬𝐢𝐭𝐞 𝐫𝐨𝐥𝐞, 𝐈𝐧 𝐉𝐨𝐡𝐚𝐫 𝐓𝐨𝐰𝐧 𝐋𝐚𝐡𝐨𝐫𝐞. \n𝐓𝐢𝐦𝐢𝐧𝐠𝐬: 11:00 𝐀𝐌 - 8:00 𝐏𝐌\n\n𝐖𝐡𝐚𝐭 𝐖𝐞 𝐎𝐟𝐟𝐞𝐫:\n☑️Biannual Increments\n☑️Eid Bonuses/Gifts\n☑️Leave Encashment\n☑️Interest Free Loans\n☑️Performance based incentives\n☑️Maternity & Paternity Leaves\n☑️Career & growth plans\n☑️Monthly Dinner/Lunch\n☑️Company Sponsored Trips\n\n📧𝐇𝐨𝐰 𝐭𝐨 𝐀𝐩𝐩𝐥𝐲: Please share your resume here, faiqa.rashid@verdant-soft.com \n\nhashtag#FullStackDeveloper hashtag#FullStackDevelopment hashtag#SoftwareDeveloper hashtag#WebDeveloper hashtag#SoftwareEngineering hashtag#JavaScript hashtag#ReactJS hashtag#NodeJS hashtag#MERNStack hashtag#TechCareers hashtag#DeveloperCommunity hashtag#StartupLife hashtag#LinkedInTech hashtag#VerdantSoft\n\napply here ",
-          "action": "save",
-          "timestamp": "2026-01-10T21:46:19.504Z",
-          "metadata": {
-            "characterCount": 1339,
-            "wordCount": 141
-          }
-        },
-        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/send-email-to-n8n",
-        "executionMode": "production"
-      }
-    ],
     "AI Agent": [
       {
         "output": {
@@ -740,57 +680,19 @@
     ],
     "Create a draft email for approval system": [
       {
-        "id": "r420793769916972660",
+        "id": "r5934617835299668019",
         "message": {
-          "id": "19bb969a7c37104d",
-          "threadId": "19bb969a7c37104d",
+          "id": "19bbe575e87af375",
+          "threadId": "19bbe575e87af375",
           "labelIds": [
             "DRAFT"
           ]
         }
       }
     ],
-    "Webhook1": [
+    "Create row for dasbhoard approval": [
       {
-        "headers": {
-          "host": "my-automation-4j0i.onrender.com",
-          "user-agent": "node",
-          "content-length": "283",
-          "accept": "*/*",
-          "accept-encoding": "gzip, br",
-          "accept-language": "*",
-          "cdn-loop": "cloudflare; loops=1",
-          "cf-connecting-ip": "119.157.166.130",
-          "cf-ipcountry": "PK",
-          "cf-ray": "9bd832086e64d56b-KHI",
-          "cf-visitor": "{\"scheme\":\"https\"}",
-          "content-type": "application/json",
-          "render-proxy-ttl": "4",
-          "rndr-id": "510cee18-2837-4d81",
-          "sec-fetch-mode": "cors",
-          "true-client-ip": "119.157.166.130",
-          "x-forwarded-for": "119.157.166.130, 172.69.244.187, 10.17.153.208",
-          "x-forwarded-proto": "https",
-          "x-request-start": "1768341930766271"
-        },
-        "params": {},
-        "query": {},
-        "body": {
-          "jobId": "182c0665-da5b-4d72-8fbc-dc5ce2c44892",
-          "recruiterEmail": "faiqa.rashid@verdant-soft.com",
-          "recruiterName": "Faiqa Rashid",
-          "company": "Verdant Soft",
-          "jobTitle": "Mid level - Full Stack Developer",
-          "emailDraftLink": "19bb94521dcc4c46",
-          "userId": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3"
-        },
-        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/send-job-post-email",
-        "executionMode": "production"
-      }
-    ],
-    "Get a row": [
-      {
-        "id": "2215abca-0bc6-4893-9aad-bf38532e3f65",
+        "id": "b3a9cbc0-d6c4-455f-a772-59d6db41b138",
         "raw_post": "📢 hashtag#HiringAlert\n\n𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧: 𝐌𝐢𝐝 𝐥𝐞𝐯𝐞𝐥 - Full Stack Developer\n𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞: 2+ 𝐲𝐞𝐚𝐫𝐬\nWe are looking for a skilled Full Stack Developer with experience in front end technologies and back-end development to join our development team. \n\nThe candidate will be responsible for developing and maintaining web applications, collaborating with cross-functional teams, and building robust solutions. This role requires proficiency in both front-end and back-end development, along with expertise in MySQL and MongoDB databases.\n\n𝐍𝐨𝐭𝐞: 𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚𝐧 𝐎𝐧𝐬𝐢𝐭𝐞 𝐫𝐨𝐥𝐞, 𝐈𝐧 𝐉𝐨𝐡𝐚𝐫 𝐓𝐨𝐰𝐧 𝐋𝐚𝐡𝐨𝐫𝐞. \n𝐓𝐢𝐦𝐢𝐧𝐠𝐬: 11:00 𝐀𝐌 - 8:00 𝐏𝐌\n\n𝐖𝐡𝐚𝐭 𝐖𝐞 𝐎𝐟𝐟𝐞𝐫:\n☑️Biannual Increments\n☑️Eid Bonuses/Gifts\n☑️Leave Encashment\n☑️Interest Free Loans\n☑️Performance based incentives\n☑️Maternity & Paternity Leaves\n☑️Career & growth plans\n☑️Monthly Dinner/Lunch\n☑️Company Sponsored Trips\n\n📧𝐇𝐨𝐰 𝐭𝐨 𝐀𝐩𝐩𝐥𝐲: Please share your resume here, faiqa.rashid@verdant-soft.com \n\nhashtag#FullStackDeveloper hashtag#FullStackDevelopment hashtag#SoftwareDeveloper hashtag#WebDeveloper hashtag#SoftwareEngineering hashtag#JavaScript hashtag#ReactJS hashtag#NodeJS hashtag#MERNStack hashtag#TechCareers hashtag#DeveloperCommunity hashtag#StartupLife hashtag#LinkedInTech hashtag#VerdantSoft\n\napply here ",
         "title": "Mid level - Full Stack Developer",
         "company": "Verdant Soft",
@@ -826,63 +728,21 @@
           "Role-Based Access Control"
         ],
         "timings": "11:00 AM - 8:00 PM",
-        "email_draft_link": "r420793769916972660",
+        "gmail_draft_id": "r6438763173322751803",
         "status": "draft_created",
         "sent_at": null,
         "follow_up_date": null,
         "follow_up_count": 0,
-        "created_at": "2026-01-13T22:19:39.002869",
-        "user_id": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3"
-      }
-    ],
-    "Get a draft": [
-      {
-        "id": "r420793769916972660",
-        "threadId": "19bb969a7c37104d",
-        "labelIds": [
-          "DRAFT"
-        ],
-        "sizeEstimate": 156796,
-        "headers": {
-          "received": "Received: from 946077616320\r\n\tnamed unknown\r\n\tby gmailapi.google.com\r\n\twith HTTPREST;\r\n\tTue, 13 Jan 2026 22:11:07 +0000",
-          "content-type": "Content-Type: multipart/mixed; boundary=\"--_NmP-3aa75cb011686c07-Part_1\"",
-          "to": "To: mahmadeveloper077@gmail.com",
-          "subject": "Subject: Application for Mid Level Full Stack Developer Position at Verdant\r\n Soft",
-          "message-id": "Message-Id: <CAEYHPR7xdi=aNBXYzY2VETJrtxmWO3zxxbtVugsd_meH6pMppA@mail.gmail.com>",
-          "date": "Date: Tue, 13 Jan 2026 22:11:07 +0000",
-          "mime-version": "MIME-Version: 1.0",
-          "from": "From: ahmadeveloper077@gmail.com"
-        },
-        "html": "<!DOCTYPE html>\n<html>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #111;\">\n    \n    <p><strong>tldr</strong><br>\n    I am a passionate Full Stack Developer focused on building scalable, responsive web applications using modern JavaScript frameworks and databases, eager to contribute to robust solutions.</p>\n    \n    <p>Dear Faiqa Rashid,</p>\n    \n    <p>I am excited to apply for the Mid Level Full Stack Developer position at Verdant Soft. The opportunity to work onsite in Johar Town Lahore with a team dedicated to developing impactful web applications aligns perfectly with my career goals and expertise.</p>\n    \n    <p>With over two years of experience, I have developed and maintained comprehensive web applications using React.js, Next.js, Node.js, and both SQL and NoSQL databases like PostgreSQL and MongoDB. Notably, I built a social app featuring real-time chat, notifications, and role-based authentication using NextAuth.js, along with subscription services integrated via Stripe. My experience with WebSocket/Pusher for live updates and Prisma for efficient database management equips me well to deliver scalable solutions, matching Verdant Soft's requirements.</p>\n    \n    <p>Please find my portfolio and GitHub for reference:</p>\n    <ul>\n      <li>GitHub: <a href=\"https://github.com/Ahmad-code077\" target=\"_blank\">https://github.com/Ahmad-code077</a></li>\n      <li>Portfolio: <a href=\"https://ahmadmamoon.netlify.app\" target=\"_blank\">https://ahmadmamoon.netlify.app</a></li>\n      <li>LinkedIn: <a href=\"https://www.linkedin.com/in/muhammad-ahmad077/\" target=\"_blank\">https://www.linkedin.com/in/muhammad-ahmad077/</a></li>\n    </ul>\n    \n    <p>I am confident that my hands-on experience with front-end UI components using Tailwind CSS and Shadcn, combined with backend API design and real-time features, will allow me to contribute effectively to your development team. I am eager to bring my skills in building responsive, feature-rich applications to support your projects and growth plans.</p>\n    \n    <p>Best regards,<br>\n    Muhammad Ahmad<br>\n    +92-321-0711148<br>\n    <a href=\"mailto:ahmadeveloper077@gmail.com\">ahmadeveloper077@gmail.com</a></p>\n    \n  </body>\n</html>",
-        "subject": "Application for Mid Level Full Stack Developer Position at Verdant Soft",
-        "date": "2026-01-13T22:11:07.000Z",
-        "to": {
-          "value": [
-            {
-              "address": "mahmadeveloper077@gmail.com",
-              "name": ""
-            }
-          ],
-          "html": "<span class=\"mp_address_group\"><a href=\"mailto:mahmadeveloper077@gmail.com\" class=\"mp_address_email\">mahmadeveloper077@gmail.com</a></span>",
-          "text": "mahmadeveloper077@gmail.com"
-        },
-        "from": {
-          "value": [
-            {
-              "address": "ahmadeveloper077@gmail.com",
-              "name": ""
-            }
-          ],
-          "html": "<span class=\"mp_address_group\"><a href=\"mailto:ahmadeveloper077@gmail.com\" class=\"mp_address_email\">ahmadeveloper077@gmail.com</a></span>",
-          "text": "ahmadeveloper077@gmail.com"
-        },
-        "messageId": "19bb969a7c37104d"
+        "created_at": "2026-01-14T21:05:02.127854",
+        "user_id": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3",
+        "thread_id": "19bbe529e1e32fc7",
+        "gmail_message_id": "19bbe529e1e32fc7"
       }
     ],
     "Send a message": [
       {
-        "id": "19bb97c789660217",
-        "threadId": "19bb97c789660217",
+        "id": "19bbe7de9c745466",
+        "threadId": "19bbe7de9c745466",
         "labelIds": [
           "SENT"
         ]
@@ -930,6 +790,143 @@
           "text": "ahmadeveloper077@gmail.com"
         },
         "messageId": "19bb969a7c37104d"
+      }
+    ],
+    "Update the row": [
+      {
+        "id": "b3a9cbc0-d6c4-455f-a772-59d6db41b138",
+        "raw_post": "📢 hashtag#HiringAlert\n\n𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧: 𝐌𝐢𝐝 𝐥𝐞𝐯𝐞𝐥 - Full Stack Developer\n𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞: 2+ 𝐲𝐞𝐚𝐫𝐬\nWe are looking for a skilled Full Stack Developer with experience in front end technologies and back-end development to join our development team. \n\nThe candidate will be responsible for developing and maintaining web applications, collaborating with cross-functional teams, and building robust solutions. This role requires proficiency in both front-end and back-end development, along with expertise in MySQL and MongoDB databases.\n\n𝐍𝐨𝐭𝐞: 𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚𝐧 𝐎𝐧𝐬𝐢𝐭𝐞 𝐫𝐨𝐥𝐞, 𝐈𝐧 𝐉𝐨𝐡𝐚𝐫 𝐓𝐨𝐰𝐧 𝐋𝐚𝐡𝐨𝐫𝐞. \n𝐓𝐢𝐦𝐢𝐧𝐠𝐬: 11:00 𝐀𝐌 - 8:00 𝐏𝐌\n\n𝐖𝐡𝐚𝐭 𝐖𝐞 𝐎𝐟𝐟𝐞𝐫:\n☑️Biannual Increments\n☑️Eid Bonuses/Gifts\n☑️Leave Encashment\n☑️Interest Free Loans\n☑️Performance based incentives\n☑️Maternity & Paternity Leaves\n☑️Career & growth plans\n☑️Monthly Dinner/Lunch\n☑️Company Sponsored Trips\n\n📧𝐇𝐨𝐰 𝐭𝐨 𝐀𝐩𝐩𝐥𝐲: Please share your resume here, faiqa.rashid@verdant-soft.com \n\nhashtag#FullStackDeveloper hashtag#FullStackDevelopment hashtag#SoftwareDeveloper hashtag#WebDeveloper hashtag#SoftwareEngineering hashtag#JavaScript hashtag#ReactJS hashtag#NodeJS hashtag#MERNStack hashtag#TechCareers hashtag#DeveloperCommunity hashtag#StartupLife hashtag#LinkedInTech hashtag#VerdantSoft\n\napply here ",
+        "title": "Mid level - Full Stack Developer",
+        "company": "Verdant Soft",
+        "recruiter_name": "Faiqa Rashid",
+        "recruiter_email": "faiqa.rashid@verdant-soft.com",
+        "location": "Johar Town Lahore",
+        "work_type": "Onsite",
+        "experience": "2+ years",
+        "skills": [
+          "React.js",
+          "Next.js",
+          "Node.js",
+          "MySQL",
+          "MongoDB",
+          "JavaScript",
+          "TypeScript",
+          "Tailwind CSS",
+          "Redux Toolkit",
+          "RTK Query",
+          "Axios",
+          "Zod",
+          "Shadcn",
+          "React-hook-form",
+          "Express.js",
+          "PostgreSQL",
+          "Prisma",
+          "REST APIs",
+          "NextAuth.js",
+          "Pusher",
+          "WebSocket",
+          "Socket.io",
+          "Stripe",
+          "Role-Based Access Control"
+        ],
+        "timings": "11:00 AM - 8:00 PM",
+        "gmail_draft_id": "r6438763173322751803",
+        "status": "sent",
+        "sent_at": "2026-01-14T16:53:33.479",
+        "follow_up_date": null,
+        "follow_up_count": 0,
+        "created_at": "2026-01-14T21:05:02.127854",
+        "user_id": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3",
+        "thread_id": "19bbe7de9c745466",
+        "gmail_message_id": "19bbe7de9c745466"
+      }
+    ],
+    "Generate Email Draft": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+          "content-length": "1736",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "accept-language": "en-US,en;q=0.9,ar;q=0.8,hy;q=0.7,ur;q=0.6",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "119.157.191.199",
+          "cf-ipcountry": "PK",
+          "cf-ray": "9bbf5dd01fce4906-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "origin": "http://localhost:3000",
+          "priority": "u=1, i",
+          "referer": "http://localhost:3000/",
+          "render-proxy-ttl": "4",
+          "rndr-id": "d54a9789-ec83-447e",
+          "sec-ch-ua": "\"Google Chrome\";v=\"143\", \"Chromium\";v=\"143\", \"Not A(Brand\";v=\"24\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"Windows\"",
+          "sec-fetch-dest": "empty",
+          "sec-fetch-mode": "cors",
+          "sec-fetch-site": "cross-site",
+          "true-client-ip": "119.157.191.199",
+          "x-forwarded-for": "119.157.191.199, 172.71.82.149, 10.17.191.229",
+          "x-forwarded-proto": "https",
+          "x-request-start": "1768081579582560"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "jobDescription": "📢 hashtag#HiringAlert\n\n𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧: 𝐌𝐢𝐝 𝐥𝐞𝐯𝐞𝐥 - Full Stack Developer\n𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞: 2+ 𝐲𝐞𝐚𝐫𝐬\nWe are looking for a skilled Full Stack Developer with experience in front end technologies and back-end development to join our development team. \n\nThe candidate will be responsible for developing and maintaining web applications, collaborating with cross-functional teams, and building robust solutions. This role requires proficiency in both front-end and back-end development, along with expertise in MySQL and MongoDB databases.\n\n𝐍𝐨𝐭𝐞: 𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚𝐧 𝐎𝐧𝐬𝐢𝐭𝐞 𝐫𝐨𝐥𝐞, 𝐈𝐧 𝐉𝐨𝐡𝐚𝐫 𝐓𝐨𝐰𝐧 𝐋𝐚𝐡𝐨𝐫𝐞. \n𝐓𝐢𝐦𝐢𝐧𝐠𝐬: 11:00 𝐀𝐌 - 8:00 𝐏𝐌\n\n𝐖𝐡𝐚𝐭 𝐖𝐞 𝐎𝐟𝐟𝐞𝐫:\n☑️Biannual Increments\n☑️Eid Bonuses/Gifts\n☑️Leave Encashment\n☑️Interest Free Loans\n☑️Performance based incentives\n☑️Maternity & Paternity Leaves\n☑️Career & growth plans\n☑️Monthly Dinner/Lunch\n☑️Company Sponsored Trips\n\n📧𝐇𝐨𝐰 𝐭𝐨 𝐀𝐩𝐩𝐥𝐲: Please share your resume here, faiqa.rashid@verdant-soft.com \n\nhashtag#FullStackDeveloper hashtag#FullStackDevelopment hashtag#SoftwareDeveloper hashtag#WebDeveloper hashtag#SoftwareEngineering hashtag#JavaScript hashtag#ReactJS hashtag#NodeJS hashtag#MERNStack hashtag#TechCareers hashtag#DeveloperCommunity hashtag#StartupLife hashtag#LinkedInTech hashtag#VerdantSoft\n\napply here ",
+          "action": "save",
+          "timestamp": "2026-01-10T21:46:19.504Z",
+          "metadata": {
+            "characterCount": 1339,
+            "wordCount": 141
+          }
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/send-email-to-n8n",
+        "executionMode": "production"
+      }
+    ],
+    "Send Draft messages": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "node",
+          "content-length": "247",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "accept-language": "*",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "119.157.166.130",
+          "cf-ipcountry": "PK",
+          "cf-ray": "9be040c80a8403e8-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "render-proxy-ttl": "4",
+          "rndr-id": "1a9d2ea6-8747-4b01",
+          "sec-fetch-mode": "cors",
+          "true-client-ip": "119.157.166.130",
+          "x-forwarded-for": "119.157.166.130, 172.70.208.46, 10.16.226.84",
+          "x-forwarded-proto": "https",
+          "x-request-start": "1768426420673876"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "jobId": "b3a9cbc0-d6c4-455f-a772-59d6db41b138",
+          "recruiterEmail": "faiqa.rashid@verdant-soft.com",
+          "recruiterName": "Faiqa Rashid",
+          "company": "Verdant Soft",
+          "jobTitle": "Mid level - Full Stack Developer",
+          "userId": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3"
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/send-job-post-email",
+        "executionMode": "production"
+      }
+    ],
+    "Delete a draft": [
+      {
+        "success": true
       }
     ]
   },
