@@ -363,8 +363,8 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        160,
-        1344
+        80,
+        1376
       ],
       "id": "2e1c876b-1f8a-4ee5-8355-c12e98acb636",
       "name": "Get many rows",
@@ -471,6 +471,94 @@
           "name": "Gmail account"
         }
       }
+    },
+    {
+      "parameters": {
+        "content": "## Sample to try \n\nZainab SulemanZainab Suleman\n   • 2ndVerified • 2nd\nHR intern @techparser | Recruitment & People Operations | Interested in Organizational DevelopmentHR intern @techparser | Recruitment & People Operations | Interested in Organizational Development\n13h •  13 hours ago • Visible to anyone on or off LinkedIn\n\nFollow\nHey, We're Hiring at Techparser\n-Flutter Internship \n-Flutter Developers \n-Web Developers \n\nTurn your unfortunatelys into \"Unfortunately I cannot hangout this Wednesday, i got work\"\n\nSend resumes at hr@techparser.io\n\nLocation: Location: 3 No Building, 2nd Floor, Sunflower Housing Society, Block J1, Phase 2, Johar Town, Lahore\nGoogle Maps: https://lnkd.in/d9PDr2zw\n\nType: Full-time \nTimings: 12 PM- 9PM",
+        "height": 640,
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1104,
+        1424
+      ],
+      "id": "50c7b8c9-4442-44e2-89ac-ce4e0cb357b4",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "resource": "thread",
+        "operation": "get",
+        "threadId": "={{ $json.thread_id }}",
+        "simple": false,
+        "options": {
+          "returnOnlyMessages": true
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        288,
+        1376
+      ],
+      "id": "21b02aa5-53ec-4639-84d3-eea04dbdbcf2",
+      "name": "Get a thread",
+      "webhookId": "694b8b71-ed31-4dfb-9020-644b3d0678b0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Jn3vAgTX5encUbQt",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const targetEmail = \"ahmadeveloper077@gmail.com\";\nlet hasReplyFromOtherPerson = false;\n\n// Check all messages\nfor (const item of $input.all()) {\n  const fromEmail = item.json.From;\n  \n  if (fromEmail) {\n    const fromLower = fromEmail.toLowerCase();\n    \n    // Check if it's NOT the target email\n    const isTargetEmail = fromLower === targetEmail || \n                         fromLower.includes(`<${targetEmail}>`) ||\n                         fromLower.endsWith(targetEmail);\n    \n    if (!isTargetEmail) {\n      hasReplyFromOtherPerson = true;\n      break; // Found at least one message from other person, no need to check further\n    }\n  }\n}\n\n// Return a single object\nreturn {\n  hasReplyFromOtherPerson: hasReplyFromOtherPerson\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        1376
+      ],
+      "id": "8a3d6961-ac59-416b-9661-cfb972546890",
+      "name": "Check has reply form other person or not"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ef452747-02f6-44dc-9651-160a576a0aea",
+              "leftValue": "={{ $json.hasReplyFromOtherPerson }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        704,
+        1376
+      ],
+      "id": "2dd58e33-6efd-475f-ace9-8ad10a687958",
+      "name": "if bool is true then mark as replied else send followup one"
     }
   ],
   "connections": {
@@ -595,6 +683,17 @@
         ]
       ]
     },
+    "Get many rows": {
+      "main": [
+        [
+          {
+            "node": "Get a thread",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Generate Email Draft": {
       "main": [
         [
@@ -622,6 +721,28 @@
         [
           {
             "node": "Get a draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a thread": {
+      "main": [
+        [
+          {
+            "node": "Check has reply form other person or not",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check has reply form other person or not": {
+      "main": [
+        [
+          {
+            "node": "if bool is true then mark as replied else send followup one",
             "type": "main",
             "index": 0
           }
