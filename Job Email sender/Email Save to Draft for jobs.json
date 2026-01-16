@@ -559,6 +559,57 @@
       ],
       "id": "2dd58e33-6efd-475f-ace9-8ad10a687958",
       "name": "if bool is true then mark as replied else send followup one"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "jobs",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get many rows').first().json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "replied"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        992,
+        1264
+      ],
+      "id": "b4fd3a0b-e8cb-4a00-ad7c-01e0a099a386",
+      "name": "Update the status to replied",
+      "credentials": {
+        "supabaseApi": {
+          "id": "PY0xlj3BC03g9GGf",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Check thread → hasReply?\n    ├─ Yes → Update DB: status = 'replied'\n    └─ No → follow_up_count = 0? → Send Follow-up 1, update DB: status = 'follow_up_1'\n           follow_up_count = 1? → Send Follow-up 2, update DB: status = 'follow_up_2'\n",
+        "width": 320
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1392,
+        1424
+      ],
+      "id": "1bc65a7d-c4ab-42d8-a813-ca9859625f88",
+      "name": "Sticky Note2"
     }
   ],
   "connections": {
@@ -743,6 +794,17 @@
         [
           {
             "node": "if bool is true then mark as replied else send followup one",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "if bool is true then mark as replied else send followup one": {
+      "main": [
+        [
+          {
+            "node": "Update the status to replied",
             "type": "main",
             "index": 0
           }
