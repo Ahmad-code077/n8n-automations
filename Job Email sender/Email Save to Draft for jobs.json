@@ -96,7 +96,7 @@
         "emailType": "html",
         "message": "=<!DOCTYPE html>\n<html>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #111;\">\n    \n    <p><strong>tldr</strong><br>\n    {{ $json.output.email_body_chunks.tldr }}</p>\n    \n    <p>Dear {{ $json.output.recruiter_name || 'Hiring Manager' }},</p>\n    \n    <p>{{ $json.output.email_body_chunks.para1 }}</p>\n    \n    <p>{{ $json.output.email_body_chunks.para2 }}</p>\n    \n    <p>Please find my portfolio and GitHub for reference:</p>\n    <ul>\n      <li>GitHub: <a href=\"https://github.com/Ahmad-code077\" target=\"_blank\">https://github.com/Ahmad-code077</a></li>\n      <li>Portfolio: <a href=\"https://ahmadmamoon.netlify.app\" target=\"_blank\">https://ahmadmamoon.netlify.app</a></li>\n      <li>LinkedIn: <a href=\"https://www.linkedin.com/in/muhammad-ahmad077/\" target=\"_blank\">https://www.linkedin.com/in/muhammad-ahmad077/</a></li>\n    </ul>\n    \n    <p>{{ $json.output.email_body_chunks.para3 }}</p>\n    \n    <p>Best regards,<br>\n    Muhammad Ahmad<br>\n    +92-321-0711148<br>\n    <a href=\"mailto:ahmadeveloper077@gmail.com\">ahmadeveloper077@gmail.com</a></p>\n    \n  </body>\n</html>\n",
         "options": {
-          "sendTo": "=mahmadeveloper077@gmail.com"
+          "sendTo": "={{ $json.output.recruiter_email || 'mahmadeveloper077@gmail.com' }}"
         }
       },
       "type": "n8n-nodes-base.gmail",
@@ -186,7 +186,13 @@
         0
       ],
       "id": "0a745851-3d64-4884-b1d8-f0d1a5ca65e3",
-      "name": "Create row for dasbhoard approval"
+      "name": "Create row for dasbhoard approval",
+      "credentials": {
+        "supabaseApi": {
+          "id": "gv8YamWZYuBsLGe0",
+          "name": "Supabase account"
+        }
+      }
     },
     {
       "parameters": {
@@ -233,7 +239,13 @@
       ],
       "id": "ea50ef8c-b511-4fac-b25e-f28f9ff0749f",
       "name": "Send a message",
-      "webhookId": "b628cb40-844f-4ffc-92e5-70290288ad0b"
+      "webhookId": "b628cb40-844f-4ffc-92e5-70290288ad0b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PcRg9Lnul0aFK4q5",
+          "name": "Gmail account"
+        }
+      }
     },
     {
       "parameters": {
@@ -296,7 +308,13 @@
         544
       ],
       "id": "226d418d-eee6-4d77-84d9-ae12e5b46300",
-      "name": "Update the row"
+      "name": "Update the row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "gv8YamWZYuBsLGe0",
+          "name": "Supabase account"
+        }
+      }
     },
     {
       "parameters": {
@@ -326,18 +344,23 @@
           "conditions": [
             {
               "keyName": "status",
-              "condition": "neq",
-              "keyValue": "draft_created"
-            },
-            {
-              "keyName": "follow_up_count",
               "condition": "eq",
-              "keyValue": "0"
+              "keyValue": "sent"
             },
             {
               "keyName": "sent_at",
               "condition": "lte",
               "keyValue": "={{ $now.minus(3,'days') }}"
+            },
+            {
+              "keyName": "status",
+              "condition": "eq",
+              "keyValue": "follow_up_1"
+            },
+            {
+              "keyName": "follow_up_count",
+              "condition": "lt",
+              "keyValue": "2"
             }
           ]
         }
@@ -356,21 +379,6 @@
           "name": "Supabase account"
         }
       }
-    },
-    {
-      "parameters": {
-        "content": "## overview\n\n## Check the store id to open the exact draft email to check and hit send for it \n\n## then delete email form the draft also after sending \n \n## the follow up tracks check if reply came back if not then send follow up increase the count and things \n\n",
-        "height": 400,
-        "width": 480
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        496,
-        480
-      ],
-      "id": "2ab1d5f7-d80a-43dc-ae68-7247736c75bb",
-      "name": "Sticky Note1"
     },
     {
       "parameters": {
@@ -446,22 +454,13 @@
       ],
       "id": "c4f5e589-bc71-4b7c-a194-e29cdbee24e8",
       "name": "Delete a draft",
-      "webhookId": "c8e163e1-93dc-4280-87db-c0e9a277cfb0"
-    },
-    {
-      "parameters": {
-        "content": "## Sample to try \n\nZainab SulemanZainab Suleman\n   • 2ndVerified • 2nd\nHR intern @techparser | Recruitment & People Operations | Interested in Organizational DevelopmentHR intern @techparser | Recruitment & People Operations | Interested in Organizational Development\n13h •  13 hours ago • Visible to anyone on or off LinkedIn\n\nFollow\nHey, We're Hiring at Techparser\n-Flutter Internship \n-Flutter Developers \n-Web Developers \n\nTurn your unfortunatelys into \"Unfortunately I cannot hangout this Wednesday, i got work\"\n\nSend resumes at hr@techparser.io\n\nLocation: Location: 3 No Building, 2nd Floor, Sunflower Housing Society, Block J1, Phase 2, Johar Town, Lahore\nGoogle Maps: https://lnkd.in/d9PDr2zw\n\nType: Full-time \nTimings: 12 PM- 9PM",
-        "height": 640,
-        "width": 320
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        400,
-        960
-      ],
-      "id": "ba2648cb-bf79-484d-93b7-c16593fe6c53",
-      "name": "Sticky Note"
+      "webhookId": "c8e163e1-93dc-4280-87db-c0e9a277cfb0",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "PcRg9Lnul0aFK4q5",
+          "name": "Gmail account"
+        }
+      }
     },
     {
       "parameters": {
@@ -572,20 +571,6 @@
           "name": "Supabase account"
         }
       }
-    },
-    {
-      "parameters": {
-        "content": "Check thread → hasReply?\n    ├─ Yes → Update DB: status = 'replied'\n    └─ No → follow_up_count = 0? → Send Follow-up 1, update DB: status = 'follow_up_1'\n           follow_up_count = 1? → Send Follow-up 2, update DB: status = 'follow_up_2'\n",
-        "width": 320
-      },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
-      "position": [
-        3408,
-        704
-      ],
-      "id": "48680fb0-60ae-49a5-80e5-8e8b2db1b6d5",
-      "name": "Sticky Note2"
     },
     {
       "parameters": {
@@ -857,6 +842,55 @@
           "name": "Supabase account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "jobs",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "status",
+              "condition": "eq",
+              "keyValue": "follow_up_2"
+            },
+            {
+              "keyName": "sent_at",
+              "condition": "lte",
+              "keyValue": "={{ $now.minus(3,'days') }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1584,
+        1104
+      ],
+      "id": "4ede44e7-9871-4143-8316-b30979646f06",
+      "name": "Get many rows1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "gv8YamWZYuBsLGe0",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Set the supbase with these conditnos \n\nStatus is either sent OR follow_up_1 → these are the rows ready for a follow-up\n\nSent_at is older than 3 days → only follow up after 3 days\n\nFollow_up_count < 2 → stop after 2 follow-ups",
+        "height": 352
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        784
+      ],
+      "id": "64e50c78-8aee-4180-af13-95e91971541a",
+      "name": "Sticky Note"
     }
   ],
   "connections": {
@@ -975,6 +1009,11 @@
         [
           {
             "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get many rows1",
             "type": "main",
             "index": 0
           }
@@ -1154,264 +1193,29 @@
     "AI Agent": [
       {
         "output": {
-          "title": "Mid level - Full Stack Developer",
-          "company": "Verdant Soft",
-          "recruiter_name": "Faiqa Rashid",
-          "recruiter_email": "faiqa.rashid@verdant-soft.com",
-          "location": "Johar Town Lahore",
-          "work_type": "Onsite",
-          "experience": "2+ years",
+          "title": "Full Stack Developer",
+          "company": "Career Pakistan (CP)",
+          "recruiter_name": null,
+          "recruiter_email": "rough6781@gmail.com",
+          "location": "Remote",
+          "work_type": "Remote",
+          "experience": "Minimum of 5+ years of experience in a Full-Stack Software Engineering role",
           "skills": [
-            "React.js",
-            "Next.js",
             "Node.js",
-            "MySQL",
-            "MongoDB",
-            "JavaScript",
             "TypeScript",
-            "Tailwind CSS",
-            "Redux Toolkit",
-            "RTK Query",
-            "Axios",
-            "Zod",
-            "Shadcn",
-            "React-hook-form",
-            "Express.js",
-            "PostgreSQL",
-            "Prisma",
-            "REST APIs",
-            "NextAuth.js",
-            "Pusher",
-            "WebSocket",
-            "Socket.io",
-            "Stripe",
-            "Role-Based Access Control"
+            "JavaScript",
+            "React"
           ],
-          "timings": "11:00 AM - 8:00 PM",
-          "email_subject": "Application for Mid Level Full Stack Developer Position at Verdant Soft",
+          "timings": "UK hours 9:00 am to 6:00 pm (Pakistan time 2:00 pm to 11:00 pm)",
+          "email_subject": "Application for Full Stack Developer Position at Career Pakistan",
           "email_body_chunks": {
-            "tldr": "I am a passionate Full Stack Developer focused on building scalable, responsive web applications using modern JavaScript frameworks and databases, eager to contribute to robust solutions.",
-            "para1": "I am excited to apply for the Mid Level Full Stack Developer position at Verdant Soft. The opportunity to work onsite in Johar Town Lahore with a team dedicated to developing impactful web applications aligns perfectly with my career goals and expertise.",
-            "para2": "With over two years of experience, I have developed and maintained comprehensive web applications using React.js, Next.js, Node.js, and both SQL and NoSQL databases like PostgreSQL and MongoDB. Notably, I built a social app featuring real-time chat, notifications, and role-based authentication using NextAuth.js, along with subscription services integrated via Stripe. My experience with WebSocket/Pusher for live updates and Prisma for efficient database management equips me well to deliver scalable solutions, matching Verdant Soft's requirements.",
-            "para3": "I am confident that my hands-on experience with front-end UI components using Tailwind CSS and Shadcn, combined with backend API design and real-time features, will allow me to contribute effectively to your development team. I am eager to bring my skills in building responsive, feature-rich applications to support your projects and growth plans.",
-            "closing": "Thank you for considering my application. I look forward to the possibility of discussing how my background and skills can contribute to Verdant Soft's success. Please feel free to reach out to me for any further information or to schedule an interview."
+            "tldr": "I am a passionate Full Stack Developer focused on building scalable, responsive web applications using modern JavaScript and TypeScript technologies. I thrive on crafting seamless user experiences and robust backend systems.",
+            "para1": "I am very interested in the Full Stack Developer role at Career Pakistan. The opportunity to contribute remotely while working UK hours aligns well with my experience and working preferences. I admire Career Pakistan's commitment to technical excellence and am eager to be part of a team advancing impactful software solutions.",
+            "para2": "With over 5 years of experience, I have deep expertise in Node.js, TypeScript, and React, building complex and scalable user interfaces and systems. I have developed real-time social and medical platforms integrating authentication, Stripe payments, WebSocket communications, and robust backend APIs using Prisma, PostgreSQL, and MongoDB. My projects demonstrate proficiency with Next.js, Redux Toolkit, Tailwind CSS, and modern tooling to deliver maintainable, high-quality code. These experiences equip me to excel in your requirements for a full-stack engineer.",
+            "para3": "Beyond technical skills, my hands-on work with real-time features, role-based access control, and cross-functional collaboration highlights my capability to contribute effectively to Career Pakistan’s goals. I am confident in my ability to help build and scale innovative web applications that meet user needs while maintaining reliable performance.",
+            "closing": "I would appreciate the opportunity to discuss how my skills and experiences align with the needs of Career Pakistan. Thank you for considering my application. I look forward to the possibility of contributing to your team and am happy to provide any further information needed."
           }
         }
-      }
-    ],
-    "Create a draft email for approval system": [
-      {
-        "id": "r5934617835299668019",
-        "message": {
-          "id": "19bbe575e87af375",
-          "threadId": "19bbe575e87af375",
-          "labelIds": [
-            "DRAFT"
-          ]
-        }
-      }
-    ],
-    "Create row for dasbhoard approval": [
-      {
-        "id": "b3a9cbc0-d6c4-455f-a772-59d6db41b138",
-        "raw_post": "📢 hashtag#HiringAlert\n\n𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧: 𝐌𝐢𝐝 𝐥𝐞𝐯𝐞𝐥 - Full Stack Developer\n𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞: 2+ 𝐲𝐞𝐚𝐫𝐬\nWe are looking for a skilled Full Stack Developer with experience in front end technologies and back-end development to join our development team. \n\nThe candidate will be responsible for developing and maintaining web applications, collaborating with cross-functional teams, and building robust solutions. This role requires proficiency in both front-end and back-end development, along with expertise in MySQL and MongoDB databases.\n\n𝐍𝐨𝐭𝐞: 𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚𝐧 𝐎𝐧𝐬𝐢𝐭𝐞 𝐫𝐨𝐥𝐞, 𝐈𝐧 𝐉𝐨𝐡𝐚𝐫 𝐓𝐨𝐰𝐧 𝐋𝐚𝐡𝐨𝐫𝐞. \n𝐓𝐢𝐦𝐢𝐧𝐠𝐬: 11:00 𝐀𝐌 - 8:00 𝐏𝐌\n\n𝐖𝐡𝐚𝐭 𝐖𝐞 𝐎𝐟𝐟𝐞𝐫:\n☑️Biannual Increments\n☑️Eid Bonuses/Gifts\n☑️Leave Encashment\n☑️Interest Free Loans\n☑️Performance based incentives\n☑️Maternity & Paternity Leaves\n☑️Career & growth plans\n☑️Monthly Dinner/Lunch\n☑️Company Sponsored Trips\n\n📧𝐇𝐨𝐰 𝐭𝐨 𝐀𝐩𝐩𝐥𝐲: Please share your resume here, faiqa.rashid@verdant-soft.com \n\nhashtag#FullStackDeveloper hashtag#FullStackDevelopment hashtag#SoftwareDeveloper hashtag#WebDeveloper hashtag#SoftwareEngineering hashtag#JavaScript hashtag#ReactJS hashtag#NodeJS hashtag#MERNStack hashtag#TechCareers hashtag#DeveloperCommunity hashtag#StartupLife hashtag#LinkedInTech hashtag#VerdantSoft\n\napply here ",
-        "title": "Mid level - Full Stack Developer",
-        "company": "Verdant Soft",
-        "recruiter_name": "Faiqa Rashid",
-        "recruiter_email": "faiqa.rashid@verdant-soft.com",
-        "location": "Johar Town Lahore",
-        "work_type": "Onsite",
-        "experience": "2+ years",
-        "skills": [
-          "React.js",
-          "Next.js",
-          "Node.js",
-          "MySQL",
-          "MongoDB",
-          "JavaScript",
-          "TypeScript",
-          "Tailwind CSS",
-          "Redux Toolkit",
-          "RTK Query",
-          "Axios",
-          "Zod",
-          "Shadcn",
-          "React-hook-form",
-          "Express.js",
-          "PostgreSQL",
-          "Prisma",
-          "REST APIs",
-          "NextAuth.js",
-          "Pusher",
-          "WebSocket",
-          "Socket.io",
-          "Stripe",
-          "Role-Based Access Control"
-        ],
-        "timings": "11:00 AM - 8:00 PM",
-        "gmail_draft_id": "r6438763173322751803",
-        "status": "draft_created",
-        "sent_at": null,
-        "follow_up_date": null,
-        "follow_up_count": 0,
-        "created_at": "2026-01-14T21:05:02.127854",
-        "user_id": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3",
-        "thread_id": "19bbe529e1e32fc7",
-        "gmail_message_id": "19bbe529e1e32fc7"
-      }
-    ],
-    "Send a message": [
-      {
-        "id": "19bbe7de9c745466",
-        "threadId": "19bbe7de9c745466",
-        "labelIds": [
-          "SENT"
-        ]
-      }
-    ],
-    "Download Resume1": [
-      {
-        "id": "r420793769916972660",
-        "threadId": "19bb969a7c37104d",
-        "labelIds": [
-          "DRAFT"
-        ],
-        "sizeEstimate": 156796,
-        "headers": {
-          "received": "Received: from 946077616320\r\n\tnamed unknown\r\n\tby gmailapi.google.com\r\n\twith HTTPREST;\r\n\tTue, 13 Jan 2026 22:11:07 +0000",
-          "content-type": "Content-Type: multipart/mixed; boundary=\"--_NmP-3aa75cb011686c07-Part_1\"",
-          "to": "To: mahmadeveloper077@gmail.com",
-          "subject": "Subject: Application for Mid Level Full Stack Developer Position at Verdant\r\n Soft",
-          "message-id": "Message-Id: <CAEYHPR7xdi=aNBXYzY2VETJrtxmWO3zxxbtVugsd_meH6pMppA@mail.gmail.com>",
-          "date": "Date: Tue, 13 Jan 2026 22:11:07 +0000",
-          "mime-version": "MIME-Version: 1.0",
-          "from": "From: ahmadeveloper077@gmail.com"
-        },
-        "html": "<!DOCTYPE html>\n<html>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #111;\">\n    \n    <p><strong>tldr</strong><br>\n    I am a passionate Full Stack Developer focused on building scalable, responsive web applications using modern JavaScript frameworks and databases, eager to contribute to robust solutions.</p>\n    \n    <p>Dear Faiqa Rashid,</p>\n    \n    <p>I am excited to apply for the Mid Level Full Stack Developer position at Verdant Soft. The opportunity to work onsite in Johar Town Lahore with a team dedicated to developing impactful web applications aligns perfectly with my career goals and expertise.</p>\n    \n    <p>With over two years of experience, I have developed and maintained comprehensive web applications using React.js, Next.js, Node.js, and both SQL and NoSQL databases like PostgreSQL and MongoDB. Notably, I built a social app featuring real-time chat, notifications, and role-based authentication using NextAuth.js, along with subscription services integrated via Stripe. My experience with WebSocket/Pusher for live updates and Prisma for efficient database management equips me well to deliver scalable solutions, matching Verdant Soft's requirements.</p>\n    \n    <p>Please find my portfolio and GitHub for reference:</p>\n    <ul>\n      <li>GitHub: <a href=\"https://github.com/Ahmad-code077\" target=\"_blank\">https://github.com/Ahmad-code077</a></li>\n      <li>Portfolio: <a href=\"https://ahmadmamoon.netlify.app\" target=\"_blank\">https://ahmadmamoon.netlify.app</a></li>\n      <li>LinkedIn: <a href=\"https://www.linkedin.com/in/muhammad-ahmad077/\" target=\"_blank\">https://www.linkedin.com/in/muhammad-ahmad077/</a></li>\n    </ul>\n    \n    <p>I am confident that my hands-on experience with front-end UI components using Tailwind CSS and Shadcn, combined with backend API design and real-time features, will allow me to contribute effectively to your development team. I am eager to bring my skills in building responsive, feature-rich applications to support your projects and growth plans.</p>\n    \n    <p>Best regards,<br>\n    Muhammad Ahmad<br>\n    +92-321-0711148<br>\n    <a href=\"mailto:ahmadeveloper077@gmail.com\">ahmadeveloper077@gmail.com</a></p>\n    \n  </body>\n</html>",
-        "subject": "Application for Mid Level Full Stack Developer Position at Verdant Soft",
-        "date": "2026-01-13T22:11:07.000Z",
-        "to": {
-          "value": [
-            {
-              "address": "mahmadeveloper077@gmail.com",
-              "name": ""
-            }
-          ],
-          "html": "<span class=\"mp_address_group\"><a href=\"mailto:mahmadeveloper077@gmail.com\" class=\"mp_address_email\">mahmadeveloper077@gmail.com</a></span>",
-          "text": "mahmadeveloper077@gmail.com"
-        },
-        "from": {
-          "value": [
-            {
-              "address": "ahmadeveloper077@gmail.com",
-              "name": ""
-            }
-          ],
-          "html": "<span class=\"mp_address_group\"><a href=\"mailto:ahmadeveloper077@gmail.com\" class=\"mp_address_email\">ahmadeveloper077@gmail.com</a></span>",
-          "text": "ahmadeveloper077@gmail.com"
-        },
-        "messageId": "19bb969a7c37104d"
-      }
-    ],
-    "Update the row": [
-      {
-        "id": "b3a9cbc0-d6c4-455f-a772-59d6db41b138",
-        "raw_post": "📢 hashtag#HiringAlert\n\n𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧: 𝐌𝐢𝐝 𝐥𝐞𝐯𝐞𝐥 - Full Stack Developer\n𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞: 2+ 𝐲𝐞𝐚𝐫𝐬\nWe are looking for a skilled Full Stack Developer with experience in front end technologies and back-end development to join our development team. \n\nThe candidate will be responsible for developing and maintaining web applications, collaborating with cross-functional teams, and building robust solutions. This role requires proficiency in both front-end and back-end development, along with expertise in MySQL and MongoDB databases.\n\n𝐍𝐨𝐭𝐞: 𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚𝐧 𝐎𝐧𝐬𝐢𝐭𝐞 𝐫𝐨𝐥𝐞, 𝐈𝐧 𝐉𝐨𝐡𝐚𝐫 𝐓𝐨𝐰𝐧 𝐋𝐚𝐡𝐨𝐫𝐞. \n𝐓𝐢𝐦𝐢𝐧𝐠𝐬: 11:00 𝐀𝐌 - 8:00 𝐏𝐌\n\n𝐖𝐡𝐚𝐭 𝐖𝐞 𝐎𝐟𝐟𝐞𝐫:\n☑️Biannual Increments\n☑️Eid Bonuses/Gifts\n☑️Leave Encashment\n☑️Interest Free Loans\n☑️Performance based incentives\n☑️Maternity & Paternity Leaves\n☑️Career & growth plans\n☑️Monthly Dinner/Lunch\n☑️Company Sponsored Trips\n\n📧𝐇𝐨𝐰 𝐭𝐨 𝐀𝐩𝐩𝐥𝐲: Please share your resume here, faiqa.rashid@verdant-soft.com \n\nhashtag#FullStackDeveloper hashtag#FullStackDevelopment hashtag#SoftwareDeveloper hashtag#WebDeveloper hashtag#SoftwareEngineering hashtag#JavaScript hashtag#ReactJS hashtag#NodeJS hashtag#MERNStack hashtag#TechCareers hashtag#DeveloperCommunity hashtag#StartupLife hashtag#LinkedInTech hashtag#VerdantSoft\n\napply here ",
-        "title": "Mid level - Full Stack Developer",
-        "company": "Verdant Soft",
-        "recruiter_name": "Faiqa Rashid",
-        "recruiter_email": "faiqa.rashid@verdant-soft.com",
-        "location": "Johar Town Lahore",
-        "work_type": "Onsite",
-        "experience": "2+ years",
-        "skills": [
-          "React.js",
-          "Next.js",
-          "Node.js",
-          "MySQL",
-          "MongoDB",
-          "JavaScript",
-          "TypeScript",
-          "Tailwind CSS",
-          "Redux Toolkit",
-          "RTK Query",
-          "Axios",
-          "Zod",
-          "Shadcn",
-          "React-hook-form",
-          "Express.js",
-          "PostgreSQL",
-          "Prisma",
-          "REST APIs",
-          "NextAuth.js",
-          "Pusher",
-          "WebSocket",
-          "Socket.io",
-          "Stripe",
-          "Role-Based Access Control"
-        ],
-        "timings": "11:00 AM - 8:00 PM",
-        "gmail_draft_id": "r6438763173322751803",
-        "status": "sent",
-        "sent_at": "2026-01-14T16:53:33.479",
-        "follow_up_date": null,
-        "follow_up_count": 0,
-        "created_at": "2026-01-14T21:05:02.127854",
-        "user_id": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3",
-        "thread_id": "19bbe7de9c745466",
-        "gmail_message_id": "19bbe7de9c745466"
-      }
-    ],
-    "Get many rows": [
-      {
-        "id": "b3a9cbc0-d6c4-455f-a772-59d6db41b138",
-        "raw_post": "📢 hashtag#HiringAlert\n\n𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧: 𝐌𝐢𝐝 𝐥𝐞𝐯𝐞𝐥 - Full Stack Developer\n𝐄𝐱𝐩𝐞𝐫𝐢𝐞𝐧𝐜𝐞: 2+ 𝐲𝐞𝐚𝐫𝐬\nWe are looking for a skilled Full Stack Developer with experience in front end technologies and back-end development to join our development team. \n\nThe candidate will be responsible for developing and maintaining web applications, collaborating with cross-functional teams, and building robust solutions. This role requires proficiency in both front-end and back-end development, along with expertise in MySQL and MongoDB databases.\n\n𝐍𝐨𝐭𝐞: 𝐓𝐡𝐢𝐬 𝐢𝐬 𝐚𝐧 𝐎𝐧𝐬𝐢𝐭𝐞 𝐫𝐨𝐥𝐞, 𝐈𝐧 𝐉𝐨𝐡𝐚𝐫 𝐓𝐨𝐰𝐧 𝐋𝐚𝐡𝐨𝐫𝐞. \n𝐓𝐢𝐦𝐢𝐧𝐠𝐬: 11:00 𝐀𝐌 - 8:00 𝐏𝐌\n\n𝐖𝐡𝐚𝐭 𝐖𝐞 𝐎𝐟𝐟𝐞𝐫:\n☑️Biannual Increments\n☑️Eid Bonuses/Gifts\n☑️Leave Encashment\n☑️Interest Free Loans\n☑️Performance based incentives\n☑️Maternity & Paternity Leaves\n☑️Career & growth plans\n☑️Monthly Dinner/Lunch\n☑️Company Sponsored Trips\n\n📧𝐇𝐨𝐰 𝐭𝐨 𝐀𝐩𝐩𝐥𝐲: Please share your resume here, faiqa.rashid@verdant-soft.com \n\nhashtag#FullStackDeveloper hashtag#FullStackDevelopment hashtag#SoftwareDeveloper hashtag#WebDeveloper hashtag#SoftwareEngineering hashtag#JavaScript hashtag#ReactJS hashtag#NodeJS hashtag#MERNStack hashtag#TechCareers hashtag#DeveloperCommunity hashtag#StartupLife hashtag#LinkedInTech hashtag#VerdantSoft\n\napply here ",
-        "title": "Mid level - Full Stack Developer",
-        "company": "Verdant Soft",
-        "recruiter_name": "Faiqa Rashid",
-        "recruiter_email": "faiqa.rashid@verdant-soft.com",
-        "location": "Johar Town Lahore",
-        "work_type": "Onsite",
-        "experience": "2+ years",
-        "skills": [
-          "React.js",
-          "Next.js",
-          "Node.js",
-          "MySQL",
-          "MongoDB",
-          "JavaScript",
-          "TypeScript",
-          "Tailwind CSS",
-          "Redux Toolkit",
-          "RTK Query",
-          "Axios",
-          "Zod",
-          "Shadcn",
-          "React-hook-form",
-          "Express.js",
-          "PostgreSQL",
-          "Prisma",
-          "REST APIs",
-          "NextAuth.js",
-          "Pusher",
-          "WebSocket",
-          "Socket.io",
-          "Stripe",
-          "Role-Based Access Control"
-        ],
-        "timings": "11:00 AM - 8:00 PM",
-        "gmail_draft_id": "r6438763173322751803",
-        "status": "sent",
-        "sent_at": "2026-01-11T16:53:33.479",
-        "follow_up_date": null,
-        "follow_up_count": 0,
-        "created_at": "2026-01-14T21:05:02.127854",
-        "user_id": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3",
-        "thread_id": "19bbe7de9c745466",
-        "gmail_message_id": "19bbe7de9c745466",
-        "sent_email_html": null,
-        "follow_up_1_html": null,
-        "follow_up_2_html": null
       }
     ],
     "Generate Email Draft": [
@@ -1497,11 +1301,6 @@
         "executionMode": "production"
       }
     ],
-    "Delete a draft": [
-      {
-        "success": true
-      }
-    ],
     "AI Agent1": [
       {
         "output": {
@@ -1535,6 +1334,7 @@
     ]
   },
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
   }
 }
