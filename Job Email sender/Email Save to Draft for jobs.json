@@ -12,10 +12,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        768,
-        0
+        -2848,
+        -976
       ],
-      "id": "f953633d-a7fd-4dbe-9638-27eb49198479",
+      "id": "3ff7ebe3-2c59-4c91-9ee4-874c5ab253d2",
       "name": "AI Agent"
     },
     {
@@ -30,10 +30,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        752,
-        192
+        -2864,
+        -784
       ],
-      "id": "b1a04d82-a682-40da-84c0-1d4a951b6355",
+      "id": "70ff4813-cc94-40dc-8290-e52b2599550f",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
@@ -50,10 +50,10 @@
       "type": "n8n-nodes-base.googleDocs",
       "typeVersion": 2,
       "position": [
-        272,
-        0
+        -3344,
+        -976
       ],
-      "id": "e2d2cd82-c841-4e3b-ad66-692574461a35",
+      "id": "1c698750-1478-4ab6-980d-071c90b67986",
       "name": "Get Resume Data",
       "credentials": {
         "googleDocsOAuth2Api": {
@@ -69,10 +69,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        480,
-        0
+        -3136,
+        -976
       ],
-      "id": "21296700-8d1f-478d-a132-bceb152b73d3",
+      "id": "e1eaebdd-f815-422a-9763-7300a7a4d64c",
       "name": "Merge the data in the content"
     },
     {
@@ -83,10 +83,10 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        944,
-        208
+        -2672,
+        -768
       ],
-      "id": "a07a9e6b-6455-4d53-baad-2a793f8f63ef",
+      "id": "c45c2074-d502-4757-81ee-86d58e571a1f",
       "name": "Structured Output Parser"
     },
     {
@@ -102,10 +102,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1408,
-        0
+        -2208,
+        -976
       ],
-      "id": "ab0d3dda-7b60-435f-8b2d-fe172e9f8563",
+      "id": "d9ee59fb-fd13-42b5-9e17-c3eceee6764a",
       "name": "Create a draft email for approval system",
       "webhookId": "c7a19019-b3ad-4493-9602-87104d8f8e98",
       "credentials": {
@@ -182,10 +182,10 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1616,
-        0
+        -2000,
+        -976
       ],
-      "id": "0a745851-3d64-4884-b1d8-f0d1a5ca65e3",
+      "id": "2bd153c3-b441-4d1c-91f3-a020b4faf2ed",
       "name": "Create row for dasbhoard approval",
       "credentials": {
         "supabaseApi": {
@@ -204,10 +204,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1712,
-        544
+        -1904,
+        -432
       ],
-      "id": "e73f786e-3f9c-4daa-8b5d-4c9f7112ad6b",
+      "id": "acbd6bc6-b35d-4789-a321-5e105ce44131",
       "name": "Get a draft",
       "webhookId": "1347520c-0150-4d85-b125-d7b0f5ee7220",
       "credentials": {
@@ -234,10 +234,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        2064,
-        544
+        -1552,
+        -432
       ],
-      "id": "ea50ef8c-b511-4fac-b25e-f28f9ff0749f",
+      "id": "ab3e5fe5-ef64-43cc-b9db-04ae21d7bcb0",
       "name": "Send a message",
       "webhookId": "b628cb40-844f-4ffc-92e5-70290288ad0b",
       "credentials": {
@@ -261,10 +261,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1888,
-        544
+        -1728,
+        -432
       ],
-      "id": "53728ff9-bb12-43a2-992d-fcc1dda39ffe",
+      "id": "22131f2e-1f33-46fc-9877-3c2216bf1b47",
       "name": "Download Resume1"
     },
     {
@@ -304,10 +304,10 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2272,
-        544
+        -1344,
+        -432
       ],
-      "id": "226d418d-eee6-4d77-84d9-ae12e5b46300",
+      "id": "c5e302c5-d927-4501-b6b5-f90520993018",
       "name": "Update the row",
       "credentials": {
         "supabaseApi": {
@@ -329,49 +329,26 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        1376,
-        912
+        -2240,
+        -64
       ],
-      "id": "a0475a18-7a9e-4742-80e1-69f911fcf6e1",
+      "id": "9266a3b1-cfe7-4dd9-8210-c6073b50f792",
       "name": "Schedule Trigger"
     },
     {
       "parameters": {
         "operation": "getAll",
         "tableId": "jobs",
-        "matchType": "allFilters",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "status",
-              "condition": "eq",
-              "keyValue": "sent"
-            },
-            {
-              "keyName": "sent_at",
-              "condition": "lte",
-              "keyValue": "={{ $now.minus(3,'days') }}"
-            },
-            {
-              "keyName": "status",
-              "condition": "eq",
-              "keyValue": "follow_up_1"
-            },
-            {
-              "keyName": "follow_up_count",
-              "condition": "lt",
-              "keyValue": "2"
-            }
-          ]
-        }
+        "filterType": "string",
+        "filterString": "=or=(status.eq.sent,status.eq.follow_up_1)&follow_up_count=lt.2"
       },
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1584,
-        912
+        -2032,
+        -64
       ],
-      "id": "48aead96-faac-4bac-9114-ad1c71c6d48e",
+      "id": "ae22aae2-34e6-4018-9406-87f84beccc91",
       "name": "Get many rows",
       "credentials": {
         "supabaseApi": {
@@ -389,10 +366,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        0,
-        0
+        -3616,
+        -976
       ],
-      "id": "ad3fde34-f6c7-48bf-9178-d492ff7ac9c6",
+      "id": "701b4a28-5215-4f25-abdb-fed824c0ac4c",
       "name": "Generate Email Draft",
       "webhookId": "f79e86b6-2449-48c8-b477-19fe1ac04ba3"
     },
@@ -405,10 +382,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        1296,
-        544
+        -2320,
+        -432
       ],
-      "id": "c03dad4b-df60-41d5-8dc4-6ecb03b111c2",
+      "id": "bc795a8e-d59d-4677-ba6b-7ace0d0a42d6",
       "name": "Send Draft messages",
       "webhookId": "0302a1e5-4783-4198-87b7-6593828f26fc"
     },
@@ -428,10 +405,10 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1504,
-        544
+        -2112,
+        -432
       ],
-      "id": "1e6a022e-582b-4e1c-ac97-9c92df345a92",
+      "id": "44515818-626f-4f28-a62a-5fbcfd1d804b",
       "name": "Get the job post detail",
       "credentials": {
         "supabaseApi": {
@@ -449,10 +426,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        2480,
-        544
+        -1136,
+        -432
       ],
-      "id": "c4f5e589-bc71-4b7c-a194-e29cdbee24e8",
+      "id": "4e6f6275-5571-4d23-b90b-a39c909e2306",
       "name": "Delete a draft",
       "webhookId": "c8e163e1-93dc-4280-87db-c0e9a277cfb0",
       "credentials": {
@@ -475,10 +452,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        1792,
-        912
+        -1824,
+        -64
       ],
-      "id": "5ddcdd29-22a3-4871-af3c-2aca007770f2",
+      "id": "c72d238c-d37f-4253-8fd1-88ce121d57e2",
       "name": "Get a thread",
       "webhookId": "694b8b71-ed31-4dfb-9020-644b3d0678b0",
       "credentials": {
@@ -490,15 +467,15 @@
     },
     {
       "parameters": {
-        "jsCode": "const targetEmail = \"ahmadeveloper077@gmail.com\";\n\n// Simple email extraction\nfunction getEmail(from) {\n  if (!from) return \"\";\n  const match = from.match(/<([^>]+)>/);\n  return match ? match[1] : from;\n}\n\n// Extract clean name\nfunction getName(from) {\n  if (!from) return \"\";\n  const match = from.match(/^([^<]+)</);\n  return match ? match[1].trim() : from;\n}\n\n// Extract message text\nfunction getMessageText(item) {\n  try {\n    if (item.json.payload && item.json.payload.parts) {\n      // Try plain text\n      const plainPart = item.json.payload.parts.find(p => \n        p.mimeType === \"text/plain\" && p.body && p.body.data\n      );\n      if (plainPart) {\n        return atob(plainPart.body.data.replace(/-/g, '+').replace(/_/g, '/'));\n      }\n      \n      // Try HTML\n      const htmlPart = item.json.payload.parts.find(p => \n        p.mimeType === \"text/html\" && p.body && p.body.data\n      );\n      if (htmlPart) {\n        const html = atob(htmlPart.body.data.replace(/-/g, '+').replace(/_/g, '/'));\n        return html.replace(/<[^>]*>/g, ' ').replace(/\\s+/g, ' ').trim();\n      }\n    }\n    return item.json.snippet || \"\";\n  } catch (e) {\n    return item.json.snippet || \"\";\n  }\n}\n\n// Process all messages\nlet hasReplyFromOther = false;\nlet otherPerson = null;\nconst allMessages = [];\n\n// Sort by date (oldest first)\nconst sortedMessages = $input.all().sort((a, b) => \n  parseInt(a.json.internalDate) - parseInt(b.json.internalDate)\n);\n\nfor (const item of sortedMessages) {\n  const from = item.json.From;\n  const email = getEmail(from);\n  const name = getName(from);\n  const isMe = email.toLowerCase() === targetEmail.toLowerCase();\n  const text = getMessageText(item);\n  const date = new Date(parseInt(item.json.internalDate));\n  \n  if (!isMe) {\n    hasReplyFromOther = true;\n    if (!otherPerson) {\n      otherPerson = { name: name || email, email: email };\n    }\n  }\n  \n  allMessages.push({\n    sender: isMe ? \"me\" : \"them\",\n    name: name || email,\n    email: email,\n    date: date.toLocaleDateString(),\n    time: date.toLocaleTimeString(),\n    text: text\n  });\n}\n\n// Simple output structure\nreturn [{\n  // Basic info\n  subject: sortedMessages[0]?.json.Subject || \"No Subject\",\n  hasReply: hasReplyFromOther,\n  totalMessages: allMessages.length,\n  \n  // Other person info (if any reply)\n  otherPerson: otherPerson,\n  \n  // All messages in simple format\n  messages: allMessages,\n  \n  // Simple summary\n  lastMessageFrom: allMessages.length > 0 ? allMessages[allMessages.length - 1].sender : \"none\",\n  daysSinceLastMessage: allMessages.length > 0 ? \n    Math.floor((new Date() - new Date(parseInt(sortedMessages[sortedMessages.length - 1].json.internalDate))) / (1000 * 60 * 60 * 24)) : null\n}];"
+        "jsCode": "const targetEmail = \"ahmadeveloper077@gmail.com\";\n\n// Helper functions\nfunction getEmail(from) {\n  if (!from) return \"\";\n  const match = from.match(/<([^>]+)>/);\n  return match ? match[1] : from;\n}\n\nfunction getName(from) {\n  if (!from) return \"\";\n  const match = from.match(/^([^<]+)</);\n  return match ? match[1].trim() : from;\n}\n\nfunction getMessageText(item) {\n  try {\n    if (item.json.payload && item.json.payload.parts) {\n      // Try plain text\n      const plainPart = item.json.payload.parts.find(p => \n        p.mimeType === \"text/plain\" && p.body && p.body.data\n      );\n      if (plainPart) {\n        return atob(plainPart.body.data.replace(/-/g, '+').replace(/_/g, '/'));\n      }\n      \n      // Try HTML\n      const htmlPart = item.json.payload.parts.find(p => \n        p.mimeType === \"text/html\" && p.body && p.body.data\n      );\n      if (htmlPart) {\n        const html = atob(htmlPart.body.data.replace(/-/g, '+').replace(/_/g, '/'));\n        return html.replace(/<[^>]*>/g, ' ').replace(/\\s+/g, ' ').trim();\n      }\n    }\n    return item.json.snippet || \"\";\n  } catch (e) {\n    return item.json.snippet || \"\";\n  }\n}\n\n// Group messages by threadId\nconst threads = new Map();\n\n// First pass: Group all messages by thread\nfor (const item of $input.all()) {\n  const threadId = item.json.threadId;\n  \n  if (!threads.has(threadId)) {\n    threads.set(threadId, []);\n  }\n  \n  threads.get(threadId).push(item);\n}\n\nconst results = [];\n\n// Process each thread separately\nfor (const [threadId, threadMessages] of threads) {\n  // Sort messages in this thread by date (oldest first)\n  const sortedMessages = threadMessages.sort((a, b) => \n    parseInt(a.json.internalDate) - parseInt(b.json.internalDate)\n  );\n  \n  let hasReplyFromOther = false;\n  let otherPerson = null;\n  const allMessages = [];\n  \n  // Process messages in this thread\n  for (const item of sortedMessages) {\n    const from = item.json.From;\n    const email = getEmail(from);\n    const name = getName(from);\n    const isMe = email.toLowerCase() === targetEmail.toLowerCase();\n    const text = getMessageText(item);\n    const date = new Date(parseInt(item.json.internalDate));\n    \n    if (!isMe) {\n      hasReplyFromOther = true;\n      if (!otherPerson) {\n        otherPerson = { name: name || email, email: email };\n      }\n    }\n    \n    allMessages.push({\n      id: item.json.id,\n      sender: isMe ? \"me\" : \"them\",\n      name: name || email,\n      email: email,\n      date: date.toLocaleDateString(),\n      time: date.toLocaleTimeString(),\n      text: text\n    });\n  }\n  \n  // Calculate days since last message\n  const lastMessageDate = sortedMessages.length > 0 ? \n    new Date(parseInt(sortedMessages[sortedMessages.length - 1].json.internalDate)) : null;\n  const daysSinceLastMessage = lastMessageDate ? \n    Math.floor((new Date() - lastMessageDate) / (1000 * 60 * 60 * 24)) : null;\n  \n  // Add thread summary to results\n  results.push({\n    threadId: threadId,\n    subject: sortedMessages[0]?.json.Subject || \"No Subject\",\n    hasReply: hasReplyFromOther,\n    totalMessages: allMessages.length,\n    otherPerson: otherPerson,\n    lastMessageFrom: allMessages.length > 0 ? allMessages[allMessages.length - 1].sender : \"none\",\n    daysSinceLastMessage: daysSinceLastMessage,\n    // Include all messages if needed\n    messages: allMessages,\n    // Basic thread info\n    firstMessageDate: allMessages.length > 0 ? allMessages[0].date : null,\n    lastMessageDate: allMessages.length > 0 ? allMessages[allMessages.length - 1].date : null\n  });\n}\n\n// Return array of thread summaries\nreturn results;"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2000,
-        912
+        -1616,
+        -64
       ],
-      "id": "a03a5d3a-e73a-4efa-848d-554eed9fe769",
+      "id": "60a05c7b-fafe-431a-b804-fb0df43994f7",
       "name": "Check has reply form other person or not"
     },
     {
@@ -517,7 +494,7 @@
               "rightValue": "",
               "operator": {
                 "type": "boolean",
-                "operation": "false",
+                "operation": "true",
                 "singleValue": true
               }
             }
@@ -529,10 +506,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        2208,
-        912
+        -1408,
+        -64
       ],
-      "id": "e0107c34-8d28-4b79-aac8-08856517ca9d",
+      "id": "ec48828f-7ec3-4d4e-a36c-0eeb2c5a9bdf",
       "name": "if bool is true then mark as replied else send followup one"
     },
     {
@@ -560,10 +537,10 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2432,
-        768
+        -1184,
+        -208
       ],
-      "id": "66abcb3e-0496-46df-9643-7950c6755367",
+      "id": "13c6115b-8d37-414a-8273-7ed43f7ed0b9",
       "name": "Update the status to replied",
       "credentials": {
         "supabaseApi": {
@@ -584,10 +561,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        2496,
-        976
+        -1120,
+        0
       ],
-      "id": "81e73276-718f-4936-962e-f24df37cf2da",
+      "id": "4e2654ea-2e1e-42ab-8862-8e19d34c85a4",
       "name": "AI Agent1"
     },
     {
@@ -602,10 +579,10 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        2480,
-        1168
+        -1136,
+        192
       ],
-      "id": "b86f9f7b-833e-4b45-aa91-6751e3a57669",
+      "id": "168ce6aa-be22-4269-90a9-62ee19cc91d2",
       "name": "OpenAI Chat Model1",
       "credentials": {
         "openAiApi": {
@@ -622,16 +599,16 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        2672,
-        1184
+        -944,
+        208
       ],
-      "id": "3f6a4769-9b03-4c8c-b20c-f24315690350",
+      "id": "05ec8096-7749-4b6a-9048-bf6531397af4",
       "name": "Structured Output Parser1"
     },
     {
       "parameters": {
-        "sendTo": "={{ 'mahmadeveloper077@gmail.com'}}",
-        "subject": "={{ $('AI Agent1').item.json.output.email_subject }}",
+        "sendTo": "={{ $json.recruiter_email }}",
+        "subject": "={{ $json.subject }}",
         "message": "={{ $json.html }}",
         "options": {
           "appendAttribution": false
@@ -640,10 +617,10 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.1,
       "position": [
-        3104,
-        976
+        -512,
+        0
       ],
-      "id": "09c108f5-22e8-4fa3-a0b9-0aeb3788d4af",
+      "id": "10287588-1165-4e8e-a23f-d20f135f95c3",
       "name": "Send a message1",
       "webhookId": "b628cb40-844f-4ffc-92e5-70290288ad0b",
       "credentials": {
@@ -670,19 +647,19 @@
           "fieldValues": [
             {
               "fieldId": "follow_up_1_html",
-              "fieldValue": "={{ $('Code in JavaScript').item.json.html }}"
+              "fieldValue": "={{ $('Creating html to send to email').item.json.html }}"
             },
             {
               "fieldId": "follow_up_count",
-              "fieldValue": "1"
+              "fieldValue": "={{ $json.follow_up_count + 1 }}"
             },
             {
               "fieldId": "follow_up_date",
               "fieldValue": "={{$now}}"
             },
             {
-              "fieldId": "sent_at",
-              "fieldValue": "={{$now}}"
+              "fieldId": "status",
+              "fieldValue": "={{ $json.nextAction }}"
             }
           ]
         }
@@ -690,10 +667,10 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        4176,
-        864
+        560,
+        -112
       ],
-      "id": "9d9a141c-524c-4608-a9fd-5c48cb596344",
+      "id": "0b49bdb2-2003-44e7-8c9a-7ba25768af3b",
       "name": "Update a row",
       "credentials": {
         "supabaseApi": {
@@ -762,37 +739,11 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        3808,
-        976
+        192,
+        0
       ],
-      "id": "2fc2b06b-3f67-493b-b7a4-5f77b97494fc",
+      "id": "27853adc-2501-48cc-af4b-6d562ecb0ee0",
       "name": "Switch"
-    },
-    {
-      "parameters": {
-        "jsCode": "// Get the data from input\nconst inputData = $input.all();\nconst firstItem = inputData[0] || {};\n\n// Check if we have AI output\nconst aiOutput = firstItem.json?.output;\nconst emailBodyChunks = aiOutput?.email_body_chunks || {};\n\n// Get recruiter name from previous node if available\n// Assuming the data comes from the previous node\nconst recruiterData = inputData[0]?.json || {};\nconst recruiterName = recruiterData.recruiter_name || 'Hiring Manager';\n\nreturn [\n  {\n    html: `<!DOCTYPE html>\n<html>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #111;\">\n    \n    ${emailBodyChunks.tldr ? `<p><strong>tldr</strong><br>${emailBodyChunks.tldr}</p>` : ''}\n    \n    <p>Dear ${recruiterName},</p>\n    \n    ${emailBodyChunks.para1 ? `<p>${emailBodyChunks.para1}</p>` : ''}\n    \n    ${emailBodyChunks.para2 ? `<p>${emailBodyChunks.para2}</p>` : ''}\n    \n    <p>Please find my portfolio and GitHub for reference:</p>\n    <ul>\n      <li>GitHub: <a href=\"https://github.com/Ahmad-code077\" target=\"_blank\">https://github.com/Ahmad-code077</a></li>\n      <li>Portfolio: <a href=\"https://ahmadmamoon.netlify.app\" target=\"_blank\">https://ahmadmamoon.netlify.app</a></li>\n      <li>LinkedIn: <a href=\"https://www.linkedin.com/in/muhammad-ahmad077/\" target=\"_blank\">https://www.linkedin.com/in/muhammad-ahmad077/</a></li>\n    </ul>\n    \n    ${emailBodyChunks.para3 ? `<p>${emailBodyChunks.para3}</p>` : ''}\n    \n    <p>${emailBodyChunks.closing || 'Best regards,'}<br>\n    Muhammad Ahmad<br>\n    +92-321-0711148<br>\n    <a href=\"mailto:ahmadeveloper077@gmail.com\">ahmadeveloper077@gmail.com</a></p>\n    \n  </body>\n</html>`\n  }\n];"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        2848,
-        976
-      ],
-      "id": "75a41b3d-ef5a-4a8b-8007-cde0f3d754f9",
-      "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {
-        "jsCode": "const jobs = $('Get many rows').all(); // get all jobs\n\nreturn jobs.map(job => {\n    let nextAction = '';\n\n    if (job.json.status === 'sent') {\n        nextAction = 'follow_up_1';\n    } else if (job.json.status === 'follow_up_1') {\n        nextAction = 'follow_up_2';\n    } else if (job.json.status === 'replied') {\n        nextAction = 'stop';\n    }\n\n    return {\n        json: {\n            id: job.json.id,\n            status: job.json.status,\n            nextAction: nextAction,\n            follow_up_count: job.json.follow_up_count\n        }\n    };\n});\n"
-      },
-      "type": "n8n-nodes-base.code",
-      "typeVersion": 2,
-      "position": [
-        3312,
-        976
-      ],
-      "id": "82493fc8-e8e9-4219-89d2-f943ab569715",
-      "name": "Code in JavaScript1"
     },
     {
       "parameters": {
@@ -811,7 +762,7 @@
           "fieldValues": [
             {
               "fieldId": "follow_up_2_html",
-              "fieldValue": "={{ $('Code in JavaScript').item.json.html }}"
+              "fieldValue": "={{ $('Creating html to send to email').item.json.html }}"
             },
             {
               "fieldId": "follow_up_count",
@@ -822,8 +773,8 @@
               "fieldValue": "={{$now}}"
             },
             {
-              "fieldId": "sent_at",
-              "fieldValue": "={{$now}}"
+              "fieldId": "status",
+              "fieldValue": "={{ $json.nextAction }}"
             }
           ]
         }
@@ -831,10 +782,10 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        4192,
-        1040
+        576,
+        64
       ],
-      "id": "d716fce9-97ca-4d6f-9834-b53d4633fbb7",
+      "id": "50eb996e-884a-4d24-81b5-d0c932023449",
       "name": "Update a row1",
       "credentials": {
         "supabaseApi": {
@@ -842,6 +793,32 @@
           "name": "Supabase account"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get data from both sources\nconst aiOutputs = $input.all(); // Contains AI-generated follow-up content\nconst dbRecords = $('Get many rows').all(); // Contains recruiter data from database\n\nconst results = [];\n\n// Loop through each AI output and match with corresponding database record\nfor (let i = 0; i < aiOutputs.length; i++) {\n  const aiItem = aiOutputs[i].json;\n  const dbItem = dbRecords[i]?.json; // Match by index\n  \n  if (!aiItem || !dbItem) continue;\n  \n  const emailBodyChunks = aiItem.output?.email_body_chunks || {};\n  const emailSubject = aiItem.output?.email_subject || \"Follow-up on Application\";\n  \n  // Get recruiter info from database\n  const recruiterName = dbItem.recruiter_name || 'Hiring Manager';\n  const recruiterEmail = dbItem.recruiter_email || '';\n  const company = dbItem.company || '';\n  const title = dbItem.title || '';\n  \n  // Create HTML email\n  const html = `<!DOCTYPE html>\n<html>\n  <head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  </head>\n  <body style=\"font-family: Arial, sans-serif; line-height: 1.6; color: #111; margin: 0; padding: 20px;\">\n    \n    ${emailBodyChunks.tldr ? `<p><strong>tldr</strong><br>${emailBodyChunks.tldr}</p>` : ''}\n    \n    <p>Dear ${recruiterName},</p>\n    \n    ${emailBodyChunks.para1 ? `<p>${emailBodyChunks.para1}</p>` : ''}\n    \n    ${emailBodyChunks.para2 ? `<p>${emailBodyChunks.para2}</p>` : ''}\n    \n    <p>Please find my portfolio and GitHub for reference:</p>\n    <ul>\n      <li>GitHub: <a href=\"https://github.com/Ahmad-code077\" target=\"_blank\">https://github.com/Ahmad-code077</a></li>\n      <li>Portfolio: <a href=\"https://ahmadmamoon.netlify.app\" target=\"_blank\">https://ahmadmamoon.netlify.app</a></li>\n      <li>LinkedIn: <a href=\"https://www.linkedin.com/in/muhammad-ahmad077/\" target=\"_blank\">https://www.linkedin.com/in/muhammad-ahmad077/</a></li>\n    </ul>\n    \n    ${emailBodyChunks.para3 ? `<p>${emailBodyChunks.para3}</p>` : ''}\n    \n    <p>${emailBodyChunks.closing || 'Best regards,'}<br>\n    Muhammad Ahmad<br>\n    +92-321-0711148<br>\n    <a href=\"mailto:ahmadeveloper077@gmail.com\">ahmadeveloper077@gmail.com</a></p>\n    \n  </body>\n</html>`;\n  \n  // Add to results\n  results.push({\n    html: html,\n    subject: emailSubject,\n    recruiter_email: recruiterEmail,\n    company: company,\n    job_title: title,\n    db_record_id: dbItem.id,\n    thread_id: dbItem.thread_id\n  });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -768,
+        0
+      ],
+      "id": "d8a9a3c4-8102-4b02-a98b-e2a1d02d6571",
+      "name": "Creating html to send to email"
+    },
+    {
+      "parameters": {
+        "jsCode": "const jobs = $('Get many rows').all(); // Get all jobs from previous node\n\n// Process each job\nconst results = [];\n\nfor (const job of jobs) {\n    const jobData = job.json;\n    let nextAction = '';\n    \n    // Determine next action based on current status\n    switch(jobData.status) {\n        case 'sent':\n            nextAction = 'follow_up_1';\n            break;\n        case 'follow_up_1':\n            nextAction = 'follow_up_2';\n            break;\n        case 'follow_up_2':\n            nextAction = 'hr-wont-response';\n            break;\n        // No default case needed if you want empty string for other statuses\n    }\n    \n    // Add result for this job\n    results.push({\n        json: {\n            id: jobData.id,\n            status: jobData.status,\n            nextAction: nextAction,\n            follow_up_count: jobData.follow_up_count || 0,\n            company: jobData.company || '',\n            title: jobData.title || '',\n            recruiter_email: jobData.recruiter_email || ''\n        }\n    });\n}\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        -16
+      ],
+      "id": "95bee3a7-5d05-42d6-b1e4-191739e0e1cb",
+      "name": "Merge sending email and input"
     },
     {
       "parameters": {
@@ -856,9 +833,9 @@
               "keyValue": "follow_up_2"
             },
             {
-              "keyName": "sent_at",
-              "condition": "lte",
-              "keyValue": "={{ $now.minus(3,'days') }}"
+              "keyName": "follow_up_date",
+              "condition": "lt",
+              "keyValue": "={{ $now.minus(3,'days')}}"
             }
           ]
         }
@@ -866,11 +843,11 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1584,
-        1104
+        -2000,
+        192
       ],
-      "id": "4ede44e7-9871-4143-8316-b30979646f06",
-      "name": "Get many rows1",
+      "id": "36b0d9d8-cfe7-4658-a953-1b8d242934b2",
+      "name": "Get the followup2 counts",
       "credentials": {
         "supabaseApi": {
           "id": "gv8YamWZYuBsLGe0",
@@ -880,17 +857,41 @@
     },
     {
       "parameters": {
-        "content": "## Set the supbase with these conditnos \n\nStatus is either sent OR follow_up_1 → these are the rows ready for a follow-up\n\nSent_at is older than 3 days → only follow up after 3 days\n\nFollow_up_count < 2 → stop after 2 follow-ups",
-        "height": 352
+        "operation": "update",
+        "tableId": "jobs",
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "closed_no_response"
+            }
+          ]
+        }
       },
-      "type": "n8n-nodes-base.stickyNote",
+      "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1520,
-        784
+        -1792,
+        208
       ],
-      "id": "64e50c78-8aee-4180-af13-95e91971541a",
-      "name": "Sticky Note"
+      "id": "125038e0-103c-4d44-9b8d-6baab8c8950a",
+      "name": "Update a row2",
+      "credentials": {
+        "supabaseApi": {
+          "id": "gv8YamWZYuBsLGe0",
+          "name": "Supabase account"
+        }
+      }
     }
   ],
   "connections": {
@@ -1013,7 +1014,7 @@
             "index": 0
           },
           {
-            "node": "Get many rows1",
+            "node": "Get the followup2 counts",
             "type": "main",
             "index": 0
           }
@@ -1108,7 +1109,7 @@
       "main": [
         [
           {
-            "node": "Code in JavaScript",
+            "node": "Creating html to send to email",
             "type": "main",
             "index": 0
           }
@@ -1141,7 +1142,7 @@
       "main": [
         [
           {
-            "node": "Code in JavaScript1",
+            "node": "Merge sending email and input",
             "type": "main",
             "index": 0
           }
@@ -1166,7 +1167,7 @@
         ]
       ]
     },
-    "Code in JavaScript": {
+    "Creating html to send to email": {
       "main": [
         [
           {
@@ -1177,7 +1178,7 @@
         ]
       ]
     },
-    "Code in JavaScript1": {
+    "Merge sending email and input": {
       "main": [
         [
           {
@@ -1187,37 +1188,20 @@
           }
         ]
       ]
+    },
+    "Get the followup2 counts": {
+      "main": [
+        [
+          {
+            "node": "Update a row2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {
-    "AI Agent": [
-      {
-        "output": {
-          "title": "Full Stack Developer",
-          "company": "Career Pakistan (CP)",
-          "recruiter_name": null,
-          "recruiter_email": "rough6781@gmail.com",
-          "location": "Remote",
-          "work_type": "Remote",
-          "experience": "Minimum of 5+ years of experience in a Full-Stack Software Engineering role",
-          "skills": [
-            "Node.js",
-            "TypeScript",
-            "JavaScript",
-            "React"
-          ],
-          "timings": "UK hours 9:00 am to 6:00 pm (Pakistan time 2:00 pm to 11:00 pm)",
-          "email_subject": "Application for Full Stack Developer Position at Career Pakistan",
-          "email_body_chunks": {
-            "tldr": "I am a passionate Full Stack Developer focused on building scalable, responsive web applications using modern JavaScript and TypeScript technologies. I thrive on crafting seamless user experiences and robust backend systems.",
-            "para1": "I am very interested in the Full Stack Developer role at Career Pakistan. The opportunity to contribute remotely while working UK hours aligns well with my experience and working preferences. I admire Career Pakistan's commitment to technical excellence and am eager to be part of a team advancing impactful software solutions.",
-            "para2": "With over 5 years of experience, I have deep expertise in Node.js, TypeScript, and React, building complex and scalable user interfaces and systems. I have developed real-time social and medical platforms integrating authentication, Stripe payments, WebSocket communications, and robust backend APIs using Prisma, PostgreSQL, and MongoDB. My projects demonstrate proficiency with Next.js, Redux Toolkit, Tailwind CSS, and modern tooling to deliver maintainable, high-quality code. These experiences equip me to excel in your requirements for a full-stack engineer.",
-            "para3": "Beyond technical skills, my hands-on work with real-time features, role-based access control, and cross-functional collaboration highlights my capability to contribute effectively to Career Pakistan’s goals. I am confident in my ability to help build and scale innovative web applications that meet user needs while maintaining reliable performance.",
-            "closing": "I would appreciate the opportunity to discuss how my skills and experiences align with the needs of Career Pakistan. Thank you for considering my application. I look forward to the possibility of contributing to your team and am happy to provide any further information needed."
-          }
-        }
-      }
-    ],
     "Generate Email Draft": [
       {
         "headers": {
@@ -1299,37 +1283,6 @@
         },
         "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/send-job-post-email",
         "executionMode": "production"
-      }
-    ],
-    "AI Agent1": [
-      {
-        "output": {
-          "email_subject": "Re: Application for Mid Level Full Stack Developer Position at Verdant Soft",
-          "email_body_chunks": {
-            "tldr": "Following up to confirm availability for a meeting to discuss the Full Stack Developer role.",
-            "para1": "Thank you for your message regarding the Mid Level Full Stack Developer position at Verdant Soft. I appreciate the opportunity to discuss the role further and am very enthusiastic about the possibility of contributing to your team.",
-            "para2": "I am available to meet at your convenience and would be happy to coordinate a time that works best for you. Please let me know your preferred date and time for the discussion.",
-            "para3": "Looking forward to your reply and the chance to explore how my skills align with your team’s needs. Thank you once again for considering my application.",
-            "closing": "Best regards,"
-          }
-        }
-      }
-    ],
-    "Send a message1": [
-      {
-        "id": "19bc8944a72b7011",
-        "threadId": "19bc8944a72b7011",
-        "labelIds": [
-          "SENT"
-        ]
-      }
-    ],
-    "Code in JavaScript1": [
-      {
-        "id": "b3a9cbc0-d6c4-455f-a772-59d6db41b138",
-        "status": "sent",
-        "nextAction": "follow_up_2",
-        "follow_up_count": 0
       }
     ]
   },
