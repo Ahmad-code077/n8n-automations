@@ -1,15 +1,16 @@
 {
+  "name": "Content Factory RSS Feed",
   "nodes": [
     {
       "parameters": {
         "numberInputs": 7
       },
-      "id": "3194468b-e003-457b-adad-f56e13e76b1d",
+      "id": "bf7635cf-aad4-48a8-829d-eaafda7c7c0c",
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        4144,
-        2032
+        1488,
+        416
       ],
       "typeVersion": 3.1
     },
@@ -23,12 +24,12 @@
           ]
         }
       },
-      "id": "e8b3c5e3-cb1e-4dfe-930f-f9de7435915d",
+      "id": "f03285a3-2b52-4621-afce-5da5190d14ab",
       "name": "Schedule",
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
-        2672,
-        2096
+        16,
+        480
       ],
       "typeVersion": 1.2
     },
@@ -64,12 +65,12 @@
         },
         "options": {}
       },
-      "id": "25e1c39e-7ea1-4a3c-842f-ec0d35b4c08e",
+      "id": "ec5325db-8b9e-4c18-b8b9-2da8bbd28741",
       "name": "Filter Fields",
       "type": "n8n-nodes-base.set",
       "position": [
-        3632,
-        1520
+        976,
+        -96
       ],
       "typeVersion": 3.4
     },
@@ -105,12 +106,12 @@
         },
         "options": {}
       },
-      "id": "931bcc14-e4bf-475b-8e52-e6274e11da9e",
+      "id": "4f525ed1-1e18-448f-a8f6-bd9b639b4768",
       "name": "Filter Fields 3",
       "type": "n8n-nodes-base.set",
       "position": [
-        3632,
-        1712
+        976,
+        96
       ],
       "typeVersion": 3.4
     },
@@ -146,12 +147,12 @@
         },
         "options": {}
       },
-      "id": "503821d6-0047-4fe1-849c-c924303e091e",
+      "id": "56b5269c-7afd-4d96-aad6-493f5e773567",
       "name": "Filter Fields 4",
       "type": "n8n-nodes-base.set",
       "position": [
-        3632,
-        1904
+        976,
+        288
       ],
       "typeVersion": 3.4
     },
@@ -187,12 +188,12 @@
         },
         "options": {}
       },
-      "id": "c2eb39b0-4dd3-45b0-b58b-4064e41a06e2",
+      "id": "64532747-79a5-4dd0-8119-d1d25b3efdea",
       "name": "Filter Fields 5",
       "type": "n8n-nodes-base.set",
       "position": [
-        3632,
-        2096
+        976,
+        480
       ],
       "typeVersion": 3.4
     },
@@ -228,12 +229,12 @@
         },
         "options": {}
       },
-      "id": "72a229fe-67df-4a34-a9bb-d5b976f51e3a",
+      "id": "d16332e3-c50c-478e-baa4-11ba4c4935a2",
       "name": "Filter Fields 6",
       "type": "n8n-nodes-base.set",
       "position": [
-        3632,
-        2288
+        976,
+        672
       ],
       "typeVersion": 3.4
     },
@@ -269,12 +270,12 @@
         },
         "options": {}
       },
-      "id": "16b83be8-f35f-4ce4-9300-fa0f8e3f304e",
+      "id": "115adb5c-4956-46e3-b881-788a23475a8a",
       "name": "Filter Fields 7",
       "type": "n8n-nodes-base.set",
       "position": [
-        3632,
-        2480
+        976,
+        864
       ],
       "typeVersion": 3.4
     },
@@ -310,12 +311,12 @@
         },
         "options": {}
       },
-      "id": "53dd62d7-4805-419b-8c12-d71a3154fdbe",
+      "id": "3d8de057-d3bd-47c3-bc46-fce6f19793c1",
       "name": "Filter Fields 8",
       "type": "n8n-nodes-base.set",
       "position": [
-        3632,
-        2672
+        976,
+        1056
       ],
       "typeVersion": 3.4
     },
@@ -326,10 +327,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        4368,
-        2112
+        1712,
+        496
       ],
-      "id": "98071617-e4c4-4f77-8879-02867be45d6d",
+      "id": "207eaa4f-5acf-435b-aeca-439051f36b0c",
       "name": "Code in JavaScript"
     },
     {
@@ -401,12 +402,12 @@
         },
         "options": {}
       },
-      "id": "8f064ccc-1e2e-421c-82e8-2d3d7fa91e15",
+      "id": "819e2c88-9475-44da-8f31-15169fd0c08d",
       "name": "Remove Certain Content1",
       "type": "n8n-nodes-base.filter",
       "position": [
-        4592,
-        2112
+        1936,
+        496
       ],
       "typeVersion": 2.2
     },
@@ -417,12 +418,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "868f2a97-cd61-4ae7-8e0d-9bff1c661407",
+      "id": "9f53084d-b0f9-4a72-8a7f-7f2feb49f000",
       "name": "Dev.to Community Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        3408,
-        1520
+        752,
+        -96
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -435,12 +436,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "d089283f-0f9e-4d43-9079-170c8736b620",
+      "id": "47099af6-a047-468e-82fa-18919bb07e51",
       "name": "TechCrunch News Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        3408,
-        1712
+        752,
+        96
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -453,12 +454,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "5f540eaf-04fe-4817-93ee-7df62578c905",
+      "id": "1171a121-6f30-45d9-ad20-5d4c0cb18f14",
       "name": "The Hacker News Security Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        3408,
-        1904
+        752,
+        288
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -472,12 +473,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "91d023d6-4863-4283-bb63-283f6318c4b6",
+      "id": "cd29017c-ada3-434a-b8e5-a7897f7a1104",
       "name": "OpenAI Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        3408,
-        2096
+        752,
+        480
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -490,12 +491,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "0004f4fa-511d-419b-b675-b4afebd13424",
+      "id": "6c3e6527-5aab-4808-a983-ed84be063995",
       "name": "AWS Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        3408,
-        2288
+        752,
+        672
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -508,12 +509,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "eea44828-8102-48ff-83ee-fc1564ca42f4",
+      "id": "aa27d1f4-4562-46b8-a099-b88db2638aa7",
       "name": "n8n Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        3408,
-        2480
+        752,
+        864
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -526,12 +527,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "1fd93b56-6a0f-44dd-9b9a-da772a9e2de5",
+      "id": "a310ee22-b6bc-4452-a831-2644a7119c65",
       "name": "Github Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        3408,
-        2672
+        752,
+        1056
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -557,6 +558,10 @@
             {
               "fieldId": "pub_date",
               "fieldValue": "={{ $json.pubDate }}"
+            },
+            {
+              "fieldId": "user_id",
+              "fieldValue": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3"
             }
           ]
         }
@@ -564,13 +569,20 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        4816,
-        2112
+        2160,
+        496
       ],
-      "id": "6ef7165b-9eab-41df-b014-86230d242505",
-      "name": "Create a row"
+      "id": "d1f16def-23b4-4086-a575-b03ecc7a4bb5",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "jlSCXolY4MW932v5",
+          "name": "Supabase account of automation"
+        }
+      }
     }
   ],
+  "pinData": {},
   "connections": {
     "Merge": {
       "main": [
@@ -801,8 +813,15 @@
       ]
     }
   },
-  "pinData": {},
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e6265dd4-fc90-4e6b-9b13-c7a1439530cd",
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
-  }
+  },
+  "id": "MXzzdjUVo2y4b0Vr",
+  "tags": []
 }
