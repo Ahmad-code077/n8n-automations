@@ -1,5 +1,4 @@
 {
-  "name": "Generate Image via webhook payload",
   "nodes": [
     {
       "parameters": {
@@ -10,10 +9,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -144,
-        96
+        -448,
+        32
       ],
-      "id": "94e07317-a29b-4807-a13b-48a0ad069791",
+      "id": "b5f0c0bd-c33d-4911-a145-d4371079fe8c",
       "name": "Generate Image Webhook",
       "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
     },
@@ -26,10 +25,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -144,
-        272
+        -448,
+        208
       ],
-      "id": "5e207840-fa50-4994-8eec-fc69b1563bf6",
+      "id": "6acccff8-9a18-44bf-9cb1-59139fd8c9cd",
       "name": "Post to Meta Platforms Webhook",
       "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
     },
@@ -49,15 +48,15 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        48,
-        96
+        -256,
+        32
       ],
-      "id": "2494a5e6-67b9-407b-a2df-a39c82bf83e7",
+      "id": "5f7d07bc-b514-45fa-891c-94d71ef8dfb3",
       "name": "Get Post From the db",
       "credentials": {
         "supabaseApi": {
-          "id": "xv98hduAJfVKrVtg",
-          "name": "Ahmad developer"
+          "id": "jlSCXolY4MW932v5",
+          "name": "Supabase account of automation"
         }
       }
     },
@@ -70,51 +69,57 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        304,
-        64
+        800,
+        16
       ],
-      "id": "18817792-1d97-4c6d-9cb1-153e9147ef17",
+      "id": "078868e5-5c0a-476f-9633-85d86041445c",
       "name": "Sticky Note"
-    }
-  ],
-  "pinData": {
-    "Generate Image Webhook": [
-      {
-        "json": {
-          "headers": {
-            "host": "my-automation-4j0i.onrender.com",
-            "user-agent": "node",
-            "content-length": "75",
-            "accept": "*/*",
-            "accept-encoding": "gzip, br",
-            "accept-language": "*",
-            "authorization": "Bearer undefined",
-            "cdn-loop": "cloudflare; loops=1",
-            "cf-connecting-ip": "119.157.185.97",
-            "cf-ipcountry": "PK",
-            "cf-ray": "9b64e03bd96cc225-KHI",
-            "cf-visitor": "{\"scheme\":\"https\"}",
-            "content-type": "application/json",
-            "render-proxy-ttl": "4",
-            "rndr-id": "9bc82393-6b1c-40c7",
-            "sec-fetch-mode": "cors",
-            "true-client-ip": "119.157.185.97",
-            "x-forwarded-for": "119.157.185.97, 172.69.244.186, 10.17.39.207",
-            "x-forwarded-proto": "https",
-            "x-request-start": "1767132717456696"
-          },
-          "params": {},
-          "query": {},
-          "body": {
-            "postId": "593ae854-3102-476d-8245-b6d05304fada",
-            "action": "generate_image"
-          },
-          "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/generate-and-store-image-to-db",
-          "executionMode": "production"
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "prompt": "=You are a professional social media creative director for an automation and technology themed Instagram and Facebook page.\n\nYour job is to read the article data and create ONE high-quality image concept that will be used for a social media post about the news.\n\nArticle Data\nTitle: {{ $json.title }}\nContent: {{ $json.content }}\n\nInstructions:\n\n1. Understand the main idea of the article.\n2. Create a clear visual concept for a social media image that explains or represents the news.\n3. The concept should work well for Instagram and Facebook audiences interested in technology, startups, and automation.\n4. The image should be modern, clean, tech-focused, and visually engaging.\n5. Keep spelling correct and avoid complex wording.\n6. Do NOT invent facts that are not in the article.\n7. Do NOT create multiple ideas. Only one strong concept.\n\nReturn the result in this exact structure:\n\nHeadline: A short catchy headline for the image.\n\nImage Prompt:\nA detailed prompt that can be used to generate an AI image.\nDescribe subject, environment, lighting, style, colors, and composition clearly.\n\nCaption:\nA short social media caption explaining the news.\n\nHashtags:\n5–10 relevant tech or automation hashtags.\n",
+        "options": {
+          "dalleQuality": "standard",
+          "size": "1024x1024"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -48,
+        32
+      ],
+      "id": "a890a01a-629a-4969-8791-9a30bc597ec7",
+      "name": "Generate an image",
+      "credentials": {
+        "openAiApi": {
+          "id": "7mHgAzv2RbJZkda8",
+          "name": "OpenAi account"
         }
       }
-    ]
-  },
+    },
+    {
+      "parameters": {
+        "operation": "uploadFile",
+        "additionalFieldsFile": {}
+      },
+      "type": "n8n-nodes-cloudinary.cloudinary",
+      "typeVersion": 1,
+      "position": [
+        160,
+        32
+      ],
+      "id": "676c8425-5749-4452-bebe-bcd6672bf553",
+      "name": "Upload an asset from file data",
+      "credentials": {
+        "cloudinaryApi": {
+          "id": "6SRgh3cFQb3aM0wN",
+          "name": "Cloudinary account"
+        }
+      }
+    }
+  ],
   "connections": {
     "Generate Image Webhook": {
       "main": [
@@ -129,19 +134,99 @@
     },
     "Get Post From the db": {
       "main": [
-        []
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Upload an asset from file data",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     }
   },
-  "active": true,
-  "settings": {
-    "executionOrder": "v1"
+  "pinData": {
+    "Generate Image Webhook": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "node",
+          "content-length": "75",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "accept-language": "*",
+          "authorization": "Bearer supersecret1234",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "175.107.223.86",
+          "cf-ipcountry": "PK",
+          "cf-ray": "9da6e0695fef21e6-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "render-proxy-ttl": "4",
+          "rndr-id": "5fd02b88-4828-4d73",
+          "sec-fetch-mode": "cors",
+          "true-client-ip": "175.107.223.86",
+          "x-forwarded-for": "175.107.223.86, 104.23.175.190, 10.18.136.196",
+          "x-forwarded-proto": "https",
+          "x-request-start": "1773193494035449"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "postId": "de5666a9-05b6-4442-8194-8c56e7a9fde8",
+          "action": "generate_image"
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/generate-and-store-image-to-db",
+        "executionMode": "production"
+      }
+    ],
+    "Generate an image": [
+      {
+        "mimeType": "image/png",
+        "fileType": "image",
+        "fileExtension": "png",
+        "fileName": "data",
+        "fileSize": "1.82 MB"
+      }
+    ],
+    "Upload an asset from file data": [
+      {
+        "asset_id": "52bcad86e19622f3d90bba788938bef0",
+        "public_id": "lgf5vr2wlruepbrm16g1",
+        "version": 1773197537,
+        "version_id": "4081f605dbf3c89b1b97a13f69647fd9",
+        "signature": "340de3d5dc1b675e48bde40fa579e792dda4fa8a",
+        "width": 1024,
+        "height": 1024,
+        "format": "png",
+        "resource_type": "image",
+        "created_at": "2026-03-11T02:52:17Z",
+        "tags": [],
+        "bytes": 1823066,
+        "type": "upload",
+        "etag": "a0e72b80b13243a5a1ff6447e1fc2737",
+        "placeholder": false,
+        "url": "http://res.cloudinary.com/dilpjrnnr/image/upload/v1773197537/lgf5vr2wlruepbrm16g1.png",
+        "secure_url": "https://res.cloudinary.com/dilpjrnnr/image/upload/v1773197537/lgf5vr2wlruepbrm16g1.png",
+        "asset_folder": "",
+        "display_name": "lgf5vr2wlruepbrm16g1",
+        "original_filename": "data",
+        "api_key": "351148655472842"
+      }
+    ]
   },
-  "versionId": "b9749e58-480d-4a34-9c9e-e0367c7cbb8b",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
-  },
-  "id": "rIcE1XTcM00uvke3",
-  "tags": []
+  }
 }
