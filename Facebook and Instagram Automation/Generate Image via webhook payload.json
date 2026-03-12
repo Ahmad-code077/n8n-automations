@@ -25,8 +25,8 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -448,
-        208
+        -480,
+        320
       ],
       "id": "6acccff8-9a18-44bf-9cb1-59139fd8c9cd",
       "name": "Post to Meta Platforms Webhook",
@@ -69,8 +69,8 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        800,
-        16
+        864,
+        -160
       ],
       "id": "078868e5-5c0a-476f-9633-85d86041445c",
       "name": "Sticky Note"
@@ -118,6 +118,310 @@
           "name": "Cloudinary account"
         }
       }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "posts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Post From the db').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "image_url",
+              "fieldValue": "={{ $json.url }}"
+            },
+            {
+              "fieldId": "status",
+              "fieldValue": "approved"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        368,
+        32
+      ],
+      "id": "8aaf2c2a-f472-4cee-a3f7-7d6bd31101e0",
+      "name": "Update a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "jlSCXolY4MW932v5",
+          "name": "Supabase account of automation"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "graphApiVersion": "v22.0",
+        "node": "me/accounts",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        784,
+        480
+      ],
+      "id": "c2b9693a-80fb-43d7-af58-2de0f8462f87",
+      "name": "Facebook Graph Api",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "u4dXVYfdcFtOOlxa",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v24.0/{{ $json.data[0].id }}/photos",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"url\": \"{{ $('Get Post').item.json.image_url }}\",\n  \"caption\": \"{{ $('Switch').item.json.post }}\\n\\n{{ $('Switch').item.json.hashtags.join(' ') }}\\n\\nWatch here: {{ $('Switch').item.json.link }}\",\n  \"published\": true,\n\"access_token\":\"{{ $json.data[0].access_token }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        992,
+        480
+      ],
+      "id": "ebadeb4d-2406-4f60-b7ec-6b3b33517e9d",
+      "name": "Post with image to facebook page"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "17841478709256156",
+        "edge": "media",
+        "options": {
+          "queryParametersJson": "={\n\"image_url\":\"{{ $('Get Post').item.json.image_url }}\",\n  \"caption\": \"{{ $('Switch').item.json.post }}\\n\\n{{ $('Switch').item.json.hashtags.join(' ') }}\\n\\nWatch here: {{ $('Switch').item.json.link }}\",\n  \"node\":\"17841478709256156\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        784,
+        272
+      ],
+      "id": "f22cbc4a-5729-4267-86e3-e595646f7fad",
+      "name": "Create image container id for instagram",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "u4dXVYfdcFtOOlxa",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v22.0",
+        "node": "17841478709256156",
+        "edge": "media_publish",
+        "options": {
+          "queryParametersJson": "={\n\"creation_id\":\"{{ $json.id }}\"\n}"
+        }
+      },
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        992,
+        272
+      ],
+      "id": "7bde71aa-0421-47b7-85d9-a6f60dfd2fbc",
+      "name": "publish to instagram",
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "u4dXVYfdcFtOOlxa",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Instagram simple post to instagram\n",
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        816,
+        192
+      ],
+      "id": "5f61c85d-ea6a-4980-9a88-f418ae83db23",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "facebook simple post to facebook\n\n",
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        832,
+        416
+      ],
+      "id": "5e079db3-fea7-4953-8374-3ee1656db5df",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-4O-MINI"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Title: {{ $json.title }}\nContent: {{ $json.content }}\n\nWrite a short social media post."
+            },
+            {
+              "content": "You are a professional social media copywriter.\n\nYour job is to convert tech news into a short, natural social media post.\n\nRules:\n- Keep the post short (max 35–40 words)\n- Write in a clear and engaging tone\n- Do not repeat the title exactly\n- Do not make the text long\n- Generate exactly 2 relevant hashtags\n- Do not include emojis\n- Return only valid JSON\n\nResponse format:\n{\n \"post\": \"short social media post\",\n \"hashtags\": [\"#tag1\", \"#tag2\"]\n}",
+              "role": "system"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -80,
+        320
+      ],
+      "id": "eac42bd2-d432-4f6d-9e87-72996f215067",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "mh5dQwl5r0WjSsrS",
+          "name": "OpenAi account Gerry"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const ai = JSON.parse($input.first().json.message.content);\nconst link = $('Get Post').first().json.link;\n$('Post to Meta Platforms Webhook').first().json.body\nreturn [{\n  post: ai.post.trim(),\n  hashtags: ai.hashtags,\n  link: link\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        272,
+        320
+      ],
+      "id": "2931ca10-1a7b-4d3b-94b0-f336be8eab21",
+      "name": "Format the return output"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "posts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.body.postId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        320
+      ],
+      "id": "48a81540-7411-4d1e-bf82-171172ac02eb",
+      "name": "Get Post",
+      "credentials": {
+        "supabaseApi": {
+          "id": "jlSCXolY4MW932v5",
+          "name": "Supabase account of automation"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $('Post to Meta Platforms Webhook').first().json.body.platforms.includes('instagram') }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    },
+                    "id": "ea1a6cdf-8b77-4fa5-a115-fc24f66d2971"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Send post to Instagram"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "931cd3c8-a339-4240-8987-0af3a63392c8",
+                    "leftValue": "={{ $('Post to Meta Platforms Webhook').first().json.body.platforms.includes('facebook') }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "boolean",
+                      "operation": "true",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Post on Facebook"
+            }
+          ]
+        },
+        "options": {
+          "allMatchingOutputs": true
+        }
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        480,
+        320
+      ],
+      "id": "ade4866a-faef-48fd-9076-3168f0e3202f",
+      "name": "Switch"
     }
   ],
   "connections": {
@@ -126,6 +430,17 @@
         [
           {
             "node": "Get Post From the db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Post to Meta Platforms Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Post",
             "type": "main",
             "index": 0
           }
@@ -148,6 +463,90 @@
         [
           {
             "node": "Upload an asset from file data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload an asset from file data": {
+      "main": [
+        [
+          {
+            "node": "Update a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph Api": {
+      "main": [
+        [
+          {
+            "node": "Post with image to facebook page",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create image container id for instagram": {
+      "main": [
+        [
+          {
+            "node": "publish to instagram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Format the return output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format the return output": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Post": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Create image container id for instagram",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Facebook Graph Api",
             "type": "main",
             "index": 0
           }
@@ -190,6 +589,44 @@
         "executionMode": "production"
       }
     ],
+    "Post to Meta Platforms Webhook": [
+      {
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "node",
+          "content-length": "105",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "accept-language": "*",
+          "authorization": "Bearer supersecret1234",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "175.107.223.86",
+          "cf-ipcountry": "PK",
+          "cf-ray": "9daf150e0b6721ea-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "render-proxy-ttl": "4",
+          "rndr-id": "94c279d4-ac4c-4f1c",
+          "sec-fetch-mode": "cors",
+          "true-client-ip": "175.107.223.86",
+          "x-forwarded-for": "175.107.223.86, 172.70.142.70, 10.20.70.9",
+          "x-forwarded-proto": "https",
+          "x-request-start": "1773279536395040"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "postId": "de5666a9-05b6-4442-8194-8c56e7a9fde8",
+          "action": "publish",
+          "platforms": [
+            "instagram",
+            "facebook"
+          ]
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/post-content-publish-webhook",
+        "executionMode": "production"
+      }
+    ],
     "Generate an image": [
       {
         "mimeType": "image/png",
@@ -222,6 +659,19 @@
         "display_name": "lgf5vr2wlruepbrm16g1",
         "original_filename": "data",
         "api_key": "351148655472842"
+      }
+    ],
+    "Message a model": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n \"post\": \"Palmer Luckey's retro gaming startup, ModRetro, is making waves with their new Game Boy-style device, the Chromatic. Now, they're eyeing funding with a stunning $1B valuation!  \\n\",\n \"hashtags\": [\"#GamingNews\", \"#ModRetro\"]\n}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
       }
     ]
   },
