@@ -169,7 +169,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        784,
+        992,
         480
       ],
       "id": "c2b9693a-80fb-43d7-af58-2de0f8462f87",
@@ -193,7 +193,7 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        992,
+        1200,
         480
       ],
       "id": "ebadeb4d-2406-4f60-b7ec-6b3b33517e9d",
@@ -212,7 +212,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        784,
+        992,
         272
       ],
       "id": "f22cbc4a-5729-4267-86e3-e595646f7fad",
@@ -237,7 +237,7 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        992,
+        1200,
         272
       ],
       "id": "7bde71aa-0421-47b7-85d9-a6f60dfd2fbc",
@@ -301,7 +301,7 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -80,
+        128,
         320
       ],
       "id": "eac42bd2-d432-4f6d-9e87-72996f215067",
@@ -320,7 +320,7 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        272,
+        448,
         320
       ],
       "id": "2931ca10-1a7b-4d3b-94b0-f336be8eab21",
@@ -417,11 +417,48 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        480,
+        688,
         320
       ],
       "id": "ade4866a-faef-48fd-9076-3168f0e3202f",
       "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "posts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "status",
+              "fieldValue": "published"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        320
+      ],
+      "id": "e1f21e31-15fc-45fe-831f-2d3b0e579d49",
+      "name": "Update a row1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "jlSCXolY4MW932v5",
+          "name": "Supabase account of automation"
+        }
+      }
     }
   ],
   "connections": {
@@ -528,7 +565,7 @@
       "main": [
         [
           {
-            "node": "Message a model",
+            "node": "Update a row1",
             "type": "main",
             "index": 0
           }
@@ -547,6 +584,17 @@
         [
           {
             "node": "Facebook Graph Api",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a row1": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
             "type": "main",
             "index": 0
           }
@@ -659,6 +707,12 @@
         "display_name": "lgf5vr2wlruepbrm16g1",
         "original_filename": "data",
         "api_key": "351148655472842"
+      }
+    ],
+    "Post with image to facebook page": [
+      {
+        "id": "122096590251191137",
+        "post_id": "914740581721664_122096590269191137"
       }
     ],
     "Message a model": [
