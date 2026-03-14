@@ -9,10 +9,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -448,
-        32
+        -976,
+        16
       ],
-      "id": "b5f0c0bd-c33d-4911-a145-d4371079fe8c",
+      "id": "819d07bd-b2ef-4114-99c0-ed2c9401f906",
       "name": "Generate Image Webhook",
       "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
     },
@@ -25,10 +25,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -480,
-        320
+        -1008,
+        304
       ],
-      "id": "6acccff8-9a18-44bf-9cb1-59139fd8c9cd",
+      "id": "646b06ec-c702-46f1-91e9-80d12e4e94d4",
       "name": "Post to Meta Platforms Webhook",
       "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
     },
@@ -48,15 +48,15 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -256,
-        32
+        -784,
+        16
       ],
-      "id": "5f7d07bc-b514-45fa-891c-94d71ef8dfb3",
+      "id": "160c9a5d-971e-4d7d-8b47-be1388315d7f",
       "name": "Get Post From the db",
       "credentials": {
         "supabaseApi": {
-          "id": "jlSCXolY4MW932v5",
-          "name": "Supabase account of automation"
+          "id": "0SIXHXBmY0xcmGP4",
+          "name": "Supabase account"
         }
       }
     },
@@ -69,10 +69,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        864,
-        -160
+        336,
+        -176
       ],
-      "id": "078868e5-5c0a-476f-9633-85d86041445c",
+      "id": "5f9147ce-29af-4b87-9f40-3d99290d97cc",
       "name": "Sticky Note"
     },
     {
@@ -87,14 +87,14 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        -48,
-        32
+        -576,
+        16
       ],
-      "id": "a890a01a-629a-4969-8791-9a30bc597ec7",
+      "id": "86da4121-9416-4e6c-ab8f-ca806299e7c5",
       "name": "Generate an image",
       "credentials": {
         "openAiApi": {
-          "id": "7mHgAzv2RbJZkda8",
+          "id": "IGMWc0W5VnRRGxLb",
           "name": "OpenAi account"
         }
       }
@@ -107,14 +107,14 @@
       "type": "n8n-nodes-cloudinary.cloudinary",
       "typeVersion": 1,
       "position": [
-        160,
-        32
+        -368,
+        16
       ],
-      "id": "676c8425-5749-4452-bebe-bcd6672bf553",
+      "id": "8f56344f-680b-4657-86b0-e40ec09e4403",
       "name": "Upload an asset from file data",
       "credentials": {
         "cloudinaryApi": {
-          "id": "6SRgh3cFQb3aM0wN",
+          "id": "6jT3qd7ZjBNHO2Dn",
           "name": "Cloudinary account"
         }
       }
@@ -148,15 +148,15 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        368,
-        32
+        -160,
+        16
       ],
-      "id": "8aaf2c2a-f472-4cee-a3f7-7d6bd31101e0",
+      "id": "0b00eadd-9830-421a-bc6d-49b60d025a6e",
       "name": "Update a row",
       "credentials": {
         "supabaseApi": {
-          "id": "jlSCXolY4MW932v5",
-          "name": "Supabase account of automation"
+          "id": "0SIXHXBmY0xcmGP4",
+          "name": "Supabase account"
         }
       }
     },
@@ -169,14 +169,14 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        992,
-        480
+        464,
+        464
       ],
-      "id": "c2b9693a-80fb-43d7-af58-2de0f8462f87",
+      "id": "9aca7e26-649b-48db-94d6-605e08f8a33e",
       "name": "Facebook Graph Api",
       "credentials": {
         "facebookGraphApi": {
-          "id": "u4dXVYfdcFtOOlxa",
+          "id": "mMo00lq3OW8FmHiQ",
           "name": "Facebook Graph account"
         }
       }
@@ -193,10 +193,10 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [
-        1200,
-        480
+        672,
+        464
       ],
-      "id": "ebadeb4d-2406-4f60-b7ec-6b3b33517e9d",
+      "id": "fa7a9526-e6f5-45c5-bc07-31b66a7a4d76",
       "name": "Post with image to facebook page"
     },
     {
@@ -212,14 +212,14 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        992,
-        272
+        464,
+        256
       ],
-      "id": "f22cbc4a-5729-4267-86e3-e595646f7fad",
+      "id": "75acdfca-73e9-40a8-9530-4f6b1fd57972",
       "name": "Create image container id for instagram",
       "credentials": {
         "facebookGraphApi": {
-          "id": "u4dXVYfdcFtOOlxa",
+          "id": "mMo00lq3OW8FmHiQ",
           "name": "Facebook Graph account"
         }
       }
@@ -237,14 +237,14 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1200,
-        272
+        672,
+        256
       ],
-      "id": "7bde71aa-0421-47b7-85d9-a6f60dfd2fbc",
+      "id": "deb4ce56-a9ac-4e7e-a2c1-8c334e4fd624",
       "name": "publish to instagram",
       "credentials": {
         "facebookGraphApi": {
-          "id": "u4dXVYfdcFtOOlxa",
+          "id": "mMo00lq3OW8FmHiQ",
           "name": "Facebook Graph account"
         }
       }
@@ -257,10 +257,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        816,
-        192
+        288,
+        176
       ],
-      "id": "5f61c85d-ea6a-4980-9a88-f418ae83db23",
+      "id": "1b24c0d8-4497-488f-96a8-065ed3451097",
       "name": "Sticky Note2"
     },
     {
@@ -271,10 +271,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        832,
-        416
+        304,
+        400
       ],
-      "id": "5e079db3-fea7-4953-8374-3ee1656db5df",
+      "id": "d12e0e34-98e9-4144-85a6-97229a40f092",
       "name": "Sticky Note3"
     },
     {
@@ -301,15 +301,15 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        128,
-        320
+        -400,
+        304
       ],
-      "id": "eac42bd2-d432-4f6d-9e87-72996f215067",
+      "id": "0cdc4be6-4d81-4ced-a203-6e29187eaf16",
       "name": "Message a model",
       "credentials": {
         "openAiApi": {
-          "id": "mh5dQwl5r0WjSsrS",
-          "name": "OpenAi account Gerry"
+          "id": "IGMWc0W5VnRRGxLb",
+          "name": "OpenAi account"
         }
       }
     },
@@ -320,10 +320,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        448,
-        320
+        -80,
+        304
       ],
-      "id": "2931ca10-1a7b-4d3b-94b0-f336be8eab21",
+      "id": "2ea4f4a9-cea1-4552-bdae-899e070260fb",
       "name": "Format the return output"
     },
     {
@@ -342,15 +342,15 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -288,
-        320
+        -816,
+        304
       ],
-      "id": "48a81540-7411-4d1e-bf82-171172ac02eb",
+      "id": "382c68c5-55da-4f57-88e7-a742a79a78a3",
       "name": "Get Post",
       "credentials": {
         "supabaseApi": {
-          "id": "jlSCXolY4MW932v5",
-          "name": "Supabase account of automation"
+          "id": "0SIXHXBmY0xcmGP4",
+          "name": "Supabase account"
         }
       }
     },
@@ -417,10 +417,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        688,
-        320
+        160,
+        304
       ],
-      "id": "ade4866a-faef-48fd-9076-3168f0e3202f",
+      "id": "cc27d7ca-85ba-4b08-ae50-d4c796f48d8b",
       "name": "Switch"
     },
     {
@@ -448,15 +448,15 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        -80,
-        320
+        -608,
+        304
       ],
-      "id": "e1f21e31-15fc-45fe-831f-2d3b0e579d49",
+      "id": "915f3c17-c331-41e0-981f-9ac943f8a19a",
       "name": "Update a row1",
       "credentials": {
         "supabaseApi": {
-          "id": "jlSCXolY4MW932v5",
-          "name": "Supabase account of automation"
+          "id": "0SIXHXBmY0xcmGP4",
+          "name": "Supabase account"
         }
       }
     }
@@ -675,57 +675,10 @@
         "executionMode": "production"
       }
     ],
-    "Generate an image": [
-      {
-        "mimeType": "image/png",
-        "fileType": "image",
-        "fileExtension": "png",
-        "fileName": "data",
-        "fileSize": "1.82 MB"
-      }
-    ],
-    "Upload an asset from file data": [
-      {
-        "asset_id": "52bcad86e19622f3d90bba788938bef0",
-        "public_id": "lgf5vr2wlruepbrm16g1",
-        "version": 1773197537,
-        "version_id": "4081f605dbf3c89b1b97a13f69647fd9",
-        "signature": "340de3d5dc1b675e48bde40fa579e792dda4fa8a",
-        "width": 1024,
-        "height": 1024,
-        "format": "png",
-        "resource_type": "image",
-        "created_at": "2026-03-11T02:52:17Z",
-        "tags": [],
-        "bytes": 1823066,
-        "type": "upload",
-        "etag": "a0e72b80b13243a5a1ff6447e1fc2737",
-        "placeholder": false,
-        "url": "http://res.cloudinary.com/dilpjrnnr/image/upload/v1773197537/lgf5vr2wlruepbrm16g1.png",
-        "secure_url": "https://res.cloudinary.com/dilpjrnnr/image/upload/v1773197537/lgf5vr2wlruepbrm16g1.png",
-        "asset_folder": "",
-        "display_name": "lgf5vr2wlruepbrm16g1",
-        "original_filename": "data",
-        "api_key": "351148655472842"
-      }
-    ],
     "Post with image to facebook page": [
       {
         "id": "122096590251191137",
         "post_id": "914740581721664_122096590269191137"
-      }
-    ],
-    "Message a model": [
-      {
-        "index": 0,
-        "message": {
-          "role": "assistant",
-          "content": "{\n \"post\": \"Palmer Luckey's retro gaming startup, ModRetro, is making waves with their new Game Boy-style device, the Chromatic. Now, they're eyeing funding with a stunning $1B valuation!  \\n\",\n \"hashtags\": [\"#GamingNews\", \"#ModRetro\"]\n}",
-          "refusal": null,
-          "annotations": []
-        },
-        "logprobs": null,
-        "finish_reason": "stop"
       }
     ]
   },
