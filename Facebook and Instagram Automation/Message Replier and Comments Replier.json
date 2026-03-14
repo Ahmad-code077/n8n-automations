@@ -18,10 +18,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        160,
-        -864
+        384,
+        48
       ],
-      "id": "624be1a1-beff-4411-b33d-73b7bd9f9fad",
+      "id": "c9e540bd-a53d-49e7-adf2-f8f3c64e0e82",
       "name": "Respond to Webhook"
     },
     {
@@ -31,10 +31,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        -80,
-        -864
+        144,
+        48
       ],
-      "id": "9e934b8c-be4e-4aef-94bd-fdd51792b768",
+      "id": "5b161c76-c0b9-4ef8-9955-9f270375c42b",
       "name": "Code in JavaScript"
     },
     {
@@ -46,10 +46,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -288,
-        -864
+        -64,
+        48
       ],
-      "id": "2ae43975-7883-4d36-b072-c0b84bd90478",
+      "id": "3d02dae6-60e2-4010-8e1f-55842a8466ae",
       "name": "Webhook to verfiy the token",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318"
     },
@@ -63,10 +63,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -320,
-        288
+        -96,
+        1200
       ],
-      "id": "676d1da2-b8fb-4da6-a14d-2d34fdd40eeb",
+      "id": "f287333e-b1aa-4bd9-8a84-d17d848868b6",
       "name": "Webhook to recieve messages and comments",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318"
     },
@@ -78,10 +78,10 @@
       "type": "n8n-nodes-base.respondToWebhook",
       "typeVersion": 1.4,
       "position": [
-        -208,
-        624
+        16,
+        1536
       ],
-      "id": "52f80ea3-f95b-49b6-84dc-eae70340a1ac",
+      "id": "c98b4d18-0dba-410c-9cb4-12194183a1ca",
       "name": "Respond back to facebook curcial"
     },
     {
@@ -94,10 +94,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1024,
-        -112
+        -800,
+        800
       ],
-      "id": "e41fa921-279a-4363-abb2-e45a78c6e651",
+      "id": "db947758-3972-44b3-baa3-0c5e8739fc62",
       "name": "Messnger page message body",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
       "disabled": true
@@ -112,10 +112,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1040,
-        96
+        -816,
+        1008
       ],
-      "id": "d3bd7ceb-fe9f-4cc5-802f-1effec3d6220",
+      "id": "0252f978-554a-49dc-aa5d-4cbe3cd46fcc",
       "name": "Instagram commets api",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
       "disabled": true
@@ -180,10 +180,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        -16,
-        288
+        208,
+        1200
       ],
-      "id": "2f112bb8-fde0-4a86-9480-cf929b855f39",
+      "id": "1d2c1839-1bfa-4a96-bfb0-69aeb1fe31af",
       "name": "seperate instagram and facebook Data"
     },
     {
@@ -196,10 +196,10 @@
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1040,
-        288
+        -816,
+        1200
       ],
-      "id": "0884f42f-229e-41a0-b52e-cb7179276b24",
+      "id": "6a4f301b-f815-4098-a1ab-f6651668b141",
       "name": "Instagram Messages",
       "webhookId": "033c911d-b97c-4b0d-99c6-7b7777b4d318",
       "disabled": true
@@ -216,10 +216,10 @@
       "type": "@n8n/n8n-nodes-langchain.agent",
       "typeVersion": 2.2,
       "position": [
-        1904,
-        928
+        2128,
+        1840
       ],
-      "id": "409a7f33-89bf-4afd-b93f-37987d76d820",
+      "id": "dbf64c9a-61b0-4228-8e24-a89b312794c4",
       "name": "AI Agent",
       "executeOnce": true
     },
@@ -246,15 +246,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1232,
-        1040
+        1456,
+        1952
       ],
-      "id": "882bd1ce-66d7-4a68-b262-aab03189386e",
+      "id": "84a538da-7e44-4522-900b-c97136b0b68c",
       "name": "Fetch conversation",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -270,15 +270,15 @@
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
       "typeVersion": 1.2,
       "position": [
-        1904,
-        1152
+        2128,
+        2064
       ],
-      "id": "aa28c11e-1af2-4f27-90ed-61ac27e87b72",
+      "id": "2f640527-1739-460e-9b0a-b66c0d5521c5",
       "name": "OpenAI Chat Model",
       "credentials": {
         "openAiApi": {
-          "id": "6j24kqb9tFijNrQo",
-          "name": "OpenAi account G"
+          "id": "IGMWc0W5VnRRGxLb",
+          "name": "OpenAi account"
         }
       }
     },
@@ -289,10 +289,10 @@
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
       "typeVersion": 1.3,
       "position": [
-        2032,
-        1152
+        2256,
+        2064
       ],
-      "id": "0c074f43-6593-4bf7-8ea0-1e2e58857084",
+      "id": "ce86ab3c-d2bd-41a8-80b8-e563073d6c53",
       "name": "Structured Output Parser"
     },
     {
@@ -314,15 +314,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1456,
-        1040
+        1680,
+        1952
       ],
-      "id": "065fb9f1-fb2e-4767-a134-882e7d8ca8d7",
+      "id": "41f0f6dd-38d3-4e30-b2d3-85a61cdaacc8",
       "name": "Get recent converstaion",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -333,10 +333,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1680,
-        1040
+        1904,
+        1952
       ],
-      "id": "c7ea73aa-b06c-4048-a206-77dc7f2ce7d8",
+      "id": "e5ea6f49-c990-4a9d-b59d-08d127c6db8f",
       "name": "Align Past messages"
     },
     {
@@ -399,10 +399,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        784,
-        896
+        1008,
+        1808
       ],
-      "id": "a041d820-827a-4eef-b01e-ba8acb4de5bb",
+      "id": "c5851008-7091-47a2-9a08-1429fd858cf3",
       "name": "seperate dms and commets"
     },
     {
@@ -418,15 +418,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2320,
-        1040
+        2544,
+        1952
       ],
-      "id": "ed62c2c7-f777-4116-94b1-0afbdcc8e33c",
+      "id": "a1edd9d7-98a4-4e65-a4b0-b12c6ea11072",
       "name": "Instagram Dm replies",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -450,15 +450,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2832,
-        736
+        3056,
+        1648
       ],
-      "id": "fdfa148e-7e1c-4275-b6e1-a0df5e50380d",
+      "id": "350e5008-ccde-43b3-b4ba-3e04f67bc121",
       "name": "Instagram Comments replies",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -490,10 +490,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1232,
-        736
+        1456,
+        1648
       ],
-      "id": "e5a561f9-5d44-43c6-a764-70afdd10b4a8",
+      "id": "aae94e7b-e3aa-4aef-99c2-d164ec551db6",
       "name": "check if the child reply"
     },
     {
@@ -513,15 +513,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1456,
-        672
+        1680,
+        1584
       ],
-      "id": "12d30516-3cc4-4f9b-9a0a-a33af547ea2c",
+      "id": "8da5045e-f184-4ae9-ac19-7c1a07d6fc69",
       "name": "Fetch Parent Comments",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -549,16 +549,16 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        2256,
-        736
+        2480,
+        1648
       ],
-      "id": "d3c04a05-4031-469e-a00e-993c6b4ab710",
+      "id": "fc3bb2a8-537d-405c-ad57-7625ad867b40",
       "name": "Message a model",
       "executeOnce": true,
       "credentials": {
         "openAiApi": {
-          "id": "6j24kqb9tFijNrQo",
-          "name": "OpenAi account G"
+          "id": "IGMWc0W5VnRRGxLb",
+          "name": "OpenAi account"
         }
       }
     },
@@ -569,10 +569,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1680,
-        736
+        1904,
+        1648
       ],
-      "id": "7bbd5814-f7cb-44c8-b2cc-fce5ed479bc4",
+      "id": "c0db5391-67f9-4939-9832-89541a607002",
       "name": "Summerize all data"
     },
     {
@@ -582,10 +582,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1968,
-        736
+        2192,
+        1648
       ],
-      "id": "5ec99a64-9d78-4952-8e74-b2f86ef9f2c9",
+      "id": "696f9415-4ee4-4a7b-a924-fa2a582d0621",
       "name": "Fields to pass to ai"
     },
     {
@@ -595,10 +595,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2608,
-        736
+        2832,
+        1648
       ],
-      "id": "267058d4-abe4-433e-8260-ed140f7232be",
+      "id": "dbd9d4dc-fd71-4655-9f10-0cda05a984c1",
       "name": "parse incoming data"
     },
     {
@@ -662,10 +662,10 @@
       "type": "n8n-nodes-base.switch",
       "typeVersion": 3.2,
       "position": [
-        752,
-        80
+        976,
+        992
       ],
-      "id": "d80ec422-3522-4161-a509-7bfff1e197d0",
+      "id": "490358f8-9a93-4b3e-b6e2-2c22a5c0889e",
       "name": "Route to message and comments"
     },
     {
@@ -691,15 +691,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        976,
-        -96
+        1200,
+        816
       ],
-      "id": "6b70dff8-e584-4d74-9101-05d3af121260",
+      "id": "17dfbea0-18e6-4727-80a5-69cea3d02fa2",
       "name": "Fetch conversation messanger",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -721,15 +721,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1200,
-        -96
+        1424,
+        816
       ],
-      "id": "ec4b9325-1682-4fc2-84d2-250e49a57654",
+      "id": "b29b63d6-5410-4b11-88eb-97c0370f56c6",
       "name": "Facebook Graph API",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -740,10 +740,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1424,
-        -96
+        1648,
+        816
       ],
-      "id": "01215036-2e29-4ddc-bc18-16647847a61e",
+      "id": "f3ade593-8870-4bfe-8d3f-e9e36dfbadfd",
       "name": "Align Past messages1"
     },
     {
@@ -770,16 +770,16 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        1648,
-        -96
+        1872,
+        816
       ],
-      "id": "c553c63c-9a83-41f4-8ce0-0d22834b271a",
+      "id": "2c961f6e-2bbc-4694-96ea-e0b0e9dd324b",
       "name": "Generate reply for messanger",
       "executeOnce": true,
       "credentials": {
         "openAiApi": {
-          "id": "6j24kqb9tFijNrQo",
-          "name": "OpenAi account G"
+          "id": "IGMWc0W5VnRRGxLb",
+          "name": "OpenAi account"
         }
       }
     },
@@ -790,10 +790,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2000,
-        -96
+        2224,
+        816
       ],
-      "id": "2f37802a-496f-4813-9d63-c042e3d68bcf",
+      "id": "169d527e-95bb-4caa-83a5-e7a37e1bbc30",
       "name": "Parse the Results"
     },
     {
@@ -809,15 +809,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2288,
-        -96
+        2512,
+        816
       ],
-      "id": "243b88eb-8630-4e4e-9fba-e28ae5a406e5",
+      "id": "81dd18b6-4780-4f11-9a64-3d6426593fac",
       "name": "Facebook Dm reply",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -828,10 +828,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1008,
-        1040
+        1232,
+        1952
       ],
-      "id": "a34d098d-da2b-4b01-a178-4ca4f0555eec",
+      "id": "93521ea2-5c63-49ae-9e0c-6571f8c1bd0d",
       "name": "Remove the personal messages"
     },
     {
@@ -841,10 +841,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1008,
-        736
+        1232,
+        1648
       ],
-      "id": "11bb552d-b005-4cd6-beb7-cfda82193dd9",
+      "id": "9bf39ba9-dc95-4c31-8438-16a6d24625e4",
       "name": "Remove mine comments"
     },
     {
@@ -875,10 +875,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1200,
-        176
+        1424,
+        1088
       ],
-      "id": "d1d59e10-5e20-4cdd-96fe-4adeb0846aa6",
+      "id": "3a8fd1cc-f614-4853-8bf6-bb9788a812e6",
       "name": "check if the child reply1"
     },
     {
@@ -890,15 +890,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        1424,
-        96
+        1648,
+        1008
       ],
-      "id": "a9db284f-e8da-46e4-b05b-f6a915463fbe",
+      "id": "5d1c4b81-28da-4e39-933f-5d8bd96c1789",
       "name": "Fetch Parent Comments1",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -909,10 +909,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1712,
-        176
+        1936,
+        1088
       ],
-      "id": "0b5fc112-98a7-4221-b261-a3a0f1383ece",
+      "id": "aa7c13ba-0f0d-4c61-89b6-0ce5a6104ef4",
       "name": "Summerize all data1"
     },
     {
@@ -922,10 +922,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2000,
-        176
+        2224,
+        1088
       ],
-      "id": "c218560e-3687-490a-891e-4fa17ffa04e8",
+      "id": "bd5743ec-f109-4d2b-b845-8b32c55d565b",
       "name": "Fields to pass to ai1"
     },
     {
@@ -948,15 +948,15 @@
       "type": "n8n-nodes-base.facebookGraphApi",
       "typeVersion": 1,
       "position": [
-        2800,
-        176
+        3024,
+        1088
       ],
-      "id": "db8ddbd0-6716-4c2e-95c6-1610bc050180",
+      "id": "d725c8a3-c2ee-442e-b5da-85049759552d",
       "name": "Instagram Comments replies1",
       "credentials": {
         "facebookGraphApi": {
-          "id": "3lONcAbTSkpQ9Aoz",
-          "name": "page access token"
+          "id": "mMo00lq3OW8FmHiQ",
+          "name": "Facebook Graph account"
         }
       }
     },
@@ -984,16 +984,16 @@
       "type": "@n8n/n8n-nodes-langchain.openAi",
       "typeVersion": 1.8,
       "position": [
-        2224,
-        176
+        2448,
+        1088
       ],
-      "id": "4aaa5627-3e31-4a43-9c30-552ffc1032b0",
+      "id": "8344e7a3-8d86-4305-985e-0b3ce0307a62",
       "name": "Message a model1",
       "executeOnce": true,
       "credentials": {
         "openAiApi": {
-          "id": "6j24kqb9tFijNrQo",
-          "name": "OpenAi account G"
+          "id": "IGMWc0W5VnRRGxLb",
+          "name": "OpenAi account"
         }
       }
     },
@@ -1004,10 +1004,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        2576,
-        176
+        2800,
+        1088
       ],
-      "id": "d3657f66-069b-4a57-a7fd-27c24ef359cb",
+      "id": "7ba70f15-b547-4966-92d5-5391c390161c",
       "name": "parse incoming data1"
     },
     {
@@ -1017,10 +1017,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        976,
-        176
+        1200,
+        1088
       ],
-      "id": "18a83ab1-ba53-440b-b404-f2a1b0af684e",
+      "id": "08d5c973-6e4c-4969-b8be-a5382d383af3",
       "name": "Remove mine comments1"
     }
   ],
@@ -1690,89 +1690,6 @@
         "executionMode": "production"
       }
     ],
-    "AI Agent": [
-      {
-        "output": {
-          "reply": "Hey there! How can I help you today?"
-        }
-      }
-    ],
-    "Fetch conversation": [
-      {
-        "data": [
-          {
-            "id": "aWdfZAG06MTpJR01lc3NhZA2VUaHJlYWQ6MTc4NDE0Nzg3MDkyNTYxNTY6MzQwMjgyMzY2ODQxNzEwMzAxMjQ0Mjc2MDIxNjYzMTc4NzEwNjE4",
-            "updated_time": "2026-01-06T20:10:42+0000"
-          }
-        ]
-      }
-    ],
-    "Get recent converstaion": [
-      {
-        "data": [
-          {
-            "message": "Hi user nice to meet you",
-            "from": {
-              "username": "ahmad__mamoon",
-              "id": "1189770910038355"
-            },
-            "created_time": "2026-01-06T20:10:42+0000",
-            "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjYwODg2NzM4MTc1OTc4MzM1NzI2MzU4MTUyMTM3OTMyOAZDZD"
-          },
-          {
-            "message": "hello user",
-            "from": {
-              "username": "ahmaddevautomation",
-              "id": "17841478709256156"
-            },
-            "created_time": "2026-01-06T19:16:58+0000",
-            "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjYwODgwNzkwMzQyMzQyMDg5OTc2MDYxOTk0MjU3NjEyOAZDZD"
-          },
-          {
-            "message": "Hi ahmad",
-            "from": {
-              "username": "ahmad__mamoon",
-              "id": "1189770910038355"
-            },
-            "created_time": "2026-01-03T19:25:23+0000",
-            "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjYwNDAzNTgyMzM1Mzg5MDE2NDcwNjE1Nzk0NjQ3MDQwMAZDZD"
-          },
-          {
-            "message": "Hi",
-            "from": {
-              "username": "ahmad__mamoon",
-              "id": "1189770910038355"
-            },
-            "created_time": "2025-12-23T21:12:55+0000",
-            "id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjU4NjYyMzA1MDA2MjU5NDgwMTYxMzM4ODIzOTYwMTY2NAZDZD"
-          }
-        ]
-      }
-    ],
-    "Instagram Dm replies": [
-      {
-        "recipient_id": "1189770910038355",
-        "message_id": "aWdfZAG1faXRlbToxOklHTWVzc2FnZAUlEOjE3ODQxNDc4NzA5MjU2MTU2OjM0MDI4MjM2Njg0MTcxMDMwMTI0NDI3NjAyMTY2MzE3ODcxMDYxODozMjYwODg2ODUyMTY1MzIwMTE3NTA3Njg5MTg1NDM3Mjg2NAZDZD"
-      }
-    ],
-    "Instagram Comments replies": [
-      {
-        "id": "18037802876738222"
-      }
-    ],
-    "Message a model": [
-      {
-        "index": 0,
-        "message": {
-          "role": "assistant",
-          "content": "{\"reply\": \"Thanks a lot! Glad you liked it! 😊\"}",
-          "refusal": null,
-          "annotations": []
-        },
-        "logprobs": null,
-        "finish_reason": "stop"
-      }
-    ],
     "Summerize all data": [
       {
         "user": "ahmad__mamoon",
@@ -1788,17 +1705,6 @@
     "Fields to pass to ai": [
       {
         "prompt": "Comment from ahmad__mamoon: \"@ahmad__mamoon just saw this post totally amazing\"\nGenerate a short, friendly reply in 1-2 sentences:"
-      }
-    ],
-    "Facebook Dm reply": [
-      {
-        "recipient_id": "25672083659147013",
-        "message_id": "m_4BwSiN4-Fj4T443ySsSJHdKKBvS3KCA5HQLzV_rhob55EDNjdSI1YoA2-62erRkxLqKU6vB7zm7KNymAmfZKeg"
-      }
-    ],
-    "Instagram Comments replies1": [
-      {
-        "id": "122096525553191137_1198056501970929"
       }
     ]
   },
