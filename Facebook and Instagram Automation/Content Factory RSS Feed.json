@@ -1,16 +1,15 @@
 {
-  "name": "Content Factory RSS Feed",
   "nodes": [
     {
       "parameters": {
         "numberInputs": 7
       },
-      "id": "bf7635cf-aad4-48a8-829d-eaafda7c7c0c",
+      "id": "51faaf29-46e8-4e40-bfa7-33cee2be2f95",
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        1488,
-        416
+        624,
+        384
       ],
       "typeVersion": 3.1
     },
@@ -24,12 +23,12 @@
           ]
         }
       },
-      "id": "f03285a3-2b52-4621-afce-5da5190d14ab",
+      "id": "7b0172e9-4856-42dc-b13e-95c9e6d18424",
       "name": "Schedule",
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
-        16,
-        480
+        -848,
+        448
       ],
       "typeVersion": 1.2
     },
@@ -65,12 +64,12 @@
         },
         "options": {}
       },
-      "id": "ec5325db-8b9e-4c18-b8b9-2da8bbd28741",
+      "id": "0e775f01-0337-4297-9402-2a89e2b15203",
       "name": "Filter Fields",
       "type": "n8n-nodes-base.set",
       "position": [
-        976,
-        -96
+        112,
+        -128
       ],
       "typeVersion": 3.4
     },
@@ -106,12 +105,12 @@
         },
         "options": {}
       },
-      "id": "4f525ed1-1e18-448f-a8f6-bd9b639b4768",
+      "id": "62908e59-075c-4420-a31d-46c3628fbead",
       "name": "Filter Fields 3",
       "type": "n8n-nodes-base.set",
       "position": [
-        976,
-        96
+        112,
+        64
       ],
       "typeVersion": 3.4
     },
@@ -147,12 +146,12 @@
         },
         "options": {}
       },
-      "id": "56b5269c-7afd-4d96-aad6-493f5e773567",
+      "id": "7a150398-da5e-4e69-9f7a-5120a527f11c",
       "name": "Filter Fields 4",
       "type": "n8n-nodes-base.set",
       "position": [
-        976,
-        288
+        112,
+        256
       ],
       "typeVersion": 3.4
     },
@@ -188,12 +187,12 @@
         },
         "options": {}
       },
-      "id": "64532747-79a5-4dd0-8119-d1d25b3efdea",
+      "id": "aa40b37f-6ad2-4c4c-a7c0-27ae1b63fc85",
       "name": "Filter Fields 5",
       "type": "n8n-nodes-base.set",
       "position": [
-        976,
-        480
+        112,
+        448
       ],
       "typeVersion": 3.4
     },
@@ -229,12 +228,12 @@
         },
         "options": {}
       },
-      "id": "d16332e3-c50c-478e-baa4-11ba4c4935a2",
+      "id": "b34353b5-1ab8-4710-a4c9-294dc89c30d1",
       "name": "Filter Fields 6",
       "type": "n8n-nodes-base.set",
       "position": [
-        976,
-        672
+        112,
+        640
       ],
       "typeVersion": 3.4
     },
@@ -270,12 +269,12 @@
         },
         "options": {}
       },
-      "id": "115adb5c-4956-46e3-b881-788a23475a8a",
+      "id": "0a75e8cf-8fa8-4837-aac6-837729536a4b",
       "name": "Filter Fields 7",
       "type": "n8n-nodes-base.set",
       "position": [
-        976,
-        864
+        112,
+        832
       ],
       "typeVersion": 3.4
     },
@@ -311,12 +310,12 @@
         },
         "options": {}
       },
-      "id": "3d8de057-d3bd-47c3-bc46-fce6f19793c1",
+      "id": "f4e75112-3701-4f30-bfa3-18ae25634598",
       "name": "Filter Fields 8",
       "type": "n8n-nodes-base.set",
       "position": [
-        976,
-        1056
+        112,
+        1024
       ],
       "typeVersion": 3.4
     },
@@ -327,89 +326,11 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1712,
-        496
+        848,
+        464
       ],
-      "id": "207eaa4f-5acf-435b-aeca-439051f36b0c",
+      "id": "15f87659-80f2-43e1-80b7-5cd372a8f435",
       "name": "Code in JavaScript"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "version": 2,
-            "leftValue": "",
-            "caseSensitive": true,
-            "typeValidation": "strict"
-          },
-          "conditions": [
-            {
-              "id": "30d4f694-9378-42b4-b1d5-cbc38fb3e7fe",
-              "operator": {
-                "type": "string",
-                "operation": "notRegex"
-              },
-              "leftValue": "={{ $json.link }}",
-              "rightValue": "opinion|rumour|layoff|porn|marijuana"
-            },
-            {
-              "id": "fdddd55b-19d5-4e87-9586-01653750e807",
-              "operator": {
-                "type": "string",
-                "operation": "notRegex"
-              },
-              "leftValue": "={{ $json.title }}",
-              "rightValue": "Opinion|Rumour|layoff|porn|marijuana|Sponsored|Ad|Click|Download|Subscribe"
-            },
-            {
-              "id": "12e44449-d6bb-4243-abb7-cfa03a9327c5",
-              "operator": {
-                "type": "string",
-                "operation": "notRegex"
-              },
-              "leftValue": "={{ $json.content }}",
-              "rightValue": "layoff|porn|marijuana"
-            },
-            {
-              "id": "2df9ef75-ea55-4e5b-a78d-e37de85fe8ca",
-              "operator": {
-                "type": "string",
-                "operation": "notRegex"
-              },
-              "leftValue": "={{ $json.content }}",
-              "rightValue": "layoff|porn|marijuana|menu.*|sidebar.*|footer.*|copyright.*|share.*|related.*|click here|read more|sign up|subscribe|newsletter|comment.*|advertisement|banner.*|sponsor.*"
-            },
-            {
-              "id": "04c95b8b-29aa-4f88-b3e5-3182af823ecd",
-              "leftValue": "={{ $json.content.length }}",
-              "rightValue": 500,
-              "operator": {
-                "type": "number",
-                "operation": "lt"
-              }
-            },
-            {
-              "id": "7c1c5c54-b86a-46ac-8338-1e4d92404b60",
-              "leftValue": "={{ $json.content.length }}",
-              "rightValue": 0,
-              "operator": {
-                "type": "number",
-                "operation": "notEquals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "options": {}
-      },
-      "id": "819e2c88-9475-44da-8f31-15169fd0c08d",
-      "name": "Remove Certain Content1",
-      "type": "n8n-nodes-base.filter",
-      "position": [
-        1936,
-        496
-      ],
-      "typeVersion": 2.2
     },
     {
       "parameters": {
@@ -418,12 +339,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "9f53084d-b0f9-4a72-8a7f-7f2feb49f000",
+      "id": "8184dbbd-90b1-4d05-a727-e4aa825e76ec",
       "name": "Dev.to Community Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        752,
-        -96
+        -112,
+        -128
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -436,12 +357,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "47099af6-a047-468e-82fa-18919bb07e51",
+      "id": "b22771f9-3de7-4529-9d3d-2b709c0bf26d",
       "name": "TechCrunch News Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        752,
-        96
+        -112,
+        64
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -454,12 +375,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "1171a121-6f30-45d9-ad20-5d4c0cb18f14",
+      "id": "e4599509-aa99-460b-9881-2e0f69f827d7",
       "name": "The Hacker News Security Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        752,
-        288
+        -112,
+        256
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -473,12 +394,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "cd29017c-ada3-434a-b8e5-a7897f7a1104",
+      "id": "cfac89d1-794e-4236-8ad2-2f808e36fb08",
       "name": "OpenAI Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        752,
-        480
+        -112,
+        448
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -491,12 +412,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "6c3e6527-5aab-4808-a983-ed84be063995",
+      "id": "c0a4f93a-5c13-4399-bff6-22f106f10909",
       "name": "AWS Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        752,
-        672
+        -112,
+        640
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -509,12 +430,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "aa27d1f4-4562-46b8-a099-b88db2638aa7",
+      "id": "6034aa4f-eea1-40a7-8cb5-aea4ef9b2d5a",
       "name": "n8n Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        752,
-        864
+        -112,
+        832
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -527,12 +448,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "a310ee22-b6bc-4452-a831-2644a7119c65",
+      "id": "edbe4582-090a-4e09-8c7d-6fa92a4679a1",
       "name": "Github Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        752,
-        1056
+        -112,
+        1024
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -569,20 +490,19 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        2160,
-        496
+        1296,
+        464
       ],
-      "id": "d1f16def-23b4-4086-a575-b03ecc7a4bb5",
+      "id": "a213ff04-f502-4578-8c17-3d1de7f4e71f",
       "name": "Create a row",
       "credentials": {
         "supabaseApi": {
-          "id": "jlSCXolY4MW932v5",
-          "name": "Supabase account of automation"
+          "id": "0SIXHXBmY0xcmGP4",
+          "name": "Supabase account"
         }
       }
     }
   ],
-  "pinData": {},
   "connections": {
     "Merge": {
       "main": [
@@ -717,17 +637,6 @@
       "main": [
         [
           {
-            "node": "Remove Certain Content1",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Remove Certain Content1": {
-      "main": [
-        [
-          {
             "node": "Create a row",
             "type": "main",
             "index": 0
@@ -813,15 +722,9 @@
       ]
     }
   },
-  "active": false,
-  "settings": {
-    "executionOrder": "v1"
-  },
-  "versionId": "e6265dd4-fc90-4e6b-9b13-c7a1439530cd",
+  "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "5fb562ea0f9026abe7e8f315ec46894e8801411ce3db851fdbe45168e485acda"
-  },
-  "id": "MXzzdjUVo2y4b0Vr",
-  "tags": []
+  }
 }
