@@ -3,62 +3,18 @@
     {
       "parameters": {
         "httpMethod": "POST",
-        "path": "generate-and-store-image-to-db",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.webhook",
-      "typeVersion": 2.1,
-      "position": [
-        -976,
-        16
-      ],
-      "id": "819d07bd-b2ef-4114-99c0-ed2c9401f906",
-      "name": "Generate Image Webhook",
-      "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
-    },
-    {
-      "parameters": {
-        "httpMethod": "POST",
         "path": "post-content-publish-webhook",
         "options": {}
       },
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 2.1,
       "position": [
-        -1008,
+        -1024,
         304
       ],
       "id": "646b06ec-c702-46f1-91e9-80d12e4e94d4",
       "name": "Post to Meta Platforms Webhook",
       "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
-    },
-    {
-      "parameters": {
-        "operation": "get",
-        "tableId": "posts",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "keyValue": "={{ $json.body.postId }}"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -784,
-        16
-      ],
-      "id": "160c9a5d-971e-4d7d-8b47-be1388315d7f",
-      "name": "Get Post From the db",
-      "credentials": {
-        "supabaseApi": {
-          "id": "0SIXHXBmY0xcmGP4",
-          "name": "Supabase account"
-        }
-      }
     },
     {
       "parameters": {
@@ -74,91 +30,6 @@
       ],
       "id": "5f9147ce-29af-4b87-9f40-3d99290d97cc",
       "name": "Sticky Note"
-    },
-    {
-      "parameters": {
-        "resource": "image",
-        "prompt": "=You are a professional social media creative director for an automation and technology themed Instagram and Facebook page.\n\nYour job is to read the article data and create ONE high-quality image concept that will be used for a social media post about the news.\n\nArticle Data\nTitle: {{ $json.title }}\nContent: {{ $json.content }}\n\nInstructions:\n\n1. Understand the main idea of the article.\n2. Create a clear visual concept for a social media image that explains or represents the news.\n3. The concept should work well for Instagram and Facebook audiences interested in technology, startups, and automation.\n4. The image should be modern, clean, tech-focused, and visually engaging.\n5. Keep spelling correct and avoid complex wording.\n6. Do NOT invent facts that are not in the article.\n7. Do NOT create multiple ideas. Only one strong concept.\n\nReturn the result in this exact structure:\n\nHeadline: A short catchy headline for the image.\n\nImage Prompt:\nA detailed prompt that can be used to generate an AI image.\nDescribe subject, environment, lighting, style, colors, and composition clearly.\n\nCaption:\nA short social media caption explaining the news.\n\nHashtags:\n5–10 relevant tech or automation hashtags.\n",
-        "options": {
-          "dalleQuality": "standard",
-          "size": "1024x1024"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.openAi",
-      "typeVersion": 1.8,
-      "position": [
-        -576,
-        16
-      ],
-      "id": "86da4121-9416-4e6c-ab8f-ca806299e7c5",
-      "name": "Generate an image",
-      "credentials": {
-        "openAiApi": {
-          "id": "IGMWc0W5VnRRGxLb",
-          "name": "OpenAi account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "uploadFile",
-        "additionalFieldsFile": {}
-      },
-      "type": "n8n-nodes-cloudinary.cloudinary",
-      "typeVersion": 1,
-      "position": [
-        -368,
-        16
-      ],
-      "id": "8f56344f-680b-4657-86b0-e40ec09e4403",
-      "name": "Upload an asset from file data",
-      "credentials": {
-        "cloudinaryApi": {
-          "id": "6jT3qd7ZjBNHO2Dn",
-          "name": "Cloudinary account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "operation": "update",
-        "tableId": "posts",
-        "filters": {
-          "conditions": [
-            {
-              "keyName": "id",
-              "condition": "eq",
-              "keyValue": "={{ $('Get Post From the db').item.json.id }}"
-            }
-          ]
-        },
-        "fieldsUi": {
-          "fieldValues": [
-            {
-              "fieldId": "image_url",
-              "fieldValue": "={{ $json.url }}"
-            },
-            {
-              "fieldId": "status",
-              "fieldValue": "approved"
-            }
-          ]
-        }
-      },
-      "type": "n8n-nodes-base.supabase",
-      "typeVersion": 1,
-      "position": [
-        -160,
-        16
-      ],
-      "id": "0b00eadd-9830-421a-bc6d-49b60d025a6e",
-      "name": "Update a row",
-      "credentials": {
-        "supabaseApi": {
-          "id": "0SIXHXBmY0xcmGP4",
-          "name": "Supabase account"
-        }
-      }
     },
     {
       "parameters": {
@@ -187,7 +58,7 @@
         "url": "=https://graph.facebook.com/v24.0/{{ $json.data[0].id }}/photos",
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={\n  \"url\": \"{{ $('Get Post').item.json.image_url }}\",\n  \"caption\": \"{{ $('Switch').item.json.post }}\\n\\n{{ $('Switch').item.json.hashtags.join(' ') }}\\n\\nWatch here: {{ $('Switch').item.json.link }}\",\n  \"published\": true,\n\"access_token\":\"{{ $json.data[0].access_token }}\"\n}\n",
+        "jsonBody": "={\n  \"url\": \"{{ $('Get Post').item.json.image_url }}\",\n  \"caption\": \"{{ $('Switch').item.json.hook }}\\n\\n{{ $('Switch').item.json.post }}\\n\\n{{ $('Switch').item.json.hashtags.join(' ') }}\\n\\nWatch here: {{ $('Switch').item.json.link }}\",\n  \"published\": true,\n\"access_token\":\"{{ $json.data[0].access_token }}\"\n}\n",
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
@@ -206,7 +77,7 @@
         "node": "17841478709256156",
         "edge": "media",
         "options": {
-          "queryParametersJson": "={\n\"image_url\":\"{{ $('Get Post').item.json.image_url }}\",\n  \"caption\": \"{{ $('Switch').item.json.post }}\\n\\n{{ $('Switch').item.json.hashtags.join(' ') }}\\n\\nWatch here: {{ $('Switch').item.json.link }}\",\n  \"node\":\"17841478709256156\"\n}"
+          "queryParametersJson": "={\n\"image_url\":\"{{ $('Get Post').item.json.image_url }}\",\n  \"caption\": \"{{ $json.hook }}\\n\\n{{ $json.post }}\\n\\n{{ $json.hashtags.join(' ') }}\",\n  \"node\":\"17841478709256156\"\n}"
         }
       },
       "type": "n8n-nodes-base.facebookGraphApi",
@@ -288,10 +159,10 @@
         "messages": {
           "values": [
             {
-              "content": "=Title: {{ $json.title }}\nContent: {{ $json.content }}\n\nWrite a short social media post."
+              "content": "=Article Title: {{ $json.title }}\nArticle Content: {{ $json.content }}\n\nWrite the social media post using only the content above. Do not add anything that is not in the article."
             },
             {
-              "content": "You are a professional social media copywriter.\n\nYour job is to convert tech news into a short, natural social media post.\n\nRules:\n- Keep the post short (max 35–40 words)\n- Write in a clear and engaging tone\n- Do not repeat the title exactly\n- Do not make the text long\n- Generate exactly 2 relevant hashtags\n- Do not include emojis\n- Return only valid JSON\n\nResponse format:\n{\n \"post\": \"short social media post\",\n \"hashtags\": [\"#tag1\", \"#tag2\"]\n}",
+              "content": "=You are a professional social media copywriter specializing in technology and developer content.\n\nYour only job is to convert a tech news article into a short, high-performing social media post.\n\n---\n\nCRITICAL CONTENT RULE:\nUse only the information provided in the article. Do not add context, assumptions, opinions, or facts that are not explicitly stated in the input. If the article does not mention something, do not include it.\n\n---\n\nPOST STRUCTURE — follow this exact order:\n\n1. HOOK (first line): The single sentence a person sees before clicking \"more.\" It must create curiosity or urgency without giving everything away. No generic openers like \"Exciting news\" or \"Did you know.\"\n2. BODY (one to two sentences): Deliver the key insight or takeaway directly from the article. Be specific. No filler words.\n3. CALL TO ACTION (optional, one short line): Only include if it feels natural and is supported by the article content — example: \"Worth keeping an eye on.\"\n\n---\n\nRULES — follow every rule without exception:\n\n1. Total post length: 35 to 45 words maximum.\n2. No emojis.\n3. Do not repeat the article title word for word.\n4. Write in a direct, intelligent tone — not hype, not corporate.\n5. Exactly 2 hashtags. Make them specific to the article topic, not generic (avoid #tech #news).\n6. Return only valid JSON. No extra text, no markdown, no explanation outside the JSON block.\n\n---\n\nOUTPUT FORMAT:\n\n{\n  \"hook\": \"first line of the post\",\n  \"post\": \"full post text including the hook\",\n  \"hashtags\": [\"#tag1\", \"#tag2\"]\n}",
               "role": "system"
             }
           ]
@@ -315,7 +186,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const ai = JSON.parse($input.first().json.message.content);\nconst link = $('Get Post').first().json.link;\n$('Post to Meta Platforms Webhook').first().json.body\nreturn [{\n  post: ai.post.trim(),\n  hashtags: ai.hashtags,\n  link: link\n}];"
+        "jsCode": "const ai = JSON.parse($input.first().json.message.content);\nconst link = $('Get Post').first().json.link;\n$('Post to Meta Platforms Webhook').first().json.body\nreturn [{\n  hook:ai.hook,\n  post: ai.post.trim(),\n  hashtags: ai.hashtags,\n  link: link\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -459,58 +330,143 @@
           "name": "Supabase account"
         }
       }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "generate-and-store-image-to-db",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1200,
+        -32
+      ],
+      "id": "8bc40563-35bf-4d54-9d64-6ee3497e74df",
+      "name": "Generate Image Webhook",
+      "webhookId": "4d09ef09-6941-492e-93a2-9dbbfa005ca6"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "tableId": "posts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "keyValue": "={{ $json.body.postId }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -1008,
+        -32
+      ],
+      "id": "34b915ab-cee7-4bd6-894d-57117b6728d7",
+      "name": "Get Post From the db",
+      "credentials": {
+        "supabaseApi": {
+          "id": "0SIXHXBmY0xcmGP4",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "model": "gpt-image-1",
+        "prompt": "=You are a professional AI image prompt engineer specializing in technology and developer content.\n\nYour only job is to generate one precise image generation prompt based on the article data provided.\n\n---\n\nARTICLE INPUT:\nTitle: {{ $json.title }}\nSummary: {{ $json.content }}\n\n---\n\nPROMPT RULES — follow every rule without exception:\n\n1. ONE subject only. Choose the single strongest visual idea from the article. Do not combine multiple concepts.\n2. No text, no logos, no signs, no words inside the image.\n3. No cluttered backgrounds. Use solid, gradient, or bokeh backgrounds only.\n4. Photorealistic style. Clean studio lighting. Sharp focus on the subject.\n5. Color palette: deep navy, electric blue, violet, with one neon accent (cyan or green).\n6. Human element allowed only if it directly strengthens the concept — example: a developer's hands on a keyboard, a silhouette at a monitor. Never add people just to fill space.\n7. Keep the composition to a maximum of two focal elements.\n8. End every prompt with exactly this suffix: 8K resolution, ultra-sharp focus, professional photography, cinematic depth of field, no watermark.\n\n---\n\nDo not add explanations, comments, captions, or any text outside the IMAGE_PROMPT line.",
+        "options": {
+          "size": "1024x1024"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -800,
+        -32
+      ],
+      "id": "3bfa2e1d-4332-4e81-86f4-6520f8ed3d81",
+      "name": "Generate an image",
+      "credentials": {
+        "openAiApi": {
+          "id": "IGMWc0W5VnRRGxLb",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "uploadFile",
+        "additionalFieldsFile": {}
+      },
+      "type": "n8n-nodes-cloudinary.cloudinary",
+      "typeVersion": 1,
+      "position": [
+        -592,
+        -32
+      ],
+      "id": "4c679903-f997-4be2-b38a-4c7cba9f7079",
+      "name": "Upload an asset from file data",
+      "credentials": {
+        "cloudinaryApi": {
+          "id": "6jT3qd7ZjBNHO2Dn",
+          "name": "Cloudinary account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "posts",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Post From the db').item.json.id }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "image_url",
+              "fieldValue": "={{ $json.url }}"
+            },
+            {
+              "fieldId": "status",
+              "fieldValue": "approved"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -384,
+        -32
+      ],
+      "id": "18bfcb58-bb91-4777-9240-b7f4d2f17386",
+      "name": "Update a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "0SIXHXBmY0xcmGP4",
+          "name": "Supabase account"
+        }
+      }
     }
   ],
   "connections": {
-    "Generate Image Webhook": {
-      "main": [
-        [
-          {
-            "node": "Get Post From the db",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Post to Meta Platforms Webhook": {
       "main": [
         [
           {
             "node": "Get Post",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Get Post From the db": {
-      "main": [
-        [
-          {
-            "node": "Generate an image",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Generate an image": {
-      "main": [
-        [
-          {
-            "node": "Upload an asset from file data",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Upload an asset from file data": {
-      "main": [
-        [
-          {
-            "node": "Update a row",
             "type": "main",
             "index": 0
           }
@@ -600,43 +556,53 @@
           }
         ]
       ]
+    },
+    "Generate Image Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get Post From the db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Post From the db": {
+      "main": [
+        [
+          {
+            "node": "Generate an image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate an image": {
+      "main": [
+        [
+          {
+            "node": "Upload an asset from file data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload an asset from file data": {
+      "main": [
+        [
+          {
+            "node": "Update a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {
-    "Generate Image Webhook": [
-      {
-        "headers": {
-          "host": "my-automation-4j0i.onrender.com",
-          "user-agent": "node",
-          "content-length": "75",
-          "accept": "*/*",
-          "accept-encoding": "gzip, br",
-          "accept-language": "*",
-          "authorization": "Bearer supersecret1234",
-          "cdn-loop": "cloudflare; loops=1",
-          "cf-connecting-ip": "175.107.223.86",
-          "cf-ipcountry": "PK",
-          "cf-ray": "9da6e0695fef21e6-SIN",
-          "cf-visitor": "{\"scheme\":\"https\"}",
-          "content-type": "application/json",
-          "render-proxy-ttl": "4",
-          "rndr-id": "5fd02b88-4828-4d73",
-          "sec-fetch-mode": "cors",
-          "true-client-ip": "175.107.223.86",
-          "x-forwarded-for": "175.107.223.86, 104.23.175.190, 10.18.136.196",
-          "x-forwarded-proto": "https",
-          "x-request-start": "1773193494035449"
-        },
-        "params": {},
-        "query": {},
-        "body": {
-          "postId": "de5666a9-05b6-4442-8194-8c56e7a9fde8",
-          "action": "generate_image"
-        },
-        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/generate-and-store-image-to-db",
-        "executionMode": "production"
-      }
-    ],
     "Post to Meta Platforms Webhook": [
       {
         "headers": {
@@ -664,7 +630,7 @@
         "params": {},
         "query": {},
         "body": {
-          "postId": "de5666a9-05b6-4442-8194-8c56e7a9fde8",
+          "postId": "0a941086-e9fb-422d-8d95-62b09847b92e",
           "action": "publish",
           "platforms": [
             "instagram",
@@ -675,10 +641,40 @@
         "executionMode": "production"
       }
     ],
-    "Post with image to facebook page": [
+    "Generate Image Webhook": [
       {
-        "id": "122096590251191137",
-        "post_id": "914740581721664_122096590269191137"
+        "headers": {
+          "host": "my-automation-4j0i.onrender.com",
+          "user-agent": "node",
+          "content-length": "75",
+          "accept": "*/*",
+          "accept-encoding": "gzip, br",
+          "accept-language": "*",
+          "authorization": "Bearer undefined",
+          "cdn-loop": "cloudflare; loops=1",
+          "cf-connecting-ip": "34.239.139.229",
+          "cf-ipcountry": "US",
+          "cf-ray": "9dbf9b118fee82ce-SIN",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "content-type": "application/json",
+          "render-proxy-ttl": "4",
+          "rndr-id": "4284b429-f30d-4c33",
+          "sec-fetch-mode": "cors",
+          "true-client-ip": "34.239.139.229",
+          "x-forwarded-for": "34.239.139.229, 162.158.162.54, 10.16.225.196",
+          "x-forwarded-proto": "https",
+          "x-invocation-id": "bom1::6fqbs-1773452797494-0eb0e75e39d8",
+          "x-request-start": "1773452797848654",
+          "x-vercel-id": "bom1::6fqbs-1773452797494-0eb0e75e39d8"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "postId": "0a941086-e9fb-422d-8d95-62b09847b92e",
+          "action": "generate_image"
+        },
+        "webhookUrl": "https://my-automation-4j0i.onrender.com/webhook/generate-and-store-image-to-db",
+        "executionMode": "production"
       }
     ]
   },
