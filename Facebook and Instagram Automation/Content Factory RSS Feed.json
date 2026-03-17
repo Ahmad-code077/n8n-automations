@@ -490,7 +490,7 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1296,
+        1280,
         464
       ],
       "id": "a213ff04-f502-4578-8c17-3d1de7f4e71f",
@@ -501,6 +501,19 @@
           "name": "Supabase account"
         }
       }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get all input items\nconst items = $input.all();\n\n// Process each item and return results\nconst results = items.map(item => {\n    // Get the raw HTML content - adjust the field name if needed\n    // If your content is in a field called 'content', use that\n    const rawHtml = item.json.content || item.json.data || '';\n    \n    // Skip if no content\n    if (!rawHtml) {\n        return { \n            json: { \n                ...item.json,\n                cleanedText: '' \n            } \n        };\n    }\n    \n    // 1. Remove script, style, SVG, and other non-content tags and their content\n    let cleanedText = rawHtml.replace(/<script\\b[^<]*(?:(?!<\\/script>)<[^<]*)*<\\/script>/gi, ' ');\n    cleanedText = cleanedText.replace(/<style\\b[^<]*(?:(?!<\\/style>)<[^<]*)*<\\/style>/gi, ' ');\n    cleanedText = cleanedText.replace(/<svg\\b[^<]*(?:(?!<\\/svg>)<[^<]*)*<\\/svg>/gi, ' ');\n    cleanedText = cleanedText.replace(/<noscript\\b[^<]*(?:(?!<\\/noscript>)<[^<]*)*<\\/noscript>/gi, ' ');\n    \n    // 2. Remove all other HTML tags, converting them to spaces\n    cleanedText = cleanedText.replace(/<[^>]*>/g, ' ');\n    \n    // 3. Decode common HTML entities\n    cleanedText = cleanedText.replace(/&nbsp;/g, ' ')\n                             .replace(/&amp;/g, '&')\n                             .replace(/&lt;/g, '<')\n                             .replace(/&gt;/g, '>')\n                             .replace(/&quot;/g, '\"')\n                             .replace(/&#039;/g, \"'\");\n    \n    // 4. Collapse multiple whitespace characters into a single space\n    cleanedText = cleanedText.replace(/\\s+/g, ' ');\n    \n    // 5. Trim leading/trailing whitespace\n    cleanedText = cleanedText.trim();\n    \n    // Return the original item data PLUS the cleaned text\n    // This preserves all original fields (title, pubDate, link, etc.)\n    return { \n        json: { \n            ...item.json,\n            content:cleanedText \n        } \n    };\n});\n\nreturn results;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1056,
+        464
+      ],
+      "id": "a7fb9c21-9d46-4f61-973f-e5bb08c871d9",
+      "name": "Cleaning html to text"
     }
   ],
   "connections": {
@@ -637,7 +650,7 @@
       "main": [
         [
           {
-            "node": "Create a row",
+            "node": "Cleaning html to text",
             "type": "main",
             "index": 0
           }
@@ -715,6 +728,17 @@
         [
           {
             "node": "Filter Fields 8",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cleaning html to text": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
             "type": "main",
             "index": 0
           }
