@@ -4,12 +4,12 @@
       "parameters": {
         "numberInputs": 7
       },
-      "id": "51faaf29-46e8-4e40-bfa7-33cee2be2f95",
+      "id": "147a7e43-4b00-448f-ba5c-6c94e16ec443",
       "name": "Merge",
       "type": "n8n-nodes-base.merge",
       "position": [
-        624,
-        384
+        576,
+        400
       ],
       "typeVersion": 3.1
     },
@@ -23,12 +23,12 @@
           ]
         }
       },
-      "id": "7b0172e9-4856-42dc-b13e-95c9e6d18424",
+      "id": "e27b7be4-20fd-48c3-9a53-763fc425af45",
       "name": "Schedule",
       "type": "n8n-nodes-base.scheduleTrigger",
       "position": [
-        -848,
-        448
+        -896,
+        464
       ],
       "typeVersion": 1.2
     },
@@ -59,17 +59,23 @@
               "name": "content",
               "type": "string",
               "value": "={{ $json.content }}"
+            },
+            {
+              "id": "dcb25636-df08-4668-ae1b-ddd63eca8636",
+              "name": "from",
+              "value": "dev-to",
+              "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "0e775f01-0337-4297-9402-2a89e2b15203",
+      "id": "7f61f97f-6b83-4d23-adec-e26818bf849e",
       "name": "Filter Fields",
       "type": "n8n-nodes-base.set",
       "position": [
-        112,
-        -128
+        64,
+        -112
       ],
       "typeVersion": 3.4
     },
@@ -100,17 +106,23 @@
               "name": "content",
               "type": "string",
               "value": "={{ $json.content }}"
+            },
+            {
+              "id": "05430bd0-fb6b-4133-908e-351a56760ecd",
+              "name": "from",
+              "value": "tech-crunch",
+              "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "62908e59-075c-4420-a31d-46c3628fbead",
+      "id": "d62c0a63-f165-4796-9e7e-d62503773bdb",
       "name": "Filter Fields 3",
       "type": "n8n-nodes-base.set",
       "position": [
-        112,
-        64
+        64,
+        80
       ],
       "typeVersion": 3.4
     },
@@ -141,17 +153,23 @@
               "name": "content",
               "type": "string",
               "value": "={{ $json.content }}"
+            },
+            {
+              "id": "f54fca76-e862-445e-b1f3-ee4726a4f1e2",
+              "name": "from",
+              "value": "the-hacker-news",
+              "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "7a150398-da5e-4e69-9f7a-5120a527f11c",
+      "id": "bb0c6bd3-d082-45af-af57-a6df6ba3d049",
       "name": "Filter Fields 4",
       "type": "n8n-nodes-base.set",
       "position": [
-        112,
-        256
+        64,
+        272
       ],
       "typeVersion": 3.4
     },
@@ -182,17 +200,23 @@
               "name": "content",
               "type": "string",
               "value": "={{ $json.content }}"
+            },
+            {
+              "id": "226faa3c-80d5-4f91-bf6a-0f133afa974d",
+              "name": "from",
+              "value": "openai",
+              "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "aa40b37f-6ad2-4c4c-a7c0-27ae1b63fc85",
+      "id": "a6eed1bb-0d59-41db-9968-769efce7e485",
       "name": "Filter Fields 5",
       "type": "n8n-nodes-base.set",
       "position": [
-        112,
-        448
+        64,
+        464
       ],
       "typeVersion": 3.4
     },
@@ -223,17 +247,23 @@
               "name": "content",
               "value": "={{ $json.content }}",
               "type": "string"
+            },
+            {
+              "id": "37531ab0-2174-4e3b-8faf-414268ba0d88",
+              "name": "from",
+              "value": "aws",
+              "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "b34353b5-1ab8-4710-a4c9-294dc89c30d1",
+      "id": "98dd2236-a578-4b97-8c33-a43686aa1245",
       "name": "Filter Fields 6",
       "type": "n8n-nodes-base.set",
       "position": [
-        112,
-        640
+        64,
+        656
       ],
       "typeVersion": 3.4
     },
@@ -264,17 +294,23 @@
               "name": "content",
               "type": "string",
               "value": "={{ $json.content }}"
+            },
+            {
+              "id": "d33557e1-2f4a-452f-ab4a-03afd4950da0",
+              "name": "from",
+              "value": "n8n",
+              "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "0a75e8cf-8fa8-4837-aac6-837729536a4b",
+      "id": "035bb499-c3e4-4fb3-a85c-3e172c5e546f",
       "name": "Filter Fields 7",
       "type": "n8n-nodes-base.set",
       "position": [
-        112,
-        832
+        64,
+        848
       ],
       "typeVersion": 3.4
     },
@@ -305,17 +341,23 @@
               "name": "content",
               "type": "string",
               "value": "={{ $json.content }}"
+            },
+            {
+              "id": "ee27dd79-f986-4cc9-827f-1a3e4df3ff68",
+              "name": "from",
+              "value": "github",
+              "type": "string"
             }
           ]
         },
         "options": {}
       },
-      "id": "f4e75112-3701-4f30-bfa3-18ae25634598",
+      "id": "a2eb2e61-7916-4a9e-ad17-abdccbc3c6bb",
       "name": "Filter Fields 8",
       "type": "n8n-nodes-base.set",
       "position": [
-        112,
-        1024
+        64,
+        1040
       ],
       "typeVersion": 3.4
     },
@@ -326,10 +368,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        848,
-        464
+        800,
+        480
       ],
-      "id": "15f87659-80f2-43e1-80b7-5cd372a8f435",
+      "id": "10c81909-4f79-433b-8cb9-cd2826e28d0a",
       "name": "Code in JavaScript"
     },
     {
@@ -339,12 +381,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "8184dbbd-90b1-4d05-a727-e4aa825e76ec",
+      "id": "7a2abde9-93e3-4a43-9869-c87e34edf089",
       "name": "Dev.to Community Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        -112,
-        -128
+        -160,
+        -112
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -357,12 +399,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "b22771f9-3de7-4529-9d3d-2b709c0bf26d",
+      "id": "78c8775f-455d-4f19-b880-bb7469f5c1a6",
       "name": "TechCrunch News Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        -112,
-        64
+        -160,
+        80
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -375,12 +417,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "e4599509-aa99-460b-9881-2e0f69f827d7",
+      "id": "49b3c10a-2295-4b47-97c3-8aeaa30f0b74",
       "name": "The Hacker News Security Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        -112,
-        256
+        -160,
+        272
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -394,12 +436,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "cfac89d1-794e-4236-8ad2-2f808e36fb08",
+      "id": "e12b1979-0fa2-4c5f-8094-50f8b8f418da",
       "name": "OpenAI Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        -112,
-        448
+        -160,
+        464
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -412,12 +454,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "c0a4f93a-5c13-4399-bff6-22f106f10909",
+      "id": "5d72c896-675c-4357-b9b8-0dd89fc8fd82",
       "name": "AWS Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        -112,
-        640
+        -160,
+        656
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -430,12 +472,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "6034aa4f-eea1-40a7-8cb5-aea4ef9b2d5a",
+      "id": "8ec217d3-baca-485c-b54d-1850651832d2",
       "name": "n8n Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        -112,
-        832
+        -160,
+        848
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -448,12 +490,12 @@
           "ignoreSSL": false
         }
       },
-      "id": "edbe4582-090a-4e09-8c7d-6fa92a4679a1",
+      "id": "2a6d5df3-5e4a-40dd-ba09-6ed461bfd547",
       "name": "Github Official Blog Feed",
       "type": "n8n-nodes-base.rssFeedRead",
       "position": [
-        -112,
-        1024
+        -160,
+        1040
       ],
       "typeVersion": 1.1,
       "alwaysOutputData": true,
@@ -483,6 +525,10 @@
             {
               "fieldId": "user_id",
               "fieldValue": "cfdb1e8a-421b-4d50-a0c0-285beb2dc2c3"
+            },
+            {
+              "fieldId": "from",
+              "fieldValue": "={{ $json.from }}"
             }
           ]
         }
@@ -490,14 +536,14 @@
       "type": "n8n-nodes-base.supabase",
       "typeVersion": 1,
       "position": [
-        1280,
-        464
+        1232,
+        480
       ],
-      "id": "a213ff04-f502-4578-8c17-3d1de7f4e71f",
+      "id": "356d29e3-e8f1-472b-b69f-7c7f906cf9db",
       "name": "Create a row",
       "credentials": {
         "supabaseApi": {
-          "id": "0SIXHXBmY0xcmGP4",
+          "id": "jgT4AlXfqTlfxvdY",
           "name": "Supabase account"
         }
       }
@@ -509,10 +555,10 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        1056,
-        464
+        1008,
+        480
       ],
-      "id": "a7fb9c21-9d46-4f61-973f-e5bb08c871d9",
+      "id": "b412a8ae-22a2-48f6-88a3-0fe489098082",
       "name": "Cleaning html to text"
     }
   ],
